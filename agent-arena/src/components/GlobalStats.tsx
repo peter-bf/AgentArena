@@ -36,7 +36,7 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
   const [recentMatches, setRecentMatches] = useState<MatchResult[]>([]);
   const [newMatchIds, setNewMatchIds] = useState<Set<string>>(new Set());
   const [allMatches, setAllMatches] = useState<MatchResult[]>([]);
-  const [displayCount, setDisplayCount] = useState(2);
+  const [displayCount, setDisplayCount] = useState(5);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -310,17 +310,17 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
 
       {/* Battle Log */}
       {recentMatches.length > 0 && (
-        <div className="bg-card rounded-lg border border-border flex flex-col max-h-64">
-          <div className="p-4 border-b border-border">
+        <div className="bg-card rounded-lg border border-border flex flex-col">
+          <div className="p-4 border-b border-border flex-shrink-0">
             <h2 className="text-sm font-medium flex items-center gap-2">
               <Zap className="w-4 h-4" />
-              Battle Log
+              Battle Log (previous 5 games):
             </h2>
           </div>
 
           <div
             ref={scrollContainerRef}
-            className="divide-y divide-border overflow-y-auto flex-1"
+            className="divide-y divide-border"
           >
             {allMatches.slice(0, displayCount).map((match) => {
               const gameIcon = GAME_ICONS[match.gameType];
@@ -387,12 +387,6 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
             })}
           </div>
 
-          {/* Loading indicator */}
-          {displayCount < allMatches.length && (
-            <div className="p-2 text-center text-xs text-muted-foreground/50 border-t border-border">
-              Scroll down for more matches
-            </div>
-          )}
         </div>
       )}
     </div>

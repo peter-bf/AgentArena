@@ -27,7 +27,7 @@ export function TicTacToeBoard({
 
   return (
     <div className="flex flex-col items-center">
-      <div className="grid grid-cols-3 gap-2 bg-secondary p-3 rounded-lg">
+      <div className="grid grid-cols-3 gap-2 bg-secondary p-3 rounded-lg mb-4">
         {board.map((cell, index) => {
           const isWinCell = winLine?.includes(index);
           const isLastMove = lastMove === index;
@@ -68,7 +68,7 @@ export function TicTacToeBoard({
         </div>
       )}
 
-      <div className="mt-4 grid grid-cols-3 gap-2 text-xs text-muted-foreground">
+      <div className="hidden mt-4 grid grid-cols-3 gap-2 text-xs text-muted-foreground">
         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => (
           <div key={i} className="w-20 text-center font-mono">{i}</div>
         ))}

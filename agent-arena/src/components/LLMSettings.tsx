@@ -12,9 +12,9 @@ interface LLMSettings {
 export function LLMSettings() {
   const [isOpen, setIsOpen] = useState(false);
   const [settings, setSettings] = useState<LLMSettings>({
-    gpt: { key: '', temperature: 0.7 },
-    deepseek: { key: '', temperature: 0.7 },
-    gemini: { key: '', temperature: 0.7 },
+    gpt: { key: '', temperature: 0.3 },
+    deepseek: { key: '', temperature: 0.3 },
+    gemini: { key: '', temperature: 0.3 },
   });
   const [visibleKeys, setVisibleKeys] = useState<Record<string, boolean>>({
     gpt: false,
@@ -27,7 +27,14 @@ export function LLMSettings() {
     const saved = sessionStorage.getItem('llmSettings');
     if (saved) {
       try {
-        setSettings(JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        // Ensure all temperatures are valid numbers and default to 0.3 if missing
+        const validated = {
+          gpt: { key: parsed.gpt?.key || '', temperature: typeof parsed.gpt?.temperature === 'number' ? parsed.gpt.temperature : 0.3 },
+          deepseek: { key: parsed.deepseek?.key || '', temperature: typeof parsed.deepseek?.temperature === 'number' ? parsed.deepseek.temperature : 0.3 },
+          gemini: { key: parsed.gemini?.key || '', temperature: typeof parsed.gemini?.temperature === 'number' ? parsed.gemini.temperature : 0.3 },
+        };
+        setSettings(validated);
       } catch (e) {
         console.error('Failed to load settings:', e);
       }
@@ -62,7 +69,7 @@ export function LLMSettings() {
   };
 
   return (
-    <div className="bg-card rounded-lg border border-border">
+    <div className="bg-card rounded-lg border border-border overflow-hidden">
       {/* Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -72,12 +79,16 @@ export function LLMSettings() {
           <Settings className="w-4 h-4" />
           <h2 className="text-sm font-medium">LLM Settings</h2>
         </div>
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Content */}
-      {isOpen && (
-        <div className="p-4 space-y-6 border-t border-border">
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="p-4 space-y-6 border-t border-border animate-in fade-in duration-300">
           {/* Disclaimer */}
           <div className="bg-secondary/30 border border-border rounded-md p-3 text-xs text-muted-foreground">
             <p className="font-medium mb-1">🔒 Privacy Notice</p>
@@ -86,9 +97,9 @@ export function LLMSettings() {
 
           {/* Settings for each provider */}
           {(['gpt', 'deepseek', 'gemini'] as const).map((provider) => (
-            <div key={provider} className="space-y-3">
+            <div key={provider} className="space-y-3 animate-in fade-in slide-in-from-left duration-300" style={{ animationDelay: `${['gpt', 'deepseek', 'gemini'].indexOf(provider) * 50}ms` }}>
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium capitalize">{provider}</label>
+                <label className="text-sm font-medium capitalize">{provider === 'gpt' ? 'OpenAI' : provider}</label>
                 <span className="text-xs text-muted-foreground">Temp: {settings[provider].temperature.toFixed(2)}</span>
               </div>
 
@@ -117,19 +128,34 @@ export function LLMSettings() {
                 </div>
               )}
 
-              {/* Temperature Slider */}
+              {/* Temperature Slider with filled background */}
               <div className="space-y-2">
-                <input
-                  type="range"
-                  min="0"
-                  max="2"
-                  step="0.1"
-                  value={settings[provider].temperature}
-                  onChange={(e) => handleSettingChange(provider, 'temperature', parseFloat(e.target.value))}
-                  className="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-foreground"
-                />
-                <div className="flex justify-between text-xs text-muted-foreground">
+                <div className="relative">
+                  {/* Filled background */}
+                  <div
+                    className="absolute left-0 top-1/2 -translate-y-1/2 h-2 bg-blue-500/80 rounded-lg pointer-events-none"
+                    style={{
+                      width: `${(settings[provider].temperature / 2) * 100}%`,
+                    }}
+                  />
+                  {/* Slider */}
+                  <input
+                    type="range"
+                    min="0"
+                    max="2"
+                    step="0.05"
+                    value={settings[provider].temperature}
+                    onChange={(e) => handleSettingChange(provider, 'temperature', parseFloat(e.target.value))}
+                    className="relative w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    style={{
+                      background: `linear-gradient(to right, rgb(59, 130, 246) 0%, rgb(59, 130, 246) ${(settings[provider].temperature / 2) * 100}%, hsl(var(--secondary)) ${(settings[provider].temperature / 2) * 100}%, hsl(var(--secondary)) 100%)`,
+                    }}
+                  />
+                </div>
+                {/* Labels under bar */}
+                <div className="flex justify-between text-xs text-muted-foreground mt-1">
                   <span>Deterministic</span>
+                  <span>Balanced</span>
                   <span>Creative</span>
                 </div>
               </div>
@@ -141,7 +167,7 @@ export function LLMSettings() {
             <p>If no API keys are provided, environment variables will be used: OPENAI_API_KEY, DEEPSEEK_API_KEY, GEMINI_API_KEY</p>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
