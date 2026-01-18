@@ -172,9 +172,16 @@ export function initBSState(seed: string | number = Date.now()): GameState {
     shipHealthB[ship.name] = ship.size;
   });
 
+  // Create two separate boards:
+  // boardA: Shows shots fired AT Player A's board (Player B's attacks)
+  // boardB: Shows shots fired AT Player B's board (Player A's attacks)
+  // Both use the same 100-cell grid representation
+  const boardA = Array(TOTAL_CELLS).fill('unknown') as BSCell[];
+  const boardB = Array(TOTAL_CELLS).fill('unknown') as BSCell[];
+
   return {
     gameType: 'bs',
-    board: Array(TOTAL_CELLS).fill('unknown') as BSCell[],
+    board: boardB, // Default to showing Player B's board for compatibility
     currentPlayer: 'A',
     moveHistory: [],
     winner: null,
@@ -187,6 +194,8 @@ export function initBSState(seed: string | number = Date.now()): GameState {
     shipHealthA,
     shipHealthB,
     moveOwnership: Array(TOTAL_CELLS).fill(null) as (Player | null)[],
+    boardA, // Shots on Player A's board
+    boardB, // Shots on Player B's board
   };
 }
 
@@ -246,27 +255,27 @@ export function applyBSMove(
   const hitShip = findShipAtCell(opponentPlacements, move);
   const isHit = hitShip !== null;
 
-  // Create new state
-  const newBoard = [...state.board] as BSCell[];
+  // Create new state with SEPARATE boards for each player
+  const newBoardA = [...(state.boardA || Array(TOTAL_CELLS).fill('unknown'))] as BSCell[];
+  const newBoardB = [...(state.boardB || Array(TOTAL_CELLS).fill('unknown'))] as BSCell[];
   const newFiredA = new Set(state.firedA!);
   const newFiredB = new Set(state.firedB!);
-  const newMoveOwnership = [...(state.moveOwnership || Array(TOTAL_CELLS).fill(null))] as (Player | null)[];
 
   let outcome: BSMoveOutcome;
   let sunkShipName: string | undefined;
 
+  // Determine which board to update based on who is shooting
+  const targetBoard = player === 'A' ? newBoardB : newBoardA; // A shoots at B's board, B shoots at A's board
+
   if (isHit && hitShip) {
     // Hit
-    newBoard[move] = 'hit';
-    newMoveOwnership[move] = player;
+    targetBoard[move] = 'hit';
     opponentHealth[hitShip.name]--;
     
     if (opponentHealth[hitShip.name] === 0) {
       // Ship sunk - mark all cells of this ship as sunk
-      markShipAsSunk(newBoard, hitShip);
-      // Update ownership for all sunk cells
       hitShip.cells.forEach(cell => {
-        newMoveOwnership[cell] = player;
+        targetBoard[cell] = 'sunk';
       });
       sunkShipName = hitShip.name;
       outcome = { outcome: 'sunk', sunkShipName };
@@ -275,8 +284,7 @@ export function applyBSMove(
     }
   } else {
     // Miss
-    newBoard[move] = 'miss';
-    newMoveOwnership[move] = player;
+    targetBoard[move] = 'miss';
     outcome = { outcome: 'miss' };
   }
 
@@ -293,7 +301,7 @@ export function applyBSMove(
 
   const newState: GameState = {
     ...state,
-    board: newBoard,
+    board: player === 'A' ? newBoardB : newBoardA, // Show the board that was just attacked
     currentPlayer: player === 'A' ? 'B' : 'A',
     winner: isWin ? player : null,
     isTerminal: isWin,
@@ -301,7 +309,8 @@ export function applyBSMove(
     firedB: newFiredB,
     shipHealthA: newShipHealthA,
     shipHealthB: newShipHealthB,
-    moveOwnership: newMoveOwnership,
+    boardA: newBoardA,
+    boardB: newBoardB,
   };
 
   return { newState, valid: true, outcome };

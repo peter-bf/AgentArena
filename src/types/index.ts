@@ -37,8 +37,9 @@ export interface GameState {
   firedB?: Set<number>;
   shipHealthA?: Record<string, number>;
   shipHealthB?: Record<string, number>;
-  // Track which player made each move (for UI coloring)
-  moveOwnership?: (Player | null)[];
+  // Separate boards for each player (battleship only)
+  boardA?: BSCell[]; // Shots fired AT Player A's board
+  boardB?: BSCell[]; // Shots fired AT Player B's board
 }
 
 export interface ShipPlacement {
@@ -95,7 +96,8 @@ export interface MatchResult {
   // Battleship-specific
   placementsA?: ShipPlacement[];
   placementsB?: ShipPlacement[];
-  moveOwnership?: (Player | null)[];
+  finalBoardA?: BSCell[]; // Final board state for Player A
+  finalBoardB?: BSCell[]; // Final board state for Player B
 }
 
 export interface GlobalStats {

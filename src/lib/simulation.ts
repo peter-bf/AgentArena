@@ -16,7 +16,16 @@ import { initC4State, applyC4Move, getC4LegalMoves } from './games/connect4';
 import { initBSState, applyBSMove, getBSLegalMoves } from './games/battleship';
 import { callAgent } from './agents';
 
-const MAX_MOVES = 500; // Increased for battleship which can take many moves
+// Different move limits for different games
+const MAX_MOVES_TTT = 10;
+const MAX_MOVES_C4 = 42;
+const MAX_MOVES_BS = 10000; // Battleship should NEVER end in a draw - only when someone wins
+
+function getMaxMoves(gameType: GameType): number {
+  if (gameType === 'ttt') return MAX_MOVES_TTT;
+  if (gameType === 'c4') return MAX_MOVES_C4;
+  return MAX_MOVES_BS;
+}
 
 export async function runMatch(
   gameType: GameType,
@@ -24,6 +33,7 @@ export async function runMatch(
   agentB: AgentConfig
 ): Promise<MatchResult> {
   const startTime = Date.now();
+  const MAX_MOVES = getMaxMoves(gameType);
 
   // Initialize game state
   let state = gameType === 'ttt' 
@@ -133,15 +143,8 @@ export async function runMatch(
     winner = forfeitedBy === 'A' ? 'B' : 'A';
   }
   if (!winner) {
-    // Only declare draw for non-battleship games, or if we hit move limit in battleship
-    if (gameType === 'bs') {
-      // Battleship shouldn't end in draw unless we hit MAX_MOVES
-      // In that case, the player with more sunk opponent ships wins
-      // But for now, just declare a draw (shouldn't happen in normal gameplay)
-      winner = 'draw';
-    } else {
-      winner = 'draw';
-    }
+    // If we hit move limit without a winner, it's a draw
+    winner = 'draw';
   }
 
   // Determine winner model
@@ -174,6 +177,5 @@ export async function runMatch(
       placementsA: state.placementsA,
       placementsB: state.placementsB,
       moveOwnership: state.moveOwnership,
-    }),
-  };
-}
+      finalBoardA: state.boardA,
+      finalBoardB: state.boardB,

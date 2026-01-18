@@ -49,7 +49,8 @@ interface GameSession {
   // Battleship-specific
   placementsA?: ShipPlacement[];
   placementsB?: ShipPlacement[];
-  moveOwnership?: (Player | null)[];
+  boardA?: BSCell[];
+  boardB?: BSCell[];
 }
 
 const createInitialSession = (gameType: GameType): GameSession => ({
@@ -302,7 +303,8 @@ export default function Home() {
           hadError?: boolean;
           placementsA?: ShipPlacement[];
           placementsB?: ShipPlacement[];
-          moveOwnership?: (Player | null)[];
+          boardA?: BSCell[];
+          boardB?: BSCell[];
         };
 
         const newMove: LiveMove = {
@@ -348,7 +350,8 @@ export default function Home() {
             // Battleship-specific
             placementsA: d.placementsA ?? prev[gameType].placementsA,
             placementsB: d.placementsB ?? prev[gameType].placementsB,
-            moveOwnership: d.moveOwnership ?? prev[gameType].moveOwnership,
+            boardA: d.boardA ?? prev[gameType].boardA,
+            boardB: d.boardB ?? prev[gameType].boardB,
           },
         }));
         break;
@@ -571,7 +574,8 @@ export default function Home() {
                   />
                 ) : (
                   <BattleshipBoard
-                    board={session.displayBoard as BSCell[]}
+                    boardA={session.matchResult?.finalBoardA ?? session.boardA ?? Array(100).fill('unknown')}
+                    boardB={session.matchResult?.finalBoardB ?? session.boardB ?? Array(100).fill('unknown')}
                     lastMove={getLastMoveIndex()}
                     currentPlayer={session.currentThinking}
                     isThinking={session.isRunning && session.currentThinking !== null}
@@ -579,7 +583,6 @@ export default function Home() {
                     agentBModel={session.agentBModel}
                     placementsA={session.matchResult?.placementsA ?? session.placementsA}
                     placementsB={session.matchResult?.placementsB ?? session.placementsB}
-                    moveOwnership={session.matchResult?.moveOwnership ?? session.moveOwnership}
                   />
                 )}
               </div>

@@ -24,7 +24,16 @@ import { saveMatch } from '@/lib/db';
 const VALID_GPT_MODELS: GPTModel[] = ['gpt-4o-mini', 'gpt-4o', 'gpt-4-turbo', 'gpt-3.5-turbo'];
 const VALID_DEEPSEEK_MODELS: DeepSeekModel[] = ['deepseek-chat', 'deepseek-reasoner'];
 const VALID_GEMINI_MODELS: GeminiModel[] = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash', 'gemini-1.5-pro'];
-const MAX_MOVES = 100;
+
+const MAX_MOVES_TTT = 10;
+const MAX_MOVES_C4 = 42;
+const MAX_MOVES_BS = 10000; // Battleship should NEVER end in a draw - only when someone wins
+
+function getMaxMoves(gameType: GameType): number {
+  if (gameType === 'ttt') return MAX_MOVES_TTT;
+  if (gameType === 'c4') return MAX_MOVES_C4;
+  return MAX_MOVES_BS;
+}
 
 function isValidGameType(val: unknown): val is GameType {
   return val === 'ttt' || val === 'c4' || val === 'bs';
@@ -82,6 +91,7 @@ export async function POST(request: NextRequest) {
 
       try {
         const startTime = Date.now();
+        const MAX_MOVES = getMaxMoves(gameType);
         let state = gameType === 'ttt' 
           ? initTTTState() 
           : gameType === 'c4' 
@@ -208,10 +218,14 @@ export async function POST(request: NextRequest) {
             durationMs: moveDurationMs,
             retries: moveRetries,
             hadError: moveHadError,
-            // Battleship-specific
-            placementsA: gameType === 'bs' ? applyResult.newState.placementsA : undefined,
-            placementsB: gameType === 'bs' ? applyResult.newState.placementsB : undefined,
-            moveOwnership: gameType === 'bs' ? applyResult.newState.moveOwnership : undefined,
+            // Battleship-specific - ALWAYS send these for battleship
+            ...(gameType === 'bs' && {
+              placementsA: applyResult.newState.placementsA,
+              placementsB: applyResult.newState.placementsB,
+              moveOwnership: applyResult.newState.moveOwnership,
+              boardA: applyResult.newState.boardA,
+              boardB: applyResult.newState.boardB,
+            }),
           });
 
           state = applyResult.newState;
@@ -266,6 +280,8 @@ export async function POST(request: NextRequest) {
           placementsA: gameType === 'bs' ? state.placementsA : undefined,
           placementsB: gameType === 'bs' ? state.placementsB : undefined,
           moveOwnership: gameType === 'bs' ? state.moveOwnership : undefined,
+          finalBoardA: gameType === 'bs' ? state.boardA : undefined,
+          finalBoardB: gameType === 'bs' ? state.boardB : undefined,
         };
 
         // Save match
