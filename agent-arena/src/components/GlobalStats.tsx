@@ -38,6 +38,7 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
   const [allMatches, setAllMatches] = useState<MatchResult[]>([]);
   const [displayCount, setDisplayCount] = useState(5);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const recentMatchesRef = useRef<MatchResult[]>([]);
 
   useEffect(() => {
     // Load recent matches from data
@@ -54,11 +55,12 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
         // Track new matches for animation
         const newIds = new Set<string>();
         recentData.forEach((match: MatchResult) => {
-          if (!recentMatches.find(m => m.id === match.id)) {
+          if (!recentMatchesRef.current.find(m => m.id === match.id)) {
             newIds.add(match.id);
           }
         });
         
+        recentMatchesRef.current = recentData;
         setRecentMatches(recentData);
         if (newIds.size > 0) {
           setNewMatchIds(newIds);
@@ -73,10 +75,10 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
     // Load immediately
     loadMatches();
     
-    // Poll for new matches every 2 seconds
-    const interval = setInterval(loadMatches, 2000);
+    // Poll for new matches every 5 seconds
+    const interval = setInterval(loadMatches, 5000);
     return () => clearInterval(interval);
-  }, [recentMatches]);
+  }, []); // Empty dependency array - only run once on mount
 
   // Handle scroll for infinite loading
   useEffect(() => {
