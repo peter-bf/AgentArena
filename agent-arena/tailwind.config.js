@@ -77,4 +77,26 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    // Ensure chip colors are always generated
+    'bg-emerald-600',
+    'bg-emerald-500',
+    'bg-emerald-400',
+    'bg-emerald-300',
+    'bg-sky-600',
+    'bg-sky-500',
+    'bg-sky-400',
+    'bg-sky-300',
+    'bg-amber-600',
+    'bg-amber-500',
+    'bg-amber-400',
+    'bg-amber-300',
+    // Winner background colors
+    'bg-emerald-950/80',
+    'bg-sky-950/80',
+    'bg-amber-950/80',
+    'border-emerald-700/50',
+    'border-sky-700/50',
+    'border-amber-700/50',
+  ],
 };

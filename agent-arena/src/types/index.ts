@@ -46,6 +46,9 @@ export interface AgentMetrics {
   invalidJsonCount: number;
   illegalMoveCount: number;
   retryCount: number;
+  totalInputTokens?: number;
+  totalOutputTokens?: number;
+  totalThinkingTimeMs?: number;
 }
 
 export interface MatchResult {

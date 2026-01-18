@@ -4,7 +4,8 @@ import { useEffect, useRef } from 'react';
 import { AgentConfig, MoveRecord, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
 import { PROVIDER_LABELS, getPlayerStyles } from '@/lib/ui/providerStyles';
 import confetti from 'canvas-confetti';
-import { Trophy } from 'lucide-react';
+import { Trophy, DollarSign, Hash, Clock } from 'lucide-react';
+import { calculateCost } from '@/lib/utils/pricing';
 
 // Human-readable model names
 const MODEL_LABELS: Record<GPTModel | DeepSeekModel | GeminiModel, string> = {
@@ -31,6 +32,9 @@ interface AgentPanelProps {
     invalidJsonCount: number;
     illegalMoveCount: number;
     retryCount: number;
+    totalInputTokens?: number;
+    totalOutputTokens?: number;
+    totalThinkingTimeMs?: number;
   };
 }
 
@@ -68,29 +72,35 @@ export function AgentPanel({ label, config, lastMove, isActive, isP2, isWinner, 
     }
   }, [isWinner]);
 
+  // Get winner-specific styles - darker background version
+  const winnerBg = isWinner ? (
+    config.model === 'gpt' ? 'bg-emerald-950/80 border-emerald-700/50' :
+    config.model === 'deepseek' ? 'bg-sky-950/80 border-sky-700/50' :
+    'bg-amber-950/80 border-amber-600/50'
+  ) : '';
+
   return (
     <div
       ref={panelRef}
-      className={`p-4 rounded-lg border ${styles.border} ${isActive ? styles.bg : isWinner ? 'bg-amber-500/10' : 'bg-card'} transition-all duration-200 relative overflow-hidden`}
+      className={`p-4 rounded-lg border ${styles.border} ${isActive ? styles.bg : isWinner ? winnerBg : 'bg-card'} transition-all duration-200 relative overflow-hidden`}
     >
-      {isWinner && (
-        <div className="absolute top-2 right-2">
-          <Trophy className="w-4 h-4 text-amber-400" />
-        </div>
-      )}
 
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <h3 className={`text-sm font-semibold ${isWinner ? 'text-amber-400' : styles.text}`}>
+          <h3 className={`text-sm font-semibold ${styles.text}`}>
             {providerDisplay}
           </h3>
           {isActive && (
             <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
           )}
         </div>
-        <span className={`px-2 py-0.5 rounded text-xs font-medium ${styles.badge}`}>
-          {label === 'A' ? 'P1' : 'P2'}
-        </span>
+        {isWinner ? (
+          <Trophy className={`w-4 h-4 ${styles.text}`} />
+        ) : (
+          <span className={`px-2 py-0.5 rounded text-xs font-medium ${styles.badge}`}>
+            {label === 'A' ? 'P1' : 'P2'}
+          </span>
+        )}
       </div>
 
       <div className="text-xs text-muted-foreground mb-3">
@@ -111,26 +121,41 @@ export function AgentPanel({ label, config, lastMove, isActive, isP2, isWinner, 
         </div>
       )}
 
-      {metrics && (
-        <div className="mt-3 pt-3 border-t border-border grid grid-cols-3 gap-1 text-xs">
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">JSON</div>
-            <div className={`font-mono ${metrics.invalidJsonCount > 0 ? 'text-red-400' : 'text-emerald-400'}`}>
-              {metrics.invalidJsonCount}
+      {metrics && (metrics.totalInputTokens !== undefined || metrics.totalOutputTokens !== undefined || metrics.totalThinkingTimeMs !== undefined) && (
+        <div className="mt-3 pt-3 border-t border-border space-y-2 text-xs">
+          {metrics.totalInputTokens !== undefined && metrics.totalOutputTokens !== undefined && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1 text-muted-foreground">
+                <Hash className="w-3 h-3" />
+                <span>Tokens</span>
+              </div>
+              <span className="font-mono">
+                {(metrics.totalInputTokens || 0) + (metrics.totalOutputTokens || 0)}
+              </span>
             </div>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">Illegal</div>
-            <div className={`font-mono ${metrics.illegalMoveCount > 0 ? 'text-red-400' : 'text-emerald-400'}`}>
-              {metrics.illegalMoveCount}
+          )}
+          {metrics.totalInputTokens !== undefined && metrics.totalOutputTokens !== undefined && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1 text-muted-foreground">
+                <DollarSign className="w-3 h-3" />
+                <span>Cost</span>
+              </div>
+              <span className="font-mono">
+                ${calculateCost(config.modelVariant, metrics.totalInputTokens || 0, metrics.totalOutputTokens || 0).toFixed(6)}
+              </span>
             </div>
-          </div>
-          <div className="text-center">
-            <div className="text-muted-foreground mb-1">Retry</div>
-            <div className={`font-mono ${metrics.retryCount > 0 ? 'text-amber-400' : 'text-emerald-400'}`}>
-              {metrics.retryCount}
+          )}
+          {metrics.totalThinkingTimeMs !== undefined && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1 text-muted-foreground">
+                <Clock className="w-3 h-3" />
+                <span>Time</span>
+              </div>
+              <span className="font-mono">
+                {(metrics.totalThinkingTimeMs / 1000).toFixed(2)}s
+              </span>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

@@ -20,7 +20,7 @@ export async function callGPT(
   prompt: string,
   modelVariant: GPTModel = 'gpt-4o-mini',
   retryPrompt?: string
-): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string }> {
+): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string; inputTokens?: number; outputTokens?: number }> {
   try {
     const openai = getClient();
 
@@ -42,15 +42,17 @@ export async function callGPT(
     });
 
     const rawResponse = completion.choices[0]?.message?.content || '';
+    const inputTokens = completion.usage?.prompt_tokens;
+    const outputTokens = completion.usage?.completion_tokens;
 
     // Try to parse JSON from response
     const parsed = parseAgentResponse(rawResponse);
 
     if (parsed.error) {
-      return { response: null, rawResponse, error: parsed.error };
+      return { response: null, rawResponse, error: parsed.error, inputTokens, outputTokens };
     }
 
-    return { response: parsed.response, rawResponse };
+    return { response: parsed.response, rawResponse, inputTokens, outputTokens };
   } catch (err) {
     const error = err instanceof Error ? err.message : 'Unknown error';
     return { response: null, rawResponse: '', error: `API Error: ${error}` };

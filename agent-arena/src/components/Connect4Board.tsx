@@ -28,8 +28,9 @@ export function Connect4Board({
 }: Connect4BoardProps) {
   const [animatingCell, setAnimatingCell] = useState<number | null>(null);
 
+  // Ensure distinct colors even when both players use the same model
   const agentAStyle = getPlayerStyles(agentAModel, false);
-  const agentBStyle = getPlayerStyles(agentBModel, agentAModel === agentBModel);
+  const agentBStyle = getPlayerStyles(agentBModel, true); // Always use P2 variant for player B to ensure contrast
 
   useEffect(() => {
     if (lastMove !== null) {
@@ -41,6 +42,9 @@ export function Connect4Board({
 
   return (
     <div className="flex flex-col items-center">
+      {/* Tailwind safelist - ensure chip colors are generated */}
+      <div className="hidden bg-emerald-600 bg-emerald-500 bg-emerald-400 bg-emerald-300 bg-sky-600 bg-sky-500 bg-sky-400 bg-sky-300 bg-amber-600 bg-amber-500 bg-amber-400 bg-amber-300" />
+      
       {/* Column indicators */}
       <div className="flex gap-1 mb-2">
         {Array.from({ length: COLS }).map((_, col) => (

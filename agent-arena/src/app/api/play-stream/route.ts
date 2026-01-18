@@ -82,8 +82,22 @@ export async function POST(request: NextRequest) {
         const startTime = Date.now();
         let state = gameType === 'ttt' ? initTTTState() : initC4State();
         const moves: MoveRecord[] = [];
-        const metricsA: AgentMetrics = { invalidJsonCount: 0, illegalMoveCount: 0, retryCount: 0 };
-        const metricsB: AgentMetrics = { invalidJsonCount: 0, illegalMoveCount: 0, retryCount: 0 };
+        const metricsA: AgentMetrics = { 
+          invalidJsonCount: 0, 
+          illegalMoveCount: 0, 
+          retryCount: 0,
+          totalInputTokens: 0,
+          totalOutputTokens: 0,
+          totalThinkingTimeMs: 0,
+        };
+        const metricsB: AgentMetrics = { 
+          invalidJsonCount: 0, 
+          illegalMoveCount: 0, 
+          retryCount: 0,
+          totalInputTokens: 0,
+          totalOutputTokens: 0,
+          totalThinkingTimeMs: 0,
+        };
         let forfeitedBy: Player | null = null;
 
         send('start', { gameType, agentA, agentB });
@@ -117,6 +131,14 @@ export async function POST(request: NextRequest) {
           metrics.invalidJsonCount += result.invalidJsonCount;
           metrics.illegalMoveCount += result.illegalMoveCount;
           metrics.retryCount += result.retryCount;
+          metrics.totalThinkingTimeMs = (metrics.totalThinkingTimeMs || 0) + moveDurationMs;
+          
+          if (result.inputTokens !== undefined) {
+            metrics.totalInputTokens = (metrics.totalInputTokens || 0) + result.inputTokens;
+          }
+          if (result.outputTokens !== undefined) {
+            metrics.totalOutputTokens = (metrics.totalOutputTokens || 0) + result.outputTokens;
+          }
 
           const moveHadError = result.retryCount > 0 || result.invalidJsonCount > 0 || result.illegalMoveCount > 0;
           const moveRetries = result.retryCount;

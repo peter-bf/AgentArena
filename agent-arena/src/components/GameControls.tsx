@@ -2,7 +2,7 @@
 
 import { GameType, ModelType, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
 import { PROVIDER_LABELS, getPlayerStyles } from '@/lib/ui/providerStyles';
-import { Play, Loader2, Lock } from 'lucide-react';
+import { Play, Loader2, Lock, X } from 'lucide-react';
 
 // Model variant options
 const GPT_MODELS: { value: GPTModel; label: string }[] = [
@@ -36,6 +36,7 @@ interface GameControlsProps {
   onAgentBModelChange: (model: ModelType) => void;
   onAgentBModelVariantChange: (variant: GPTModel | DeepSeekModel | GeminiModel) => void;
   onRunMatch: () => void;
+  onCancelMatch?: () => void;
   isRunning: boolean;
 }
 
@@ -51,6 +52,7 @@ export function GameControls({
   onAgentBModelChange,
   onAgentBModelVariantChange,
   onRunMatch,
+  onCancelMatch,
   isRunning,
 }: GameControlsProps) {
   const agentAModels = agentAModel === 'gpt'
@@ -74,11 +76,8 @@ export function GameControls({
         <label className="block text-xs text-muted-foreground mb-2 uppercase tracking-wider">Game</label>
         <div className="flex gap-2">
           <button
-            onClick={() => !isRunning && onGameTypeChange('ttt')}
-            disabled={isRunning}
+            onClick={() => onGameTypeChange('ttt')}
             className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-              isRunning ? 'opacity-50 cursor-not-allowed' : ''
-            } ${
               gameType === 'ttt'
                 ? 'bg-secondary text-foreground'
                 : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
@@ -87,11 +86,8 @@ export function GameControls({
             Tic-Tac-Toe
           </button>
           <button
-            onClick={() => !isRunning && onGameTypeChange('c4')}
-            disabled={isRunning}
+            onClick={() => onGameTypeChange('c4')}
             className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
-              isRunning ? 'opacity-50 cursor-not-allowed' : ''
-            } ${
               gameType === 'c4'
                 ? 'bg-secondary text-foreground'
                 : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
@@ -188,29 +184,25 @@ export function GameControls({
         </div>
       </div>
 
-      {/* Run Button */}
+      {/* Run/Cancel Button */}
       <div className="p-4">
-        <button
-          onClick={onRunMatch}
-          disabled={isRunning}
-          className={`w-full py-2.5 px-4 rounded-md font-medium text-sm transition-colors flex items-center justify-center gap-2 ${
-            isRunning
-              ? 'bg-secondary text-muted-foreground cursor-not-allowed'
-              : 'bg-foreground text-background hover:bg-foreground/90'
-          }`}
-        >
-          {isRunning ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              Running...
-            </>
-          ) : (
-            <>
-              <Play className="w-4 h-4" />
-              Start Match
-            </>
-          )}
-        </button>
+        {isRunning ? (
+          <button
+            onClick={onCancelMatch}
+            className="w-full py-2.5 px-4 rounded-md font-medium text-sm transition-colors flex items-center justify-center gap-2 bg-destructive text-destructive-foreground hover:bg-destructive/90"
+          >
+            <X className="w-4 h-4" />
+            Cancel Match
+          </button>
+        ) : (
+          <button
+            onClick={onRunMatch}
+            className="w-full py-2.5 px-4 rounded-md font-medium text-sm transition-colors flex items-center justify-center gap-2 bg-foreground text-background hover:bg-foreground/90"
+          >
+            <Play className="w-4 h-4" />
+            Start Match
+          </button>
+        )}
       </div>
     </div>
   );

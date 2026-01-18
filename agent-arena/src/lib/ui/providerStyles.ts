@@ -29,8 +29,8 @@ export const PROVIDER_STYLES: Record<ModelType, ProviderStyle> = {
     bgP2: 'bg-emerald-400/10',
     badge: 'bg-emerald-500/20 text-emerald-300',
     badgeP2: 'bg-emerald-400/15 text-emerald-200',
-    chip: 'bg-emerald-500',
-    chipP2: 'bg-emerald-400',
+    chip: 'bg-emerald-600',
+    chipP2: 'bg-emerald-300',
   },
   deepseek: {
     text: 'text-sky-400',
@@ -41,7 +41,7 @@ export const PROVIDER_STYLES: Record<ModelType, ProviderStyle> = {
     bgP2: 'bg-sky-400/10',
     badge: 'bg-sky-500/20 text-sky-300',
     badgeP2: 'bg-sky-400/15 text-sky-200',
-    chip: 'bg-sky-500',
+    chip: 'bg-sky-600',
     chipP2: 'bg-sky-300',
   },
   gemini: {
@@ -53,7 +53,7 @@ export const PROVIDER_STYLES: Record<ModelType, ProviderStyle> = {
     bgP2: 'bg-amber-400/10',
     badge: 'bg-amber-500/20 text-amber-300',
     badgeP2: 'bg-amber-400/15 text-amber-200',
-    chip: 'bg-amber-500',
+    chip: 'bg-amber-600',
     chipP2: 'bg-amber-300',
   },
 };

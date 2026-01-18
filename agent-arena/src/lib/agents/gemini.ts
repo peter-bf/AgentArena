@@ -14,7 +14,7 @@ export async function callGemini(
   prompt: string,
   modelVariant: GeminiModel = DEFAULT_MODEL,
   retryPrompt?: string
-): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string }> {
+): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string; inputTokens?: number; outputTokens?: number }> {
   try {
     const systemPrompt = 'You are an expert game-playing AI that plays to WIN. Always take winning moves when available. Always block opponent winning moves. Think strategically. Respond only with valid JSON as instructed - no markdown, no extra text.';
     const fullPrompt = retryPrompt
@@ -46,13 +46,15 @@ export async function callGemini(
 
     const data = await response.json();
     const rawResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const inputTokens = data?.usageMetadata?.promptTokenCount;
+    const outputTokens = data?.usageMetadata?.candidatesTokenCount;
 
     const parsed = parseAgentResponse(rawResponse);
     if (parsed.error) {
-      return { response: null, rawResponse, error: parsed.error };
+      return { response: null, rawResponse, error: parsed.error, inputTokens, outputTokens };
     }
 
-    return { response: parsed.response, rawResponse };
+    return { response: parsed.response, rawResponse, inputTokens, outputTokens };
   } catch (err) {
     const error = err instanceof Error ? err.message : 'Unknown error';
     return { response: null, rawResponse: '', error: `API Error: ${error}` };

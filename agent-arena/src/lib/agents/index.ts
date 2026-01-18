@@ -11,6 +11,8 @@ export interface AgentCallResult {
   retryCount: number;
   forfeit: boolean;
   forfeitReason?: string;
+  inputTokens?: number;
+  outputTokens?: number;
 }
 
 const MAX_RETRIES = 5; // Max total retries per turn
@@ -42,11 +44,21 @@ export async function callAgent(
       result.retryCount++;
     }
 
-    const { response, error } = model === 'gpt'
+    const agentResponse = model === 'gpt'
       ? await callGPT(prompt, modelVariant as GPTModel, retryPrompt)
       : model === 'deepseek'
       ? await callDeepSeek(prompt, modelVariant as DeepSeekModel, retryPrompt)
       : await callGemini(prompt, modelVariant as GeminiModel, retryPrompt);
+
+    const { response, error, inputTokens, outputTokens } = agentResponse;
+
+    // Track tokens (accumulate across retries)
+    if (inputTokens !== undefined) {
+      result.inputTokens = (result.inputTokens || 0) + inputTokens;
+    }
+    if (outputTokens !== undefined) {
+      result.outputTokens = (result.outputTokens || 0) + outputTokens;
+    }
 
     if (error || !response) {
       // Invalid JSON or API error

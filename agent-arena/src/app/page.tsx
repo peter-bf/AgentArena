@@ -470,6 +470,16 @@ export default function Home() {
               onAgentBModelChange={handleAgentBModelChange}
               onAgentBModelVariantChange={(v) => updateSession(activeGameType, { agentBModelVariant: v })}
               onRunMatch={runMatch}
+              onCancelMatch={() => {
+                if (abortControllers.current[activeGameType]) {
+                  abortControllers.current[activeGameType]!.abort();
+                  abortControllers.current[activeGameType] = null;
+                }
+                updateSession(activeGameType, {
+                  isRunning: false,
+                  currentThinking: null,
+                });
+              }}
               isRunning={session.isRunning}
             />
           </div>
