@@ -1,0 +1,100 @@
+import OpenAI from 'openai';
+import { AgentResponse, DeepSeekModel } from '@/types';
+
+// Lazy initialization to avoid errors if API key is missing
+let client: OpenAI | null = null;
+
+function getClient(): OpenAI {
+  if (!client) {
+    if (!process.env.DEEPSEEK_API_KEY) {
+      throw new Error('DEEPSEEK_API_KEY environment variable is not set');
+    }
+    client = new OpenAI({
+      apiKey: process.env.DEEPSEEK_API_KEY,
+      baseURL: process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1',
+    });
+  }
+  return client;
+}
+
+export async function callDeepSeek(
+  prompt: string,
+  modelVariant: DeepSeekModel = 'deepseek-chat',
+  retryPrompt?: string
+): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string }> {
+  try {
+    const openai = getClient();
+
+    const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
+      { role: 'system', content: 'You are a game-playing AI. Respond only with valid JSON as instructed.' },
+      { role: 'user', content: prompt },
+    ];
+
+    if (retryPrompt) {
+      messages.push({ role: 'assistant', content: 'I apologize for the error.' });
+      messages.push({ role: 'user', content: retryPrompt });
+    }
+
+    const completion = await openai.chat.completions.create({
+      model: modelVariant,
+      messages,
+      temperature: 0.3,
+      max_tokens: 200,
+    });
+
+    const rawResponse = completion.choices[0]?.message?.content || '';
+
+    // Try to parse JSON from response
+    const parsed = parseAgentResponse(rawResponse);
+
+    if (parsed.error) {
+      return { response: null, rawResponse, error: parsed.error };
+    }
+
+    return { response: parsed.response, rawResponse };
+  } catch (err) {
+    const error = err instanceof Error ? err.message : 'Unknown error';
+    return { response: null, rawResponse: '', error: `API Error: ${error}` };
+  }
+}
+
+function parseAgentResponse(raw: string): { response: AgentResponse | null; error?: string } {
+  try {
+    // Try to extract JSON from the response
+    let jsonStr = raw.trim();
+
+    // Remove markdown code blocks if present
+    if (jsonStr.startsWith('```json')) {
+      jsonStr = jsonStr.slice(7);
+    } else if (jsonStr.startsWith('```')) {
+      jsonStr = jsonStr.slice(3);
+    }
+    if (jsonStr.endsWith('```')) {
+      jsonStr = jsonStr.slice(0, -3);
+    }
+    jsonStr = jsonStr.trim();
+
+    // Try to find JSON object in the response
+    const jsonMatch = jsonStr.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      jsonStr = jsonMatch[0];
+    }
+
+    const parsed = JSON.parse(jsonStr);
+
+    // Validate required fields
+    if (typeof parsed.move !== 'number') {
+      return { response: null, error: 'Missing or invalid "move" field (must be a number)' };
+    }
+
+    return {
+      response: {
+        move: parsed.move,
+        reason: parsed.reason || undefined,
+        plan: Array.isArray(parsed.plan) ? parsed.plan : undefined,
+      }
+    };
+  } catch (e) {
+    return { response: null, error: 'Invalid JSON format' };
+  }
+}

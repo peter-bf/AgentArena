@@ -1,0 +1,438 @@
+[
+  {
+    "id": "0be77674-20fa-4b27-824d-8a946b9f7fe4",
+    "createdAt": "2026-01-18T07:44:26.541Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini",
+      "mode": "react"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat",
+      "mode": "react"
+    },
+    "winner": "B",
+    "winnerModel": "deepseek",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "I choose the center position to maximize my chances of winning.",
+        "timestamp": 1768722251612
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Taking a corner position provides the most strategic advantage in early game, allowing for multiple potential winning lines.",
+        "timestamp": 1768722254116
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This move blocks O from winning on the next turn.",
+        "timestamp": 1768722255633
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Blocking X's potential win in the top row while also creating a winning opportunity for O.",
+        "timestamp": 1768722258007
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a winning opportunity by placing X in the left column.",
+        "timestamp": 1768722259028
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Placing O at index 5 blocks X's potential win in the second row and creates a winning opportunity for O in the right column.",
+        "timestamp": 1768722261579
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing X in position 6 will create a winning line with the existing Xs in positions 1 and 4.",
+        "timestamp": 1768722263402
+      },
+      {
+        "player": "B",
+        "move": 8,
+        "reason": "Choosing 8 blocks X from winning on the bottom row and gives O a chance to win on the next turn.",
+        "timestamp": 1768722266540
+      }
+    ],
+    "metrics": {
+      "totalMoves": 8,
+      "durationMs": 16638,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      2,
+      5,
+      8
+    ],
+    "finalBoard": [
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "O",
+      "X",
+      null,
+      "O"
+    ]
+  },
+  {
+    "id": "8c997f6e-b2f1-4701-92d1-cf73a1cea2d1",
+    "createdAt": "2026-01-18T07:46:18.757Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini",
+      "mode": "react"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat",
+      "mode": "react"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "I chose the center position to maximize my chances of winning.",
+        "timestamp": 1768722361464
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Taking a corner position provides maximum strategic flexibility in early game Tic-Tac-Toe.",
+        "timestamp": 1768722366601
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This move blocks O from winning on the next turn.",
+        "timestamp": 1768722367395
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing O at index 2 blocks X's potential win in the top row and creates a winning threat for O.",
+        "timestamp": 1768722369736
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a winning opportunity by placing X in the left column.",
+        "timestamp": 1768722370505
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Placing O at index 5 blocks X from completing a winning row (row 1) and creates a potential winning line for O.",
+        "timestamp": 1768722373170
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "This move creates a winning line with X in the left column.",
+        "timestamp": 1768722374841
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Placing O at index 7 blocks X's potential winning move at index 8 and creates a winning opportunity for O at index 8 on the next turn.",
+        "timestamp": 1768722377683
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "Placing X in position 8 will complete a vertical line and win the game.",
+        "timestamp": 1768722378757
+      }
+    ],
+    "metrics": {
+      "totalMoves": 9,
+      "durationMs": 19186,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "O",
+      "X",
+      "O",
+      "X"
+    ]
+  },
+  {
+    "id": "c55a22bd-e7be-4703-a5da-47a5a08302a4",
+    "createdAt": "2026-01-18T07:50:33.993Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini",
+      "mode": "react"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat",
+      "mode": "planner"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "I choose the center position to maximize my chances of winning.",
+        "timestamp": 1768722607560
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Taking a corner position provides maximum strategic advantage in early game Tic-Tac-Toe",
+        "plan": [
+          "Control a corner to create multiple winning possibilities",
+          "Force X to defend against potential forks",
+          "Create opportunities for double threats in subsequent moves",
+          "Maintain flexibility to adapt to X's responses"
+        ],
+        "timestamp": 1768722616337
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This move blocks O from winning in the next turn.",
+        "timestamp": 1768722618112
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Blocking X's immediate winning threat on the top row while creating a potential fork for O.",
+        "plan": [
+          "Block X's potential win on the top row by placing O at index 2.",
+          "Force X to defend, likely at index 6 or 8.",
+          "Create a winning opportunity by threatening multiple lines on the next move."
+        ],
+        "timestamp": 1768722622186
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Playing in position 3 creates a winning line with X in positions 1, 4, and 3.",
+        "timestamp": 1768722623718
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Placing O at index 5 blocks X's immediate winning threat on the second row and creates a potential winning line for O.",
+        "plan": [
+          "Block X's potential win on row 2 (indices 3,4,5)",
+          "Set up a future fork opportunity by aligning O's at indices 2 and 5",
+          "Force X into a defensive position to control the game's outcome"
+        ],
+        "timestamp": 1768722627992
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "I will place X in position 6 to create a winning line with Xs in positions 3, 4, and 6.",
+        "timestamp": 1768722628978
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Placing O at index 7 blocks X's potential winning diagonal from the top-left to bottom-right and creates a winning threat for O.",
+        "plan": [
+          "Block X's diagonal win by occupying index 7.",
+          "Force X to defend at index 8 on their next turn.",
+          "Win by placing O at index 8 on the following move."
+        ],
+        "timestamp": 1768722633332
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "Placing X in position 8 completes a vertical line and wins the game.",
+        "timestamp": 1768722633992
+      }
+    ],
+    "metrics": {
+      "totalMoves": 9,
+      "durationMs": 28807,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "O",
+      "X",
+      "O",
+      "X"
+    ]
+  },
+  {
+    "id": "938e78d5-dcd6-45e8-8852-e4a0dd2502d4",
+    "createdAt": "2026-01-18T07:51:10.581Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini",
+      "mode": "react"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat",
+      "mode": "planner"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "I choose the center position to maximize my chances of winning.",
+        "timestamp": 1768722644570
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Taking a corner position provides maximum strategic advantage in early game Tic-Tac-Toe",
+        "plan": [
+          "Control corners to create multiple winning opportunities",
+          "Force opponent to defend against diagonal and row threats",
+          "Set up potential forks while maintaining defensive positioning"
+        ],
+        "timestamp": 1768722652330
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This move blocks O from potentially winning in the next turn.",
+        "timestamp": 1768722653728
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Blocking X's immediate winning threat on the top row while creating a potential fork for O.",
+        "plan": [
+          "Block X's potential win on the top row by placing O at index 2.",
+          "Force X to defend, likely at index 6 or 8.",
+          "Create a winning threat on the next move, such as by completing a diagonal or column."
+        ],
+        "timestamp": 1768722657963
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move blocks O from winning on the next turn.",
+        "timestamp": 1768722658826
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Placing O at index 5 blocks X's potential winning line and creates a winning threat for O.",
+        "plan": [
+          "Block X's immediate win by preventing a three-in-a-row across the middle row.",
+          "Create a winning opportunity for O by aligning two O's on the top row and this move.",
+          "Force X to defend, limiting their offensive options.",
+          "Maintain control of the board to secure a win or draw."
+        ],
+        "timestamp": 1768722663692
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing X at index 6 will create a winning line with Xs in positions 3, 4, and 5.",
+        "timestamp": 1768722664853
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Blocking X's potential winning move at position 7 while also creating a winning opportunity for O.",
+        "plan": [
+          "Block X's immediate threat of winning by placing O at index 7.",
+          "Force X to block O's winning line at index 8 on their next turn.",
+          "Secure a draw or look for a win depending on X's response."
+        ],
+        "timestamp": 1768722669254
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "This move completes a vertical line of X's in the right column, securing a win.",
+        "timestamp": 1768722670581
+      }
+    ],
+    "metrics": {
+      "totalMoves": 9,
+      "durationMs": 27032,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "O",
+      "X",
+      "O",
+      "X"
+    ]
+  }
+]
