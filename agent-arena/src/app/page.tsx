@@ -8,12 +8,14 @@ import {
   GlobalStats as GlobalStatsType,
   TTTCell,
   C4Cell,
+  BSCell,
   GPTModel,
   DeepSeekModel,
   GeminiModel,
 } from '@/types';
 import { TicTacToeBoard } from '@/components/TicTacToeBoard';
 import { Connect4Board } from '@/components/Connect4Board';
+import { BattleshipBoard } from '@/components/BattleshipBoard';
 import { AgentPanel } from '@/components/AgentPanel';
 import { MatchResultCard } from '@/components/MatchResultCard';
 import { GlobalStats } from '@/components/GlobalStats';
@@ -24,6 +26,7 @@ import { PROVIDER_LABELS, getPlayerStyles } from '@/lib/ui/providerStyles';
 
 const INITIAL_TTT_BOARD: TTTCell[] = Array(9).fill(null);
 const INITIAL_C4_BOARD: C4Cell[] = Array(42).fill(null);
+const INITIAL_BS_BOARD: BSCell[] = Array(100).fill('unknown');
 
 // State for a single game session
 interface GameSession {
@@ -31,7 +34,7 @@ interface GameSession {
   matchResult: MatchResult | null;
   liveMoves: LiveMove[];
   currentThinking: 'A' | 'B' | null;
-  displayBoard: (TTTCell | C4Cell)[];
+  displayBoard: (TTTCell | C4Cell | BSCell)[];
   currentMoveIndex: number;
   isAutoPlaying: boolean;
   lastMoveIdx: number | null;
@@ -47,7 +50,11 @@ const createInitialSession = (gameType: GameType): GameSession => ({
   matchResult: null,
   liveMoves: [],
   currentThinking: null,
-  displayBoard: gameType === 'ttt' ? [...INITIAL_TTT_BOARD] : [...INITIAL_C4_BOARD],
+  displayBoard: gameType === 'ttt' 
+    ? [...INITIAL_TTT_BOARD] 
+    : gameType === 'c4' 
+    ? [...INITIAL_C4_BOARD] 
+    : [...INITIAL_BS_BOARD],
   currentMoveIndex: -1,
   isAutoPlaying: false,
   lastMoveIdx: null,
@@ -66,18 +73,21 @@ export default function Home() {
   const [sessions, setSessions] = useState<Record<GameType, GameSession>>({
     ttt: createInitialSession('ttt'),
     c4: createInitialSession('c4'),
+    bs: createInitialSession('bs'),
   });
 
   // Global stats
   const [globalStats, setGlobalStats] = useState<GlobalStatsType>({
     ttt: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0, gemini: 0 } },
     c4: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0, gemini: 0 } },
+    bs: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0, gemini: 0 } },
   });
 
   // Abort controllers for each game type
   const abortControllers = useRef<Record<GameType, AbortController | null>>({
     ttt: null,
     c4: null,
+    bs: null,
   });
 
   // Get current session
@@ -128,28 +138,42 @@ export default function Home() {
     if (!session.matchResult || session.isRunning) return;
 
     if (session.currentMoveIndex < 0) {
-      updateSession(activeGameType, {
-        displayBoard: activeGameType === 'ttt' ? [...INITIAL_TTT_BOARD] : [...INITIAL_C4_BOARD],
-      });
+      const initialBoard = activeGameType === 'ttt' 
+        ? [...INITIAL_TTT_BOARD] 
+        : activeGameType === 'c4' 
+        ? [...INITIAL_C4_BOARD] 
+        : [...INITIAL_BS_BOARD];
+      updateSession(activeGameType, { displayBoard: initialBoard });
       return;
     }
 
     // Reconstruct board state up to current move
-    const board = activeGameType === 'ttt'
-      ? [...INITIAL_TTT_BOARD]
-      : [...INITIAL_C4_BOARD];
+    let board: (TTTCell | C4Cell | BSCell)[];
+    if (activeGameType === 'ttt') {
+      board = [...INITIAL_TTT_BOARD];
+    } else if (activeGameType === 'c4') {
+      board = [...INITIAL_C4_BOARD];
+    } else {
+      board = [...INITIAL_BS_BOARD];
+    }
 
-    for (let i = 0; i <= session.currentMoveIndex && i < session.matchResult.moves.length; i++) {
-      const moveRecord = session.matchResult.moves[i];
-      if (activeGameType === 'ttt') {
-        (board as TTTCell[])[moveRecord.move] = moveRecord.player === 'A' ? 'X' : 'O';
-      } else {
-        const column: number = moveRecord.move;
-        for (let row = 5; row >= 0; row--) {
-          const idx = row * 7 + column;
-          if (board[idx] === null) {
-            (board as C4Cell[])[idx] = moveRecord.player === 'A' ? 'R' : 'Y';
-            break;
+    if (activeGameType === 'bs') {
+      // For battleship, use the final board since reconstructing knowledge grid
+      // from moves would require running the full game logic
+      board = session.matchResult.finalBoard as BSCell[];
+    } else {
+      for (let i = 0; i <= session.currentMoveIndex && i < session.matchResult.moves.length; i++) {
+        const moveRecord = session.matchResult.moves[i];
+        if (activeGameType === 'ttt') {
+          (board as TTTCell[])[moveRecord.move] = moveRecord.player === 'A' ? 'X' : 'O';
+        } else if (activeGameType === 'c4') {
+          const column: number = moveRecord.move;
+          for (let row = 5; row >= 0; row--) {
+            const idx = row * 7 + column;
+            if (board[idx] === null) {
+              (board as C4Cell[])[idx] = moveRecord.player === 'A' ? 'R' : 'Y';
+              break;
+            }
           }
         }
       }
@@ -180,16 +204,21 @@ export default function Home() {
     }
     abortControllers.current[gameType] = new AbortController();
 
-    updateSession(gameType, {
-      isRunning: true,
-      error: null,
-      matchResult: null,
-      currentMoveIndex: -1,
-      liveMoves: [],
-      currentThinking: null,
-      displayBoard: gameType === 'ttt' ? [...INITIAL_TTT_BOARD] : [...INITIAL_C4_BOARD],
-      lastMoveIdx: null,
-    });
+      const initialBoard = gameType === 'ttt' 
+        ? [...INITIAL_TTT_BOARD] 
+        : gameType === 'c4' 
+        ? [...INITIAL_C4_BOARD] 
+        : [...INITIAL_BS_BOARD];
+      updateSession(gameType, {
+        isRunning: true,
+        error: null,
+        matchResult: null,
+        currentMoveIndex: -1,
+        liveMoves: [],
+        currentThinking: null,
+        displayBoard: initialBoard,
+        lastMoveIdx: null,
+      });
 
     try {
       const res = await fetch('/api/play-stream', {
@@ -260,7 +289,7 @@ export default function Home() {
           move: number;
           reason?: string;
           modelVariant: GPTModel | DeepSeekModel | GeminiModel;
-          board: (TTTCell | C4Cell)[];
+          board: (TTTCell | C4Cell | BSCell)[];
           durationMs?: number;
           retries?: number;
           hadError?: boolean;
@@ -293,6 +322,9 @@ export default function Home() {
               }
             }
           }
+        } else if (gameType === 'bs') {
+          // For battleship, the move index is the cell index directly
+          lastMoveIdx = d.move;
         }
 
         setSessions(prev => ({
@@ -392,6 +424,7 @@ export default function Home() {
     if (session.isRunning) return session.lastMoveIdx;
     if (!currentMove) return null;
     if (activeGameType === 'ttt') return currentMove.move;
+    if (activeGameType === 'bs') return currentMove.move;
 
     const col = currentMove.move;
     const boardCopy = [...INITIAL_C4_BOARD];
@@ -421,7 +454,7 @@ export default function Home() {
     : null;
 
   // Check if any game is running
-  const anyGameRunning = sessions.ttt.isRunning || sessions.c4.isRunning;
+  const anyGameRunning = sessions.ttt.isRunning || sessions.c4.isRunning || sessions.bs.isRunning;
 
   return (
     <main className="min-h-screen bg-background">
@@ -447,7 +480,7 @@ export default function Home() {
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-xs text-emerald-400">
-                    {sessions.ttt.isRunning && sessions.c4.isRunning ? 'Both games' : sessions.ttt.isRunning ? 'TTT' : 'C4'} running
+                    {[sessions.ttt.isRunning && 'TTT', sessions.c4.isRunning && 'C4', sessions.bs.isRunning && 'BS'].filter(Boolean).join(', ') || 'Running'} running
                   </span>
                 </div>
               )}
@@ -489,7 +522,7 @@ export default function Home() {
             <div className="bg-card rounded-lg border border-border p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-medium">
-                  {activeGameType === 'ttt' ? 'Tic-Tac-Toe' : 'Connect Four'}
+                  {activeGameType === 'ttt' ? 'Tic-Tac-Toe' : activeGameType === 'c4' ? 'Connect Four' : 'Battleship'}
                 </h2>
                 {session.isRunning && (
                   <div className="flex items-center gap-2">
@@ -510,10 +543,19 @@ export default function Home() {
                     agentAModel={session.agentAModel}
                     agentBModel={session.agentBModel}
                   />
-                ) : (
+                ) : activeGameType === 'c4' ? (
                   <Connect4Board
                     board={session.displayBoard as C4Cell[]}
                     winLine={winLine ?? null}
+                    lastMove={getLastMoveIndex()}
+                    currentPlayer={session.currentThinking}
+                    isThinking={session.isRunning && session.currentThinking !== null}
+                    agentAModel={session.agentAModel}
+                    agentBModel={session.agentBModel}
+                  />
+                ) : (
+                  <BattleshipBoard
+                    board={session.displayBoard as BSCell[]}
                     lastMove={getLastMoveIndex()}
                     currentPlayer={session.currentThinking}
                     isThinking={session.isRunning && session.currentThinking !== null}

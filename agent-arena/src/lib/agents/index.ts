@@ -1,4 +1,4 @@
-import { ModelType, AgentResponse, GameType, Player, TTTCell, C4Cell, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
+import { ModelType, AgentResponse, GameType, Player, TTTCell, C4Cell, BSCell, GameState, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
 import { callGPT } from './gpt';
 import { callDeepSeek } from './deepseek';
 import { callGemini } from './gemini';
@@ -21,9 +21,10 @@ export async function callAgent(
   model: ModelType,
   modelVariant: GPTModel | DeepSeekModel | GeminiModel,
   gameType: GameType,
-  board: (TTTCell | C4Cell)[],
+  board: (TTTCell | C4Cell | BSCell)[],
   player: Player,
-  legalMoves: number[]
+  legalMoves: number[],
+  state?: GameState
 ): Promise<AgentCallResult> {
   const result: AgentCallResult = {
     response: null,
@@ -33,7 +34,7 @@ export async function callAgent(
     forfeit: false,
   };
 
-  const prompt = buildPrompt(gameType, board, player);
+  const prompt = buildPrompt(gameType, board, player, state, legalMoves);
 
   let lastError = '';
 

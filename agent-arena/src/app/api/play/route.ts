@@ -8,7 +8,7 @@ const VALID_DEEPSEEK_MODELS: DeepSeekModel[] = ['deepseek-chat', 'deepseek-reaso
 const VALID_GEMINI_MODELS: GeminiModel[] = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash', 'gemini-1.5-pro'];
 
 function isValidGameType(val: unknown): val is GameType {
-  return val === 'ttt' || val === 'c4';
+  return val === 'ttt' || val === 'c4' || val === 'bs';
 }
 
 function isValidModelType(val: unknown): val is ModelType {
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     // Validate request
     if (!isValidGameType(body.gameType)) {
       return NextResponse.json(
-        { error: 'Invalid gameType. Must be "ttt" or "c4".' },
+        { error: 'Invalid gameType. Must be "ttt", "c4", or "bs".' },
         { status: 400 }
       );
     }

@@ -12,10 +12,12 @@ import {
   AgentMetrics,
   TTTCell,
   C4Cell,
+  BSCell,
   Player,
 } from '@/types';
 import { initTTTState, applyTTTMove, getTTTLegalMoves } from '@/lib/games/tictactoe';
 import { initC4State, applyC4Move, getC4LegalMoves } from '@/lib/games/connect4';
+import { initBSState, applyBSMove, getBSLegalMoves } from '@/lib/games/battleship';
 import { callAgent } from '@/lib/agents';
 import { saveMatch } from '@/lib/db';
 
@@ -25,7 +27,7 @@ const VALID_GEMINI_MODELS: GeminiModel[] = ['gemini-2.0-flash', 'gemini-2.0-flas
 const MAX_MOVES = 100;
 
 function isValidGameType(val: unknown): val is GameType {
-  return val === 'ttt' || val === 'c4';
+  return val === 'ttt' || val === 'c4' || val === 'bs';
 }
 
 function isValidModelType(val: unknown): val is ModelType {
@@ -80,7 +82,11 @@ export async function POST(request: NextRequest) {
 
       try {
         const startTime = Date.now();
-        let state = gameType === 'ttt' ? initTTTState() : initC4State();
+        let state = gameType === 'ttt' 
+          ? initTTTState() 
+          : gameType === 'c4' 
+          ? initC4State() 
+          : initBSState(Date.now());
         const moves: MoveRecord[] = [];
         const metricsA: AgentMetrics = { 
           invalidJsonCount: 0, 
@@ -109,7 +115,9 @@ export async function POST(request: NextRequest) {
 
           const legalMoves = gameType === 'ttt'
             ? getTTTLegalMoves(state.board as TTTCell[])
-            : getC4LegalMoves(state.board as C4Cell[]);
+            : gameType === 'c4'
+            ? getC4LegalMoves(state.board as C4Cell[])
+            : getBSLegalMoves(state, currentPlayer);
 
           if (legalMoves.length === 0) break;
 
@@ -124,7 +132,8 @@ export async function POST(request: NextRequest) {
             gameType,
             state.board,
             currentPlayer,
-            legalMoves
+            legalMoves,
+            gameType === 'bs' ? state : undefined
           );
           const moveDurationMs = Date.now() - moveStartTime;
 
@@ -150,9 +159,16 @@ export async function POST(request: NextRequest) {
           }
 
           // Apply move
-          const applyResult = gameType === 'ttt'
-            ? applyTTTMove(state, result.response!.move, currentPlayer)
-            : applyC4Move(state, result.response!.move, currentPlayer);
+          let applyResult: { newState: any; valid: boolean; error?: string; outcome?: any };
+          if (gameType === 'ttt') {
+            applyResult = applyTTTMove(state, result.response!.move, currentPlayer);
+          } else if (gameType === 'c4') {
+            applyResult = applyC4Move(state, result.response!.move, currentPlayer);
+          } else if (gameType === 'bs') {
+            applyResult = applyBSMove(state, result.response!.move, currentPlayer);
+          } else {
+            throw new Error(`Unknown game type: ${gameType}`);
+          }
 
           if (!applyResult.valid) {
             forfeitedBy = currentPlayer;
@@ -169,6 +185,13 @@ export async function POST(request: NextRequest) {
             retries: moveRetries,
             hadError: moveHadError,
           };
+
+          // Add battleship-specific fields
+          if (gameType === 'bs' && applyResult.outcome) {
+            moveRecord.outcome = applyResult.outcome.outcome;
+            moveRecord.sunkShipName = applyResult.outcome.sunkShipName;
+          }
+
           moves.push(moveRecord);
 
           // Send move event

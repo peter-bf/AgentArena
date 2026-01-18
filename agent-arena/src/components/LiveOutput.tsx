@@ -1,6 +1,6 @@
 'use client';
 
-import { AgentConfig, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
+import { AgentConfig, GPTModel, DeepSeekModel, GeminiModel, GameType } from '@/types';
 import { getPlayerStyles } from '@/lib/ui/providerStyles';
 import { Radio, X, RotateCcw } from 'lucide-react';
 
@@ -35,15 +35,22 @@ interface LiveOutputProps {
   agentB: AgentConfig;
   isRunning: boolean;
   currentThinking: 'A' | 'B' | null;
-  gameType: 'ttt' | 'c4';
+  gameType: GameType;
 }
 
 export function LiveOutput({ moves, agentA, agentB, isRunning, currentThinking, gameType }: LiveOutputProps) {
   const formatMove = (move: number) => {
     if (gameType === 'ttt') {
       return `pos ${move}`;
+    } else if (gameType === 'c4') {
+      return `col ${move}`;
+    } else {
+      // Battleship: convert index to A1-J10 format
+      const row = Math.floor(move / 10);
+      const col = move % 10;
+      const rowLabel = String.fromCharCode(65 + row);
+      return `${rowLabel}${col + 1}`;
     }
-    return `col ${move}`;
   };
 
   const formatDuration = (ms?: number) => {

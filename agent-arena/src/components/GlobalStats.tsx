@@ -9,11 +9,11 @@ interface GlobalStatsProps {
 
 export function GlobalStats({ stats }: GlobalStatsProps) {
   const totals = {
-    matches: stats.ttt.matchesPlayed + stats.c4.matchesPlayed,
-    gptWins: stats.ttt.winsByModel.gpt + stats.c4.winsByModel.gpt,
-    deepseekWins: stats.ttt.winsByModel.deepseek + stats.c4.winsByModel.deepseek,
-    geminiWins: stats.ttt.winsByModel.gemini + stats.c4.winsByModel.gemini,
-    draws: stats.ttt.draws + stats.c4.draws,
+    matches: stats.ttt.matchesPlayed + stats.c4.matchesPlayed + stats.bs.matchesPlayed,
+    gptWins: stats.ttt.winsByModel.gpt + stats.c4.winsByModel.gpt + stats.bs.winsByModel.gpt,
+    deepseekWins: stats.ttt.winsByModel.deepseek + stats.c4.winsByModel.deepseek + stats.bs.winsByModel.deepseek,
+    geminiWins: stats.ttt.winsByModel.gemini + stats.c4.winsByModel.gemini + stats.bs.winsByModel.gemini,
+    draws: stats.ttt.draws + stats.c4.draws + stats.bs.draws,
   };
 
   return (
@@ -53,7 +53,7 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
         {/* Per-game breakdown */}
         {totals.matches > 0 && (
           <div className="mt-4 pt-4 border-t border-border">
-            <div className="grid grid-cols-2 gap-4 text-xs">
+            <div className="grid grid-cols-3 gap-4 text-xs">
               <div>
                 <div className="text-muted-foreground mb-2">Tic-Tac-Toe</div>
                 <div className="flex gap-2">
@@ -72,6 +72,16 @@ export function GlobalStats({ stats }: GlobalStatsProps) {
                   <span className="text-sky-400">{stats.c4.winsByModel.deepseek}</span>
                   <span className="text-muted-foreground">/</span>
                   <span className="text-amber-400">{stats.c4.winsByModel.gemini}</span>
+                </div>
+              </div>
+              <div>
+                <div className="text-muted-foreground mb-2">Battleship</div>
+                <div className="flex gap-2">
+                  <span className="text-emerald-400">{stats.bs.winsByModel.gpt}</span>
+                  <span className="text-muted-foreground">/</span>
+                  <span className="text-sky-400">{stats.bs.winsByModel.deepseek}</span>
+                  <span className="text-muted-foreground">/</span>
+                  <span className="text-amber-400">{stats.bs.winsByModel.gemini}</span>
                 </div>
               </div>
             </div>

@@ -9,9 +9,11 @@ import {
   AgentMetrics,
   TTTCell,
   C4Cell,
+  BSCell,
 } from '@/types';
 import { initTTTState, applyTTTMove, getTTTLegalMoves } from './games/tictactoe';
 import { initC4State, applyC4Move, getC4LegalMoves } from './games/connect4';
+import { initBSState, applyBSMove, getBSLegalMoves } from './games/battleship';
 import { callAgent } from './agents';
 
 const MAX_MOVES = 100; // Safety limit
@@ -19,12 +21,23 @@ const MAX_MOVES = 100; // Safety limit
 export async function runMatch(
   gameType: GameType,
   agentA: AgentConfig,
-  agentB: AgentConfig
+  agentB: AgentConfig,
+  matchId?: string
 ): Promise<MatchResult> {
   const startTime = Date.now();
 
   // Initialize game state
-  let state = gameType === 'ttt' ? initTTTState() : initC4State();
+  let state: GameState;
+  if (gameType === 'ttt') {
+    state = initTTTState();
+  } else if (gameType === 'c4') {
+    state = initC4State();
+  } else if (gameType === 'bs') {
+    state = initBSState(matchId || Date.now());
+  } else {
+    throw new Error(`Unknown game type: ${gameType}`);
+  }
+
   const moves: MoveRecord[] = [];
 
   const metricsA: AgentMetrics = { invalidJsonCount: 0, illegalMoveCount: 0, retryCount: 0 };
@@ -39,9 +52,16 @@ export async function runMatch(
     const metrics = currentPlayer === 'A' ? metricsA : metricsB;
 
     // Get legal moves
-    const legalMoves = gameType === 'ttt'
-      ? getTTTLegalMoves(state.board as TTTCell[])
-      : getC4LegalMoves(state.board as C4Cell[]);
+    let legalMoves: number[];
+    if (gameType === 'ttt') {
+      legalMoves = getTTTLegalMoves(state.board as TTTCell[]);
+    } else if (gameType === 'c4') {
+      legalMoves = getC4LegalMoves(state.board as C4Cell[]);
+    } else if (gameType === 'bs') {
+      legalMoves = getBSLegalMoves(state, currentPlayer);
+    } else {
+      throw new Error(`Unknown game type: ${gameType}`);
+    }
 
     if (legalMoves.length === 0) {
       // No legal moves - game should be terminal (draw)
@@ -55,7 +75,8 @@ export async function runMatch(
       gameType,
       state.board,
       currentPlayer,
-      legalMoves
+      legalMoves,
+      gameType === 'bs' ? state : undefined
     );
 
     // Update metrics
@@ -70,9 +91,16 @@ export async function runMatch(
     }
 
     // Apply move
-    const applyResult = gameType === 'ttt'
-      ? applyTTTMove(state, result.response!.move, currentPlayer)
-      : applyC4Move(state, result.response!.move, currentPlayer);
+    let applyResult: { newState: GameState; valid: boolean; error?: string; outcome?: any };
+    if (gameType === 'ttt') {
+      applyResult = applyTTTMove(state, result.response!.move, currentPlayer);
+    } else if (gameType === 'c4') {
+      applyResult = applyC4Move(state, result.response!.move, currentPlayer);
+    } else if (gameType === 'bs') {
+      applyResult = applyBSMove(state, result.response!.move, currentPlayer);
+    } else {
+      throw new Error(`Unknown game type: ${gameType}`);
+    }
 
     if (!applyResult.valid) {
       // This shouldn't happen since we validated, but handle it
@@ -81,13 +109,21 @@ export async function runMatch(
     }
 
     // Record move
-    moves.push({
+    const moveRecord: MoveRecord = {
       player: currentPlayer,
       move: result.response!.move,
       reason: result.response!.reason,
       plan: result.response!.plan,
       timestamp: Date.now(),
-    });
+    };
+
+    // Add battleship-specific fields
+    if (gameType === 'bs' && applyResult.outcome) {
+      moveRecord.outcome = applyResult.outcome.outcome;
+      moveRecord.sunkShipName = applyResult.outcome.sunkShipName;
+    }
+
+    moves.push(moveRecord);
 
     state = applyResult.newState;
     state.moveHistory = moves;

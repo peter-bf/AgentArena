@@ -1,5 +1,5 @@
 // Game types
-export type GameType = 'ttt' | 'c4';
+export type GameType = 'ttt' | 'c4' | 'bs';
 export type ModelType = 'gpt' | 'deepseek' | 'gemini';
 export type Player = 'A' | 'B';
 export type Winner = 'A' | 'B' | 'draw';
@@ -9,12 +9,13 @@ export type GPTModel = 'gpt-4o-mini' | 'gpt-4o' | 'gpt-4-turbo' | 'gpt-3.5-turbo
 export type DeepSeekModel = 'deepseek-chat' | 'deepseek-reasoner';
 export type GeminiModel = 'gemini-2.0-flash' | 'gemini-2.0-flash-lite' | 'gemini-1.5-flash' | 'gemini-1.5-pro';
 
-// Tic-Tac-Toe: 0-8 index, Connect-4: 0-6 column
+// Tic-Tac-Toe: 0-8 index, Connect-4: 0-6 column, Battleship: 0-99 cell index
 export type Move = number;
 
 // Cell values
 export type TTTCell = 'X' | 'O' | null;
 export type C4Cell = 'R' | 'Y' | null; // Red, Yellow
+export type BSCell = 'unknown' | 'miss' | 'hit' | 'sunk';
 
 export interface AgentConfig {
   model: ModelType;
@@ -23,12 +24,30 @@ export interface AgentConfig {
 
 export interface GameState {
   gameType: GameType;
-  board: (TTTCell | C4Cell)[];
+  board: (TTTCell | C4Cell | BSCell)[];
   currentPlayer: Player;
   moveHistory: MoveRecord[];
   winner: Winner | null;
   winLine: number[] | null;
   isTerminal: boolean;
+  // Battleship-specific hidden fields (not exposed to agents)
+  placementsA?: ShipPlacement[];
+  placementsB?: ShipPlacement[];
+  firedA?: Set<number>;
+  firedB?: Set<number>;
+  shipHealthA?: Record<string, number>;
+  shipHealthB?: Record<string, number>;
+}
+
+export interface ShipPlacement {
+  name: string;
+  size: number;
+  cells: number[];
+}
+
+export interface BSMoveOutcome {
+  outcome: 'miss' | 'hit' | 'sunk';
+  sunkShipName?: string;
 }
 
 export interface MoveRecord {
@@ -40,6 +59,9 @@ export interface MoveRecord {
   durationMs?: number;
   retries?: number;
   hadError?: boolean;
+  // Battleship-specific
+  outcome?: 'miss' | 'hit' | 'sunk';
+  sunkShipName?: string;
 }
 
 export interface AgentMetrics {
@@ -67,12 +89,13 @@ export interface MatchResult {
     agentB: AgentMetrics;
   };
   winLine: number[] | null;
-  finalBoard: (TTTCell | C4Cell)[];
+  finalBoard: (TTTCell | C4Cell | BSCell)[];
 }
 
 export interface GlobalStats {
   ttt: GameStats;
   c4: GameStats;
+  bs: GameStats;
 }
 
 export interface GameStats {

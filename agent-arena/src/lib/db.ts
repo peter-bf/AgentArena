@@ -66,6 +66,7 @@ export async function getGlobalStats(): Promise<GlobalStats> {
   return {
     ttt: computeStats('ttt'),
     c4: computeStats('c4'),
+    bs: computeStats('bs'),
   };
 }
 

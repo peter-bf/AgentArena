@@ -1,5 +1,6 @@
 export { TicTacToeBoard } from './TicTacToeBoard';
 export { Connect4Board } from './Connect4Board';
+export { BattleshipBoard } from './BattleshipBoard';
 export { AgentPanel } from './AgentPanel';
 export { MatchResultCard } from './MatchResultCard';
 export { GlobalStats } from './GlobalStats';

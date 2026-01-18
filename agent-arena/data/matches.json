@@ -12348,5 +12348,1845 @@
       "R",
       null
     ]
+  },
+  {
+    "id": "cb99c305-3a1e-4985-8697-766fcd0abd03",
+    "createdAt": "2026-01-18T11:31:11.593Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768735862365,
+        "durationMs": 762,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Taking a corner is a strong opening move after opponent took center.",
+        "timestamp": 1768735864667,
+        "durationMs": 2302,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move creates a winning opportunity in the next turn.",
+        "timestamp": 1768735865488,
+        "durationMs": 821,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Placing O at position 1 creates a winning threat on the top row while also blocking opponent's potential diagonal win.",
+        "timestamp": 1768735867950,
+        "durationMs": 2462,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move wins the game by completing the top row.",
+        "timestamp": 1768735868755,
+        "durationMs": 805,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Block opponent's immediate winning threat on the bottom row.",
+        "timestamp": 1768735870898,
+        "durationMs": 2143,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "This move wins by completing the vertical line.",
+        "timestamp": 1768735871593,
+        "durationMs": 695,
+        "retries": 0,
+        "hadError": false
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 9991,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 2147,
+        "totalOutputTokens": 81,
+        "totalThinkingTimeMs": 3083
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 1644,
+        "totalOutputTokens": 81,
+        "totalThinkingTimeMs": 6907
+      }
+    },
+    "winLine": [
+      2,
+      4,
+      6
+    ],
+    "finalBoard": [
+      "O",
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "X",
+      null,
+      null
+    ]
+  },
+  {
+    "id": "d09f6637-2832-411c-b4ea-10f4eb87bee5",
+    "createdAt": "2026-01-18T11:31:26.023Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position increases control and future winning opportunities.",
+        "timestamp": 1768735875636,
+        "durationMs": 751,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Take a corner to control the board and create future threats.",
+        "timestamp": 1768735877428,
+        "durationMs": 1792,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move creates a winning opportunity on the next turn.",
+        "timestamp": 1768735878105,
+        "durationMs": 676,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Placing O at position 1 creates a winning threat on the top row while also blocking opponent's potential diagonal win.",
+        "timestamp": 1768735881045,
+        "durationMs": 2940,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move wins the game by completing the top row.",
+        "timestamp": 1768735881762,
+        "durationMs": 716,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's winning threat on the diagonal.",
+        "timestamp": 1768735883837,
+        "durationMs": 2075,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a winning line with X in row 3.",
+        "timestamp": 1768735886023,
+        "durationMs": 2186,
+        "retries": 0,
+        "hadError": false
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 11138,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 2147,
+        "totalOutputTokens": 88,
+        "totalThinkingTimeMs": 4329
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 1644,
+        "totalOutputTokens": 78,
+        "totalThinkingTimeMs": 6807
+      }
+    },
+    "winLine": [
+      3,
+      4,
+      5
+    ],
+    "finalBoard": [
+      "O",
+      "O",
+      "X",
+      "X",
+      "X",
+      "X",
+      "O",
+      null,
+      null
+    ]
+  },
+  {
+    "id": "1ca95b92-18cd-43f0-a770-c5808d6ec25a",
+    "createdAt": "2026-01-18T11:31:38.325Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768735889612,
+        "durationMs": 575,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Take a corner to control the board and create future threats.",
+        "timestamp": 1768735891346,
+        "durationMs": 1734,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move creates a winning opportunity on the next turn.",
+        "timestamp": 1768735892292,
+        "durationMs": 946,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Placing O at position 1 creates a winning threat on the top row while also blocking opponent's potential fork.",
+        "timestamp": 1768735894729,
+        "durationMs": 2437,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move wins the game by completing the top row.",
+        "timestamp": 1768735895567,
+        "durationMs": 838,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Block opponent's immediate winning threat on the bottom row.",
+        "timestamp": 1768735897643,
+        "durationMs": 2076,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "This move wins the game by completing the vertical line.",
+        "timestamp": 1768735898325,
+        "durationMs": 682,
+        "retries": 0,
+        "hadError": false
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 9288,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 2147,
+        "totalOutputTokens": 83,
+        "totalThinkingTimeMs": 3041
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 1644,
+        "totalOutputTokens": 79,
+        "totalThinkingTimeMs": 6247
+      }
+    },
+    "winLine": [
+      2,
+      4,
+      6
+    ],
+    "finalBoard": [
+      "O",
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "X",
+      null,
+      null
+    ]
+  },
+  {
+    "id": "6a08d58c-010d-401c-ac07-4f5520ec4105",
+    "createdAt": "2026-01-18T11:33:07.387Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768735976184,
+        "durationMs": 783,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Take a corner to establish strong board control.",
+        "timestamp": 1768735978400,
+        "durationMs": 2216,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move creates a potential win on the next turn.",
+        "timestamp": 1768735979377,
+        "durationMs": 977,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Block opponent's immediate winning threat on the middle row.",
+        "timestamp": 1768735981155,
+        "durationMs": 1777,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768735981864,
+        "durationMs": 708,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Block opponent's immediate winning threat in the top row.",
+        "timestamp": 1768735983984,
+        "durationMs": 2120,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768735984550,
+        "durationMs": 565,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Block opponent's immediate winning threat on the bottom row.",
+        "timestamp": 1768735986475,
+        "durationMs": 1925,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "This move wins the game with three X's in a column.",
+        "timestamp": 1768735987387,
+        "durationMs": 912,
+        "retries": 0,
+        "hadError": false
+      }
+    ],
+    "metrics": {
+      "totalMoves": 9,
+      "durationMs": 11986,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 2704,
+        "totalOutputTokens": 95,
+        "totalThinkingTimeMs": 3945
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 2237,
+        "totalOutputTokens": 86,
+        "totalThinkingTimeMs": 8038
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "O",
+      "X",
+      "O",
+      "O",
+      "X",
+      "X",
+      "X",
+      "O",
+      "X"
+    ]
+  },
+  {
+    "id": "fc843481-6533-41b4-8e76-140196a52e2f",
+    "createdAt": "2026-01-18T11:42:52.371Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a potential winning line while controlling the center.",
+        "timestamp": 1768736552197,
+        "durationMs": 998,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in the center column builds a strong vertical threat and counters the opponent's opening.",
+        "timestamp": 1768736554472,
+        "durationMs": 2275,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a potential winning diagonal line.",
+        "timestamp": 1768736555250,
+        "durationMs": 777,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 builds on my existing piece and creates a vertical threat.",
+        "timestamp": 1768736557505,
+        "durationMs": 2255,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a winning opportunity for my next turn.",
+        "timestamp": 1768736558171,
+        "durationMs": 666,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Extend my vertical three-in-a-row to create a winning threat.",
+        "timestamp": 1768736560470,
+        "durationMs": 2299,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768736560932,
+        "durationMs": 462,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat of three Y's and blocks opponent's potential diagonal.",
+        "timestamp": 1768736563309,
+        "durationMs": 2377,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This blocks the opponent's immediate winning move in column 2.",
+        "timestamp": 1768736564046,
+        "durationMs": 736,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768736566301,
+        "durationMs": 2255,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical win with four Red pieces.",
+        "timestamp": 1768736566985,
+        "durationMs": 684,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768736569245,
+        "durationMs": 2260,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move blocks the opponent's potential winning move in column 4 next turn.",
+        "timestamp": 1768736569992,
+        "durationMs": 746,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768736571783,
+        "durationMs": 1791,
+        "retries": 0,
+        "hadError": false
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "I can win immediately by placing a piece in column 5.",
+        "timestamp": 1768736572371,
+        "durationMs": 588,
+        "retries": 0,
+        "hadError": false
+      }
+    ],
+    "metrics": {
+      "totalMoves": 15,
+      "durationMs": 21174,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 5439,
+        "totalOutputTokens": 170,
+        "totalThinkingTimeMs": 5657
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 4755,
+        "totalOutputTokens": 192,
+        "totalThinkingTimeMs": 15512
+      }
+    },
+    "winLine": [
+      37,
+      38,
+      39,
+      40
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "R",
+      "R",
+      null
+    ]
+  },
+  {
+    "id": "68262193-df1c-45ce-a39e-513e7cfb5ce3",
+    "createdAt": "2026-01-18T11:45:05.565Z",
+    "gameType": "bs",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Starting to systematically scan the board for ships.",
+        "timestamp": 1768736520510,
+        "durationMs": 1001,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 10,
+        "reason": "Hunt mode: targeting adjacent cell to the hit at A1 to continue sinking the ship.",
+        "timestamp": 1768736522608,
+        "durationMs": 2098,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 12,
+        "reason": "Targeting adjacent cell to finish the ship in A1 and A2.",
+        "timestamp": 1768736523794,
+        "durationMs": 1186,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 11,
+        "reason": "Targeting adjacent cell to existing hit at A1 to sink the ship.",
+        "timestamp": 1768736527436,
+        "durationMs": 3642,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 32,
+        "reason": "Targeting adjacent cell to hit the ship on A1 and B1.",
+        "timestamp": 1768736528539,
+        "durationMs": 1102,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 20,
+        "reason": "Targeting adjacent cell to existing hit at A0 to sink the ship.",
+        "timestamp": 1768736532798,
+        "durationMs": 4259,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 42,
+        "reason": "Targeting adjacent cell to hit the ship.",
+        "timestamp": 1768736534523,
+        "durationMs": 1725,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Target adjacent cell to sink the ship at A1.",
+        "timestamp": 1768736536428,
+        "durationMs": 1905,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 41,
+        "reason": "Targeting adjacent cell to hit the ship at A1 and B1.",
+        "timestamp": 1768736537600,
+        "durationMs": 1172,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Targeting adjacent cell to existing hit at A1 to sink the ship.",
+        "timestamp": 1768736541257,
+        "durationMs": 3657,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 43,
+        "reason": "Targeting adjacent cell to hit the ship.",
+        "timestamp": 1768736543185,
+        "durationMs": 1928,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 12,
+        "reason": "Target adjacent cell to sink the ship with hits at A0 and B0.",
+        "timestamp": 1768736545043,
+        "durationMs": 1858,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 33,
+        "reason": "Targeting adjacent cells to the hit at A1 to potentially sink the ship.",
+        "timestamp": 1768736546962,
+        "durationMs": 1919,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Targeting adjacent cell to existing hit at A1 to sink the ship.",
+        "timestamp": 1768736551036,
+        "durationMs": 4074,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 34,
+        "reason": "Target adjacent cell to finish the ship.",
+        "timestamp": 1768736552868,
+        "durationMs": 1832,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 13,
+        "reason": "Targeting adjacent cell to finish the ship with hits at A0 and B0.",
+        "timestamp": 1768736554879,
+        "durationMs": 2011,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 36,
+        "reason": "Targeting adjacent cells to the hit at B1 to potentially sink the ship.",
+        "timestamp": 1768736555835,
+        "durationMs": 956,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Targeting adjacent cell to the hit at A1 to sink the ship.",
+        "timestamp": 1768736557903,
+        "durationMs": 2068,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 44,
+        "reason": "Target adjacent cell to finish the ship.",
+        "timestamp": 1768736559507,
+        "durationMs": 1603,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Targeting adjacent cell to existing hit at A1 to sink the ship.",
+        "timestamp": 1768736561595,
+        "durationMs": 2088,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 37,
+        "reason": "Targeting adjacent cell to finish the hit ship.",
+        "timestamp": 1768736563342,
+        "durationMs": 1747,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Targeting adjacent cell to finish the damaged ship at A1 and B1.",
+        "timestamp": 1768736565729,
+        "durationMs": 2386,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 39,
+        "reason": "Target adjacent cell to the hit at A1.",
+        "timestamp": 1768736567452,
+        "durationMs": 1723,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 14,
+        "reason": "Target adjacent cell to sink the hit ship at A1 and B1.",
+        "timestamp": 1768736569386,
+        "durationMs": 1934,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 46,
+        "reason": "Targeting adjacent cell to finish the ship.",
+        "timestamp": 1768736570924,
+        "durationMs": 1538,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Targeting adjacent cell to existing hit at A0 to sink the ship.",
+        "timestamp": 1768736574691,
+        "durationMs": 3767,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 45,
+        "reason": "Targeting adjacent cells to the hit at B1 to potentially sink the ship.",
+        "timestamp": 1768736577437,
+        "durationMs": 2746,
+        "retries": 2,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 8,
+        "reason": "Targeting adjacent cell to the hit at A1 to sink the ship.",
+        "timestamp": 1768736579589,
+        "durationMs": 2152,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 38,
+        "reason": "Targeting adjacent cell to finish the ship.",
+        "timestamp": 1768736581055,
+        "durationMs": 1459,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Target adjacent to hit at A0 to sink the ship.",
+        "timestamp": 1768736582987,
+        "durationMs": 1931,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 47,
+        "reason": "Targeting adjacent cell to finish the ship.",
+        "timestamp": 1768736584752,
+        "durationMs": 1765,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 9,
+        "reason": "Target cell adjacent to existing hit at A1 to continue sinking the ship.",
+        "timestamp": 1768736586777,
+        "durationMs": 2025,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 14,
+        "reason": "Targeting adjacent cell to finish the ship.",
+        "timestamp": 1768736588210,
+        "durationMs": 1432,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 15,
+        "reason": "Targeting adjacent cell to the hit at A1 to sink the ship.",
+        "timestamp": 1768736590397,
+        "durationMs": 2187,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 22,
+        "reason": "Targeting adjacent cell to hit the ship at B1.",
+        "timestamp": 1768736591084,
+        "durationMs": 687,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 16,
+        "reason": "Target adjacent to hit at A1 to sink the ship.",
+        "timestamp": 1768736592852,
+        "durationMs": 1768,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 24,
+        "reason": "Targeting adjacent cells to the hit at B5 to potentially sink the ship.",
+        "timestamp": 1768736593720,
+        "durationMs": 868,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 17,
+        "reason": "Target adjacent cell to sink the hit ship at A1 and B1.",
+        "timestamp": 1768736595623,
+        "durationMs": 1903,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 21,
+        "reason": "Target adjacent cell to finish the hit ship.",
+        "timestamp": 1768736598481,
+        "durationMs": 2858,
+        "retries": 2,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 28,
+        "reason": "Target adjacent to hit at B6 to continue sinking the damaged ship.",
+        "timestamp": 1768736600697,
+        "durationMs": 2216,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 40,
+        "reason": "Targeting adjacent cells to the hit at B1 to potentially sink the ship.",
+        "timestamp": 1768736602557,
+        "durationMs": 1860,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 18,
+        "reason": "Targeting adjacent cell to the hit at A1 to sink the ship.",
+        "timestamp": 1768736605128,
+        "durationMs": 2571,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 26,
+        "reason": "Targeting adjacent cells to the hit at B5 to potentially sink the ship.",
+        "timestamp": 1768736605952,
+        "durationMs": 824,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 19,
+        "reason": "Targeting adjacent cell to hit at B1 to sink the ship.",
+        "timestamp": 1768736607840,
+        "durationMs": 1888,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 31,
+        "reason": "Target adjacent cell to hit the ship.",
+        "timestamp": 1768736610082,
+        "durationMs": 2241,
+        "retries": 2,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 21,
+        "reason": "Target adjacent cell to finish the ship at B1, as it is a hit and likely part of a vertical ship.",
+        "timestamp": 1768736612348,
+        "durationMs": 2265,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 18,
+        "reason": "Targeting an adjacent cell to a hit to potentially sink a ship.",
+        "timestamp": 1768736616042,
+        "durationMs": 3693,
+        "retries": 2,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 22,
+        "reason": "Targeting adjacent cell to hit at B6 to sink the damaged ship.",
+        "timestamp": 1768736617995,
+        "durationMs": 1953,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 35,
+        "reason": "Target adjacent cell to finish the ship.",
+        "timestamp": 1768736619357,
+        "durationMs": 1361,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 23,
+        "reason": "Target adjacent to hit at A0 to sink the ship.",
+        "timestamp": 1768736621167,
+        "durationMs": 1809,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 52,
+        "reason": "Targeting adjacent cell to finish the hit ship on E5.",
+        "timestamp": 1768736621979,
+        "durationMs": 812,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 25,
+        "reason": "Targeting adjacent cell to existing hit at B6 to sink the ship.",
+        "timestamp": 1768736623856,
+        "durationMs": 1877,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 11,
+        "reason": "Targeting an adjacent cell to finish the ship.",
+        "timestamp": 1768736626258,
+        "durationMs": 2402,
+        "retries": 2,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 24,
+        "reason": "Targeting adjacent cell to hit at E1 to sink the ship.",
+        "timestamp": 1768736628514,
+        "durationMs": 2255,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 48,
+        "reason": "Targeting adjacent cell to finish the hit ship in E1.",
+        "timestamp": 1768736629502,
+        "durationMs": 988,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 27,
+        "reason": "Targeting adjacent cell to hit at B6 to sink the damaged ship.",
+        "timestamp": 1768736631721,
+        "durationMs": 2219,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 16,
+        "reason": "Targeting adjacent cell to finish the ship.",
+        "timestamp": 1768736634003,
+        "durationMs": 2282,
+        "retries": 2,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 26,
+        "reason": "Targeting adjacent cell to existing hit at A0 to sink the ship.",
+        "timestamp": 1768736636346,
+        "durationMs": 2343,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 30,
+        "reason": "Targeting adjacent cell to hit and potentially sink the ship at E1.",
+        "timestamp": 1768736637337,
+        "durationMs": 991,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 29,
+        "reason": "Targeting adjacent cell to hit at A1 to sink the ship.",
+        "timestamp": 1768736639187,
+        "durationMs": 1850,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 54,
+        "reason": "Targeting adjacent cell to confirm and potentially sink the ship at E10.",
+        "timestamp": 1768736640062,
+        "durationMs": 875,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 44,
+        "reason": "Targeting adjacent cell to the hit at F5 to sink the ship.",
+        "timestamp": 1768736642201,
+        "durationMs": 2138,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 49,
+        "reason": "Targeting adjacent cell to finish the ship.",
+        "timestamp": 1768736643763,
+        "durationMs": 1562,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 41,
+        "reason": "Targeting adjacent cell to the hit at F5 to sink the ship.",
+        "timestamp": 1768736645739,
+        "durationMs": 1976,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 56,
+        "reason": "Targeting adjacent cell to hit ship at E5.",
+        "timestamp": 1768736646473,
+        "durationMs": 734,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 40,
+        "reason": "Targeting adjacent cell to hit at F5 to sink the ship.",
+        "timestamp": 1768736648412,
+        "durationMs": 1939,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 50,
+        "reason": "Targeting adjacent cell to finish the ship hit at E1.",
+        "timestamp": 1768736649309,
+        "durationMs": 897,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 42,
+        "reason": "Targeting adjacent cell to finish the damaged ship at F4.",
+        "timestamp": 1768736651165,
+        "durationMs": 1856,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 57,
+        "reason": "Targeting adjacent cell to finish the hit ship in F5.",
+        "timestamp": 1768736652054,
+        "durationMs": 889,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 43,
+        "reason": "Target adjacent cell to sink the ship at F4, as it's a hit and likely part of a larger unsunk vessel.",
+        "timestamp": 1768736654659,
+        "durationMs": 2605,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 51,
+        "reason": "Targeting adjacent cell to finish the hit ship in column 1.",
+        "timestamp": 1768736655674,
+        "durationMs": 1015,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 45,
+        "reason": "Targeting adjacent cell to the hit at F5 to sink the ship.",
+        "timestamp": 1768736657865,
+        "durationMs": 2191,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 27,
+        "reason": "Targeting adjacent cells to finish the hit ship.",
+        "timestamp": 1768736659436,
+        "durationMs": 1571,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 46,
+        "reason": "Targeting adjacent cell to hit at F4 to continue sinking the damaged ship.",
+        "timestamp": 1768736663895,
+        "durationMs": 4459,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 53,
+        "reason": "Targeting a new area to find potential ships.",
+        "timestamp": 1768736664646,
+        "durationMs": 751,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 47,
+        "reason": "Targeting adjacent cell to the hit at F5 to sink the damaged ship.",
+        "timestamp": 1768736666624,
+        "durationMs": 1978,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 60,
+        "reason": "Targeting adjacent cell to finish the hit ship on F6.",
+        "timestamp": 1768736667761,
+        "durationMs": 1136,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 48,
+        "reason": "Targeting adjacent cell to the hit at F5 to sink the damaged ship.",
+        "timestamp": 1768736669854,
+        "durationMs": 2093,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 55,
+        "reason": "Targeting adjacent cell to confirm and potentially sink the vertical ship.",
+        "timestamp": 1768736670879,
+        "durationMs": 1025,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 71,
+        "reason": "Target adjacent cell to sink the vertical ship at F1-G1 after hits at E1, F1, and G1.",
+        "timestamp": 1768736673306,
+        "durationMs": 2427,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 58,
+        "reason": "Targeting adjacent cells to finish the ship at F5.",
+        "timestamp": 1768736674144,
+        "durationMs": 838,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 70,
+        "reason": "Targeting adjacent cell to hit at F5 to continue sinking the damaged ship.",
+        "timestamp": 1768736678543,
+        "durationMs": 4398,
+        "retries": 1,
+        "hadError": true,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 62,
+        "reason": "Targeting adjacent cell to finish the ship at E1.",
+        "timestamp": 1768736679356,
+        "durationMs": 813,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 72,
+        "reason": "Target adjacent cell to sink the ship at F5 by checking the vertical continuation.",
+        "timestamp": 1768736681825,
+        "durationMs": 2469,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 63,
+        "reason": "Targeting adjacent cells to the hit at G1 to potentially sink the ship.",
+        "timestamp": 1768736682580,
+        "durationMs": 755,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 73,
+        "reason": "Target adjacent cell to sink the damaged ship at F4 and G4.",
+        "timestamp": 1768736684871,
+        "durationMs": 2291,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 66,
+        "reason": "Targeting adjacent cells to finish the hit ship in column 6.",
+        "timestamp": 1768736685638,
+        "durationMs": 767,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 74,
+        "reason": "Targeting adjacent cell to hit at F4 to sink the damaged ship.",
+        "timestamp": 1768736687883,
+        "durationMs": 2245,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 28,
+        "reason": "Targeting adjacent cells to finish the ship at E1.",
+        "timestamp": 1768736688788,
+        "durationMs": 905,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 75,
+        "reason": "Targeting adjacent cell to the hit at G4 to sink the ship.",
+        "timestamp": 1768736690914,
+        "durationMs": 2126,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 67,
+        "reason": "Targeting adjacent cells to the hit at G6 to potentially sink the ship.",
+        "timestamp": 1768736691707,
+        "durationMs": 793,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 76,
+        "reason": "Targeting adjacent cell to the hit at F4 to sink the damaged ship.",
+        "timestamp": 1768736693518,
+        "durationMs": 1811,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 61,
+        "reason": "Targeting adjacent cell to finish the ship on G2.",
+        "timestamp": 1768736694197,
+        "durationMs": 679,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 77,
+        "reason": "Target adjacent cell to sink the hit ship at H7.",
+        "timestamp": 1768736696113,
+        "durationMs": 1915,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 64,
+        "reason": "Targeting a potential hit adjacent to the confirmed hit at F5.",
+        "timestamp": 1768736696945,
+        "durationMs": 832,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "B",
+        "move": 78,
+        "reason": "Targeting adjacent cell to sink the damaged ship near H7.",
+        "timestamp": 1768736699538,
+        "durationMs": 2593,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "hit"
+      },
+      {
+        "player": "A",
+        "move": 68,
+        "reason": "Targeting adjacent cell to finish the hit ship at G6.",
+        "timestamp": 1768736700225,
+        "durationMs": 687,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 64,
+        "reason": "Target adjacent cell to sink the damaged ship near F5 and G4-G5.",
+        "timestamp": 1768736702634,
+        "durationMs": 2409,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "A",
+        "move": 72,
+        "reason": "Targeting adjacent cell to finish the hit ship at G7.",
+        "timestamp": 1768736703728,
+        "durationMs": 1093,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      },
+      {
+        "player": "B",
+        "move": 65,
+        "reason": "Targeting adjacent cell to hit at F5 to sink the ship.",
+        "timestamp": 1768736705565,
+        "durationMs": 1837,
+        "retries": 0,
+        "hadError": false,
+        "outcome": "miss"
+      }
+    ],
+    "metrics": {
+      "totalMoves": 100,
+      "durationMs": 186057,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 27,
+        "retryCount": 27,
+        "totalInputTokens": 82892,
+        "totalOutputTokens": 1775,
+        "totalThinkingTimeMs": 67318
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 7,
+        "retryCount": 7,
+        "totalInputTokens": 57147,
+        "totalOutputTokens": 1495,
+        "totalThinkingTimeMs": 118715
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "unknown",
+      "hit",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "unknown",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "miss",
+      "hit",
+      "miss",
+      "hit",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown",
+      "unknown"
+    ]
   }
 ]

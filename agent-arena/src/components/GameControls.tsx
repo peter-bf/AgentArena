@@ -74,10 +74,10 @@ export function GameControls({
       {/* Game Selection */}
       <div className="p-4 border-b border-border">
         <label className="block text-xs text-muted-foreground mb-2 uppercase tracking-wider">Game</label>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <button
             onClick={() => onGameTypeChange('ttt')}
-            className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+            className={`py-2 px-3 rounded-md text-sm font-medium transition-colors ${
               gameType === 'ttt'
                 ? 'bg-secondary text-foreground'
                 : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
@@ -87,13 +87,23 @@ export function GameControls({
           </button>
           <button
             onClick={() => onGameTypeChange('c4')}
-            className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+            className={`py-2 px-3 rounded-md text-sm font-medium transition-colors ${
               gameType === 'c4'
                 ? 'bg-secondary text-foreground'
                 : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
             }`}
           >
             Connect Four
+          </button>
+          <button
+            onClick={() => onGameTypeChange('bs')}
+            className={`py-2 px-3 rounded-md text-sm font-medium transition-colors ${
+              gameType === 'bs'
+                ? 'bg-secondary text-foreground'
+                : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
+            }`}
+          >
+            Battleship
           </button>
         </div>
       </div>
