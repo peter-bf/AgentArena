@@ -5,6 +5,7 @@ import {
   ModelType,
   GPTModel,
   DeepSeekModel,
+  GeminiModel,
   AgentConfig,
   MoveRecord,
   MatchResult,
@@ -20,6 +21,7 @@ import { saveMatch } from '@/lib/db';
 
 const VALID_GPT_MODELS: GPTModel[] = ['gpt-4o-mini', 'gpt-4o', 'gpt-4-turbo', 'gpt-3.5-turbo'];
 const VALID_DEEPSEEK_MODELS: DeepSeekModel[] = ['deepseek-chat', 'deepseek-reasoner'];
+const VALID_GEMINI_MODELS: GeminiModel[] = ['gemini-1.5-flash', 'gemini-1.5-pro'];
 const MAX_MOVES = 100;
 
 function isValidGameType(val: unknown): val is GameType {
@@ -27,14 +29,16 @@ function isValidGameType(val: unknown): val is GameType {
 }
 
 function isValidModelType(val: unknown): val is ModelType {
-  return val === 'gpt' || val === 'deepseek';
+  return val === 'gpt' || val === 'deepseek' || val === 'gemini';
 }
 
-function isValidModelVariant(model: ModelType, variant: unknown): variant is GPTModel | DeepSeekModel {
+function isValidModelVariant(model: ModelType, variant: unknown): variant is GPTModel | DeepSeekModel | GeminiModel {
   if (model === 'gpt') {
     return VALID_GPT_MODELS.includes(variant as GPTModel);
-  } else {
+  } else if (model === 'deepseek') {
     return VALID_DEEPSEEK_MODELS.includes(variant as DeepSeekModel);
+  } else {
+    return VALID_GEMINI_MODELS.includes(variant as GeminiModel);
   }
 }
 

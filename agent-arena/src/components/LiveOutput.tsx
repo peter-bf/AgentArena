@@ -1,22 +1,25 @@
 'use client';
 
-import { AgentConfig, GPTModel, DeepSeekModel } from '@/types';
+import { AgentConfig, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
+import { PROVIDER_STYLES } from '@/lib/ui/providerStyles';
 
 // Human-readable model names
-const MODEL_LABELS: Record<GPTModel | DeepSeekModel, string> = {
+const MODEL_LABELS: Record<GPTModel | DeepSeekModel | GeminiModel, string> = {
   'gpt-4o-mini': 'GPT-4o Mini',
   'gpt-4o': 'GPT-4o',
   'gpt-4-turbo': 'GPT-4 Turbo',
   'gpt-3.5-turbo': 'GPT-3.5 Turbo',
   'deepseek-chat': 'DeepSeek Chat',
   'deepseek-reasoner': 'DeepSeek Reasoner',
+  'gemini-1.5-flash': 'Gemini 1.5 Flash',
+  'gemini-1.5-pro': 'Gemini 1.5 Pro',
 };
 
 export interface LiveMove {
   player: 'A' | 'B';
   move: number;
   reason?: string;
-  modelVariant: GPTModel | DeepSeekModel;
+  modelVariant: GPTModel | DeepSeekModel | GeminiModel;
   timestamp: number;
 }
 
@@ -61,21 +64,19 @@ export function LiveOutput({ moves, agentA, agentB, isRunning, currentThinking, 
         {moves.map((move, index) => {
           const isAgentA = move.player === 'A';
           const config = isAgentA ? agentA : agentB;
-          const isDeepSeek = config.model === 'deepseek';
+          const styles = PROVIDER_STYLES[config.model];
           const modelLabel = MODEL_LABELS[move.modelVariant] || move.modelVariant;
           const playerSymbol = gameType === 'ttt'
             ? (isAgentA ? 'X' : 'O')
-            : (isAgentA ? 'Red' : 'Yellow');
+            : (isAgentA ? 'P1' : 'P2');
 
           return (
             <div
               key={index}
-              className={`p-2 rounded text-sm animate-fade-in ${
-                isDeepSeek ? 'bg-blue-500/10 border-l-2 border-blue-500' : 'bg-red-500/10 border-l-2 border-red-500'
-              }`}
+              className={`p-2 rounded text-sm animate-fade-in ${styles.bg} border-l-2 ${styles.border}`}
             >
               <div className="flex items-center justify-between">
-                <span className={`font-medium ${isDeepSeek ? 'text-blue-400' : 'text-red-400'}`}>
+                <span className={`font-medium ${styles.text}`}>
                   {modelLabel} ({playerSymbol})
                 </span>
                 <span className="text-slate-400 font-mono">
@@ -93,15 +94,13 @@ export function LiveOutput({ moves, agentA, agentB, isRunning, currentThinking, 
 
         {isRunning && currentThinking && (
           <div className={`p-2 rounded text-sm ${
-            (currentThinking === 'A' ? agentA.model : agentB.model) === 'deepseek'
-              ? 'bg-blue-500/10 border-l-2 border-blue-500'
-              : 'bg-red-500/10 border-l-2 border-red-500'
+            PROVIDER_STYLES[currentThinking === 'A' ? agentA.model : agentB.model].bg
+          } border-l-2 ${
+            PROVIDER_STYLES[currentThinking === 'A' ? agentA.model : agentB.model].border
           }`}>
             <div className="flex items-center gap-2">
               <span className={`font-medium ${
-                (currentThinking === 'A' ? agentA.model : agentB.model) === 'deepseek'
-                  ? 'text-blue-400'
-                  : 'text-red-400'
+                PROVIDER_STYLES[currentThinking === 'A' ? agentA.model : agentB.model].text
               }`}>
                 {MODEL_LABELS[currentThinking === 'A' ? agentA.modelVariant : agentB.modelVariant]}
               </span>

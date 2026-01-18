@@ -1285,5 +1285,3813 @@
       "O",
       "X"
     ]
+  },
+  {
+    "id": "63b92e75-6f5d-4a95-9bc2-ae834a9647cb",
+    "createdAt": "2026-01-18T08:48:28.388Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a potential winning line while controlling the center.",
+        "timestamp": 1768726085725
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in the center column builds control and blocks opponent's vertical line.",
+        "timestamp": 1768726088233
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat while blocking the opponent's potential winning move.",
+        "timestamp": 1768726088983
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 builds on my existing piece and controls the center.",
+        "timestamp": 1768726091354
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat and blocks the opponent's potential winning move.",
+        "timestamp": 1768726092089
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing here creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726094138
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726094716
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Blocks opponent's immediate winning threat in column 2 while building my own vertical threat.",
+        "timestamp": 1768726097096
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726098029
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing in column 2 creates a winning diagonal threat that cannot be blocked.",
+        "timestamp": 1768726100097
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726100896
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726103383
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in column 4 next turn.",
+        "timestamp": 1768726105152
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768726107427
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "I can win immediately by dropping in column 5.",
+        "timestamp": 1768726108388
+      }
+    ],
+    "metrics": {
+      "totalMoves": 15,
+      "durationMs": 23875,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      37,
+      38,
+      39,
+      40
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "R",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "R",
+      "R",
+      null
+    ]
+  },
+  {
+    "id": "261fd58d-e9ea-4867-9ca2-db035270eeaa",
+    "createdAt": "2026-01-18T08:49:07.493Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a winning opportunity for me in the next turn.",
+        "timestamp": 1768726125300
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in the center column builds a strong vertical threat while blocking the opponent's existing piece.",
+        "timestamp": 1768726127872
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a potential winning line while blocking the opponent's immediate threat.",
+        "timestamp": 1768726128577
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 builds on my existing piece and controls the center.",
+        "timestamp": 1768726130998
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726131919
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Extend my vertical three-in-a-row to create a winning threat.",
+        "timestamp": 1768726134113
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Blocking opponent's immediate winning move.",
+        "timestamp": 1768726134684
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Block opponent's immediate winning threat in column 2.",
+        "timestamp": 1768726136497
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726137165
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726139832
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726140527
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726142987
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move blocks the opponent's potential winning move.",
+        "timestamp": 1768726144484
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768726146797
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move wins the game by creating a vertical line of 4 Red pieces.",
+        "timestamp": 1768726147493
+      }
+    ],
+    "metrics": {
+      "totalMoves": 15,
+      "durationMs": 22880,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      37,
+      38,
+      39,
+      40
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "R",
+      "R",
+      null
+    ]
+  },
+  {
+    "id": "0bc259d0-aa82-47aa-ad1c-2db58584e830",
+    "createdAt": "2026-01-18T08:50:01.042Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-reasoner"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move wins the game by connecting 4 pieces vertically.",
+        "timestamp": 1768726155028
+      }
+    ],
+    "metrics": {
+      "totalMoves": 1,
+      "durationMs": 46838,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "14e3d128-a8dd-461a-9257-c3195c5d6412",
+    "createdAt": "2026-01-18T08:50:21.196Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a potential winning line while controlling the center.",
+        "timestamp": 1768726216339
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a winning line of 4 vertically.",
+        "timestamp": 1768726217000
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat and blocks the opponent's potential winning move.",
+        "timestamp": 1768726218063
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This blocks the opponent's potential win while also setting up my own winning opportunity.",
+        "timestamp": 1768726218959
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a diagonal threat while blocking the opponent's potential win.",
+        "timestamp": 1768726219795
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726220531
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move wins the game by connecting 4 Red pieces vertically.",
+        "timestamp": 1768726221196
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 5650,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      37,
+      38,
+      39,
+      40
+    ],
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "R",
+      "R",
+      null
+    ]
+  },
+  {
+    "id": "e2e6d6ad-a2d3-4c98-94be-59b65553b2b1",
+    "createdAt": "2026-01-18T08:50:28.364Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates an immediate winning opportunity for me.",
+        "timestamp": 1768726223963
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Dropping in column 3 creates an immediate win with four in a row vertically.",
+        "timestamp": 1768726224763
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a potential winning line while blocking the opponent's diagonal threat.",
+        "timestamp": 1768726225501
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat and blocks the opponent's potential winning move.",
+        "timestamp": 1768726226274
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in the next turn.",
+        "timestamp": 1768726226977
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's winning move in column 5.",
+        "timestamp": 1768726227682
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This move wins the game by connecting four Red pieces vertically.",
+        "timestamp": 1768726228364
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 4950,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      36,
+      37,
+      38,
+      39
+    ],
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "R",
+      "R",
+      "Y",
+      null
+    ]
+  },
+  {
+    "id": "e504776f-b481-49aa-b7cb-cf97e01019a4",
+    "createdAt": "2026-01-18T08:51:05.254Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Center control and future positioning advantage.",
+        "timestamp": 1768726238090
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a winning line with four in a row vertically.",
+        "timestamp": 1768726238787
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Block opponent's potential vertical win.",
+        "timestamp": 1768726239277
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a diagonal threat for a future win.",
+        "timestamp": 1768726240041
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's potential vertical win in column 2.",
+        "timestamp": 1768726240670
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a winning opportunity for me on the next turn.",
+        "timestamp": 1768726241480
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Block potential future threats in the center column.",
+        "timestamp": 1768726242013
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726242695
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Block opponent's potential winning move next turn.",
+        "timestamp": 1768726243240
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical connect-4 and wins the game.",
+        "timestamp": 1768726244273
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's winning move in column 2.",
+        "timestamp": 1768726244726
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a vertical win with four Yellow pieces.",
+        "timestamp": 1768726245472
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Block opponent's potential winning move in column 4.",
+        "timestamp": 1768726245954
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates an immediate winning line with four Yellow pieces vertically.",
+        "timestamp": 1768726246734
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Block opponent's potential vertical win.",
+        "timestamp": 1768726247250
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726247801
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Block opponent's potential winning move in column 4.",
+        "timestamp": 1768726248417
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in column 4.",
+        "timestamp": 1768726249182
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's potential winning move in column 5.",
+        "timestamp": 1768726250537
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726251087
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's winning move in column 5.",
+        "timestamp": 1768726251608
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Blocking opponent's potential win in column 5 next turn.",
+        "timestamp": 1768726252240
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's winning move in column 6.",
+        "timestamp": 1768726252610
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Blocks opponent's potential win in column 5 next turn.",
+        "timestamp": 1768726253298
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's potential winning move in column 5.",
+        "timestamp": 1768726253830
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "This blocks the opponent's potential winning move in column 5 next turn.",
+        "timestamp": 1768726254502
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's potential win in column 6.",
+        "timestamp": 1768726254993
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 2.",
+        "timestamp": 1768726255917
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's potential win in column 0.",
+        "timestamp": 1768726256542
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 1.",
+        "timestamp": 1768726257155
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726257985
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's immediate winning move in column 1.",
+        "timestamp": 1768726258632
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's potential winning move in column 6.",
+        "timestamp": 1768726259117
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726259818
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726260272
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 1.",
+        "timestamp": 1768726261530
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Block opponent's winning move in column 1.",
+        "timestamp": 1768726262166
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "This move creates a vertical win with four Yellow pieces.",
+        "timestamp": 1768726263042
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726263428
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Block opponent's winning move in column 0.",
+        "timestamp": 1768726264124
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's winning move in column 0.",
+        "timestamp": 1768726264493
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "This move creates a vertical win with four Yellow pieces.",
+        "timestamp": 1768726265253
+      }
+    ],
+    "metrics": {
+      "totalMoves": 42,
+      "durationMs": 27825,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y"
+    ]
+  },
+  {
+    "id": "b00fdcc5-7121-452d-b1a2-3d7ad4885632",
+    "createdAt": "2026-01-18T08:51:15.403Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center is strategically valuable",
+        "timestamp": 1768726270645
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "to block opponent's potential win",
+        "timestamp": 1768726272335
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Take a corner for strategic advantage",
+        "timestamp": 1768726272864
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726273588
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726274120
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726274804
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "Immediate win by completing a diagonal.",
+        "timestamp": 1768726275403
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 5266,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      0,
+      4,
+      8
+    ],
+    "finalBoard": [
+      "X",
+      "O",
+      "X",
+      "O",
+      "X",
+      null,
+      "O",
+      null,
+      "X"
+    ]
+  },
+  {
+    "id": "8e3a9c1a-9680-4f79-a2ac-ba8257693947",
+    "createdAt": "2026-01-18T08:51:29.697Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center is strategically valuable",
+        "timestamp": 1768726285034
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "to block opponent's potential winning move",
+        "timestamp": 1768726286494
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Take a corner for strategic advantage.",
+        "timestamp": 1768726287244
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726287994
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's winning move",
+        "timestamp": 1768726288563
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent from winning on next turn.",
+        "timestamp": 1768726289316
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "Immediate win by completing a diagonal.",
+        "timestamp": 1768726289697
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 5173,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      0,
+      4,
+      8
+    ],
+    "finalBoard": [
+      "X",
+      "O",
+      "X",
+      "O",
+      "X",
+      null,
+      "O",
+      null,
+      "X"
+    ]
+  },
+  {
+    "id": "fb8242db-0520-4a17-8918-f94450e49107",
+    "createdAt": "2026-01-18T08:51:36.754Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center is strategically valuable",
+        "timestamp": 1768726291745
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "blocks opponent's potential win",
+        "timestamp": 1768726293499
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Control center and create multiple threats.",
+        "timestamp": 1768726294108
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726294781
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Win by completing the top row.",
+        "timestamp": 1768726295577
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726296271
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Immediate win by completing a diagonal.",
+        "timestamp": 1768726296754
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 5426,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      2,
+      4,
+      6
+    ],
+    "finalBoard": [
+      "O",
+      "X",
+      "X",
+      null,
+      "X",
+      "O",
+      "X",
+      "O",
+      null
+    ]
+  },
+  {
+    "id": "310edb00-5f7b-477d-bf88-ac6bb226c504",
+    "createdAt": "2026-01-18T08:51:45.150Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center is strategically valuable",
+        "timestamp": 1768726302612
+      }
+    ],
+    "metrics": {
+      "totalMoves": 1,
+      "durationMs": 2989,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 6,
+        "retryCount": 5
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "bef5818a-a978-4a0a-b455-d67bb4c9efc3",
+    "createdAt": "2026-01-18T08:51:57.227Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center is strategically valuable",
+        "timestamp": 1768726314705
+      }
+    ],
+    "metrics": {
+      "totalMoves": 1,
+      "durationMs": 2977,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 6,
+        "retryCount": 5
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "aba890f0-5d6e-4b43-9e62-0783be4daaad",
+    "createdAt": "2026-01-18T08:52:27.748Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Center control for future advantage",
+        "timestamp": 1768726340543
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Control the center column for strategic advantage.",
+        "timestamp": 1768726341174
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Control center and create future threats.",
+        "timestamp": 1768726341730
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's potential win next turn in column 5.",
+        "timestamp": 1768726342442
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Block opponent's potential vertical win.",
+        "timestamp": 1768726342911
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Block opponent's potential win in column 4.",
+        "timestamp": 1768726343477
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's potential vertical win in column 5.",
+        "timestamp": 1768726344302
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Create a diagonal threat while avoiding immediate loss.",
+        "timestamp": 1768726344868
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Block opponent's potential win in column 4.",
+        "timestamp": 1768726345621
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Block opponent's potential winning move in column 3.",
+        "timestamp": 1768726346080
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's potential vertical win in column 5.",
+        "timestamp": 1768726346581
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's potential win in column 6.",
+        "timestamp": 1768726347154
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Immediate win by completing a horizontal line of 4.",
+        "timestamp": 1768726347748
+      }
+    ],
+    "metrics": {
+      "totalMoves": 13,
+      "durationMs": 7695,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      24,
+      25,
+      26,
+      27
+    ],
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "R",
+      "R",
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y"
+    ]
+  },
+  {
+    "id": "c40b9b32-eeeb-4f74-ab70-1318e659cd3c",
+    "createdAt": "2026-01-18T08:54:11.587Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Center column provides the most future winning opportunities.",
+        "timestamp": 1768726359982
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in the center column builds a strong vertical threat and counters the opponent's opening.",
+        "timestamp": 1768726362024
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 builds a vertical threat and controls the center.",
+        "timestamp": 1768726364310
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Blocks opponent's potential vertical win while building my own vertical threat.",
+        "timestamp": 1768726366857
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing here creates a vertical threat and blocks opponent's potential vertical line.",
+        "timestamp": 1768726368826
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and blocks opponent's potential vertical win.",
+        "timestamp": 1768726370942
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's potential diagonal win while building my own threat.",
+        "timestamp": 1768726372980
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Block opponent's immediate winning threat in column 2.",
+        "timestamp": 1768726374976
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Blocks opponent's immediate winning threat at column 2 while creating a strong diagonal threat.",
+        "timestamp": 1768726377120
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726379439
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat of three reds and blocks opponent's potential diagonal.",
+        "timestamp": 1768726381655
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Placing in column 4 creates a diagonal threat and controls the center.",
+        "timestamp": 1768726383917
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Creates a winning double threat by completing a diagonal and setting up a vertical win.",
+        "timestamp": 1768726386256
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Creates a winning diagonal threat while blocking opponent's potential vertical win.",
+        "timestamp": 1768726388415
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat of three reds and blocks opponent's potential diagonal.",
+        "timestamp": 1768726390794
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Placing in column 4 creates a diagonal threat and blocks opponent's potential vertical threat.",
+        "timestamp": 1768726393076
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726395091
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Placing in column 4 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768726397356
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Creates a winning threat by completing a diagonal four-in-a-row.",
+        "timestamp": 1768726399574
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning diagonal threat from (2,2) to (5,5) that the opponent cannot block.",
+        "timestamp": 1768726402263
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's immediate winning threat.",
+        "timestamp": 1768726404348
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning vertical four-in-a-row.",
+        "timestamp": 1768726406279
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's immediate winning threat.",
+        "timestamp": 1768726407900
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's immediate winning threat in column 5.",
+        "timestamp": 1768726409682
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning vertical four in a row.",
+        "timestamp": 1768726411672
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal from (2,2) to (5,5).",
+        "timestamp": 1768726414219
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal from (0,2) to (3,5).",
+        "timestamp": 1768726416776
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Placing in column 6 creates a diagonal threat from (2,2) to (5,5) while blocking opponent's potential vertical in column 6.",
+        "timestamp": 1768726419440
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal threat from (2,6) to (5,3) that the opponent cannot block.",
+        "timestamp": 1768726422066
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal from (2,6) to (5,3).",
+        "timestamp": 1768726424288
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Column 0 is safe and creates a vertical threat while avoiding any immediate opponent win.",
+        "timestamp": 1768726426571
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat.",
+        "timestamp": 1768726428150
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Placing in column 0 creates a vertical threat and avoids giving opponent a winning opportunity.",
+        "timestamp": 1768726430401
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Column 0 is safe and creates a vertical threat while avoiding giving opponent a winning drop.",
+        "timestamp": 1768726432897
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Placing in column 1 creates a vertical threat and avoids giving opponent a winning column.",
+        "timestamp": 1768726435193
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Column 0 is safe and creates a vertical threat while avoiding giving opponent a winning opportunity.",
+        "timestamp": 1768726437770
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Placing in column 0 creates a vertical threat and avoids giving opponent a winning setup.",
+        "timestamp": 1768726440394
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Placing in column 1 creates a vertical threat and avoids giving opponent a winning opportunity.",
+        "timestamp": 1768726443011
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768726445258
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768726447356
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768726449639
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Only legal move available.",
+        "timestamp": 1768726451587
+      }
+    ],
+    "metrics": {
+      "totalMoves": 42,
+      "durationMs": 93610,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "R"
+    ]
+  },
+  {
+    "id": "092497f5-a348-4d4a-ba69-909db6349ef1",
+    "createdAt": "2026-01-18T08:54:55.991Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "B",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates an immediate winning line.",
+        "timestamp": 1768726459801
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Dropping in column 3 creates a vertical threat of 4 in the next turn.",
+        "timestamp": 1768726460637
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates an immediate win by connecting four vertically.",
+        "timestamp": 1768726461342
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a horizontal line of 4 Y pieces.",
+        "timestamp": 1768726462481
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Dropping in column 2 creates a vertical threat and blocks opponent's potential win.",
+        "timestamp": 1768726463224
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This blocks the opponent's potential win in column 2.",
+        "timestamp": 1768726464248
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a vertical win with four R pieces.",
+        "timestamp": 1768726464833
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726466143
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726466811
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a vertical threat of 4 in column 3.",
+        "timestamp": 1768726467875
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a vertical win with four Red pieces.",
+        "timestamp": 1768726469004
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768726469749
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "This move creates a vertical threat while blocking the opponent's potential winning move.",
+        "timestamp": 1768726470546
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's immediate winning move.",
+        "timestamp": 1768726471150
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in the next turn.",
+        "timestamp": 1768726472306
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726483514
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726483964
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "This move creates a vertical threat and blocks the opponent's potential winning move.",
+        "timestamp": 1768726485500
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a vertical threat while blocking the opponent's potential win.",
+        "timestamp": 1768726486261
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726486885
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726487646
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a winning opportunity on the next turn.",
+        "timestamp": 1768726489373
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a vertical win with 4 in a row.",
+        "timestamp": 1768726490186
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "This blocks the opponent's potential win in the next turn.",
+        "timestamp": 1768726490983
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This blocks the opponent's immediate winning move in column 5.",
+        "timestamp": 1768726491750
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "This blocks the opponent's potential win in the next turn.",
+        "timestamp": 1768726492574
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Blocking opponent's potential winning move.",
+        "timestamp": 1768726493832
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 1.",
+        "timestamp": 1768726494682
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768726495231
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "I can win immediately by connecting 4 pieces vertically.",
+        "timestamp": 1768726495991
+      }
+    ],
+    "metrics": {
+      "totalMoves": 30,
+      "durationMs": 36931,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 2,
+        "retryCount": 2
+      }
+    },
+    "winLine": [
+      21,
+      22,
+      23,
+      24
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      "Y",
+      "R",
+      null,
+      null,
+      null,
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      null,
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      null,
+      "R",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      null,
+      "R",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      null
+    ]
+  },
+  {
+    "id": "3160f8ce-5a6b-4ef2-9ea1-4b6e0f6a612a",
+    "createdAt": "2026-01-18T08:55:10.425Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768726503349
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "to block opponent's potential win in the next move",
+        "timestamp": 1768726505025
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move wins the game by completing the diagonal.",
+        "timestamp": 1768726505883
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726506778
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move creates a winning opportunity on the next turn.",
+        "timestamp": 1768726508513
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Blocking opponent's immediate winning move.",
+        "timestamp": 1768726509230
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "This move wins the game by completing three X's in a row.",
+        "timestamp": 1768726510424
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 7769,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      2,
+      5,
+      8
+    ],
+    "finalBoard": [
+      null,
+      "O",
+      "X",
+      "O",
+      "X",
+      "X",
+      "O",
+      null,
+      "X"
+    ]
+  },
+  {
+    "id": "97ce6367-e71b-4f4b-aae9-5e079b8cfcb3",
+    "createdAt": "2026-01-18T08:58:30.075Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768726697324
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Take a corner to control multiple lines and set up future threats.",
+        "timestamp": 1768726699199
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "This move creates an opportunity to win in the next turn.",
+        "timestamp": 1768726700123
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Block opponent's immediate winning threat on the middle row.",
+        "timestamp": 1768726702165
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726703012
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Block opponent's immediate winning threat on the top row.",
+        "timestamp": 1768726706277
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768726707227
+      },
+      {
+        "player": "B",
+        "move": 7,
+        "reason": "Block opponent's immediate winning threat on the bottom row.",
+        "timestamp": 1768726709223
+      },
+      {
+        "player": "A",
+        "move": 8,
+        "reason": "This move wins the game with three X's in a column.",
+        "timestamp": 1768726710075
+      }
+    ],
+    "metrics": {
+      "totalMoves": 9,
+      "durationMs": 13497,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "O",
+      "X",
+      "O",
+      "O",
+      "X",
+      "X",
+      "X",
+      "O",
+      "X"
+    ]
+  },
+  {
+    "id": "907f008e-ea68-4b6e-bb3b-38b285d13a3c",
+    "createdAt": "2026-01-18T09:14:41.021Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gemini",
+      "modelVariant": "gemini-1.5-flash"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "B",
+    "winnerModel": "deepseek",
+    "moves": [],
+    "metrics": {
+      "totalMoves": 0,
+      "durationMs": 1,
+      "agentA": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "68d7186f-b063-42e3-b7cc-9d3f4705e9bc",
+    "createdAt": "2026-01-18T09:16:49.423Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768727803691
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "block opponent's potential win in the next turn",
+        "timestamp": 1768727805694
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "This move wins the game by completing the top row.",
+        "timestamp": 1768727806356
+      },
+      {
+        "player": "B",
+        "move": 8,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768727807255
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768727807858
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's winning move at position 1.",
+        "timestamp": 1768727808516
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "This move wins the game by completing a vertical line.",
+        "timestamp": 1768727809423
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 6617,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      2,
+      4,
+      6
+    ],
+    "finalBoard": [
+      "X",
+      "O",
+      "X",
+      null,
+      "X",
+      "O",
+      "X",
+      null,
+      "O"
+    ]
+  },
+  {
+    "id": "4803ab11-0582-4b82-8f79-d6c2348bb987",
+    "createdAt": "2026-01-18T09:17:38.716Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768727852834
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "block opponent's potential win",
+        "timestamp": 1768727854397
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "This move creates a winning opportunity in the next turn.",
+        "timestamp": 1768727855331
+      },
+      {
+        "player": "B",
+        "move": 8,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768727855997
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768727857011
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's winning move in the next turn.",
+        "timestamp": 1768727857818
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "This move wins the game by completing three X's in a row.",
+        "timestamp": 1768727858715
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 6924,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      2,
+      4,
+      6
+    ],
+    "finalBoard": [
+      "X",
+      "O",
+      "X",
+      null,
+      "X",
+      "O",
+      "X",
+      null,
+      "O"
+    ]
+  },
+  {
+    "id": "4c01fa86-9fe3-4f8e-a541-0d83e431811c",
+    "createdAt": "2026-01-18T09:17:56.037Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768727871054
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "blocks opponent's potential win on next turn",
+        "timestamp": 1768727872582
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "This move creates a winning opportunity in the next turn.",
+        "timestamp": 1768727873348
+      },
+      {
+        "player": "B",
+        "move": 8,
+        "reason": "Block opponent's winning move.",
+        "timestamp": 1768727874156
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768727874754
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's winning move at position 1.",
+        "timestamp": 1768727875446
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "This move allows me to win immediately.",
+        "timestamp": 1768727876037
+      }
+    ],
+    "metrics": {
+      "totalMoves": 7,
+      "durationMs": 5605,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 1,
+        "retryCount": 1
+      }
+    },
+    "winLine": [
+      2,
+      4,
+      6
+    ],
+    "finalBoard": [
+      "X",
+      "O",
+      "X",
+      null,
+      "X",
+      "O",
+      "X",
+      null,
+      "O"
+    ]
+  },
+  {
+    "id": "6fa9ec18-7c1a-469a-849d-5575510ac312",
+    "createdAt": "2026-01-18T09:18:22.418Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "This move creates a potential winning line while blocking opponent threats.",
+        "timestamp": 1768727882041
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Dropping in column 3 creates a vertical threat and blocks the opponent's potential winning move.",
+        "timestamp": 1768727883135
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a diagonal threat while also blocking the opponent's potential winning move.",
+        "timestamp": 1768727884059
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in the next turn.",
+        "timestamp": 1768727884840
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768727885663
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Dropping in column 2 blocks the opponent's potential winning move next turn.",
+        "timestamp": 1768727886920
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768727887722
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Dropping in column 3 creates a vertical win with four Y pieces.",
+        "timestamp": 1768727888617
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Dropping in column 3 creates a vertical win with 4 in a row.",
+        "timestamp": 1768727889743
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This blocks the opponent's potential win in the next turn.",
+        "timestamp": 1768727890716
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This move creates a vertical win with four Red pieces.",
+        "timestamp": 1768727891525
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a winning opportunity for me in the next turn.",
+        "timestamp": 1768727892647
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Dropping in column 2 creates a vertical win with 4 in a row.",
+        "timestamp": 1768727893499
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a vertical win with four Yellow pieces.",
+        "timestamp": 1768727894165
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Dropping in column 2 creates a vertical win with four Red pieces.",
+        "timestamp": 1768727894829
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a vertical threat of 4 in column 3.",
+        "timestamp": 1768727895715
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "This blocks the opponent's potential winning move while setting up my own opportunities.",
+        "timestamp": 1768727896431
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in the next turn.",
+        "timestamp": 1768727897109
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This blocks the opponent's potential winning move.",
+        "timestamp": 1768727898575
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768727899175
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "This blocks the opponent's immediate winning move.",
+        "timestamp": 1768727900628
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Blocking opponent's potential winning move in column 5.",
+        "timestamp": 1768727901531
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "I can win immediately by placing my piece in column 5.",
+        "timestamp": 1768727902418
+      }
+    ],
+    "metrics": {
+      "totalMoves": 23,
+      "durationMs": 21115,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 2,
+        "retryCount": 2
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      9,
+      17,
+      25,
+      33
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "R",
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "Y",
+      "R",
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      "R",
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      null,
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      null
+    ]
+  },
+  {
+    "id": "8473931c-d17d-4b9d-baec-d2ad96065de2",
+    "createdAt": "2026-01-18T09:19:15.069Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "B",
+    "winnerModel": "deepseek",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Center column provides the most future winning opportunities.",
+        "timestamp": 1768727913309
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in the center column builds a strong vertical threat while blocking the opponent's existing piece.",
+        "timestamp": 1768727915786
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 builds a vertical threat and controls the center.",
+        "timestamp": 1768727917956
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and blocks opponent's potential vertical line.",
+        "timestamp": 1768727920115
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing here creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768727922429
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and blocks opponent's vertical line.",
+        "timestamp": 1768727924639
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Block opponent's potential diagonal win while building my own threat.",
+        "timestamp": 1768727926854
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Block opponent's immediate winning threat in column 2.",
+        "timestamp": 1768727928743
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Blocks opponent's immediate winning threat in column 2 while creating a potential diagonal threat.",
+        "timestamp": 1768727931068
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768727933231
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical threat of three reds and blocks opponent's potential diagonal.",
+        "timestamp": 1768727935492
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Creates a diagonal threat and controls the center.",
+        "timestamp": 1768727937615
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Placing in column 2 creates a vertical three-in-a-row and blocks opponent's potential diagonal threat.",
+        "timestamp": 1768727939729
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Placing in column 4 creates a diagonal threat and avoids giving opponent immediate winning options.",
+        "timestamp": 1768727941877
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a vertical threat of three reds and blocks opponent's potential diagonal.",
+        "timestamp": 1768727943984
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Creates a winning diagonal threat while blocking opponent's potential vertical win.",
+        "timestamp": 1768727946051
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768727948059
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Placing in column 4 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768727950553
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a vertical threat of three reds and blocks potential opponent diagonals.",
+        "timestamp": 1768727953036
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Immediate win by completing a vertical four in column 5.",
+        "timestamp": 1768727955068
+      }
+    ],
+    "metrics": {
+      "totalMoves": 20,
+      "durationMs": 43578,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": [
+      30,
+      31,
+      32,
+      33
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "R",
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "R",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "R",
+      null,
+      null,
+      null,
+      null,
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      null,
+      null,
+      null,
+      "R",
+      "R",
+      "Y",
+      "R",
+      null
+    ]
+  },
+  {
+    "id": "0eab3f68-4351-49d4-8311-a9849aec6fc5",
+    "createdAt": "2026-01-18T09:20:25.252Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "A",
+    "winnerModel": "deepseek",
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Center column provides the most future winning opportunities.",
+        "timestamp": 1768727976657
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a potential vertical threat while blocking the opponent's immediate winning move.",
+        "timestamp": 1768727977443
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat and occupies the center.",
+        "timestamp": 1768727979385
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a winning opportunity for me in the next turn.",
+        "timestamp": 1768727980193
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Extend my vertical line to build a potential winning column.",
+        "timestamp": 1768727982210
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768727982872
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Blocks opponent's potential diagonal win while building my own vertical threat.",
+        "timestamp": 1768727984870
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768727985671
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical threat of four reds and wins immediately.",
+        "timestamp": 1768727987994
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "Dropping in column 2 creates a vertical win with four Y's.",
+        "timestamp": 1768727988785
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 creates a vertical win with four red pieces.",
+        "timestamp": 1768727990894
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical win with four Y pieces.",
+        "timestamp": 1768727991529
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a diagonal threat from (row 2, col 2) to (row 5, col 5) that the opponent cannot block in one move.",
+        "timestamp": 1768727994334
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical threat while blocking the opponent.",
+        "timestamp": 1768727995474
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a winning diagonal threat while also blocking opponent's potential vertical win.",
+        "timestamp": 1768727997582
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in the next turn.",
+        "timestamp": 1768727999012
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a winning diagonal from (2,2) to (5,5).",
+        "timestamp": 1768728001177
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical connect-4 opportunity next turn.",
+        "timestamp": 1768728001830
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Creates a winning threat in column 5 while avoiding opponent's immediate threats.",
+        "timestamp": 1768728004085
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's winning move in column 6.",
+        "timestamp": 1768728004781
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning double threat with two potential connect-4 lines.",
+        "timestamp": 1768728006915
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768728007460
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Block opponent's immediate winning threat.",
+        "timestamp": 1768728009184
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 1.",
+        "timestamp": 1768728010869
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning diagonal from (2,5) to (5,2).",
+        "timestamp": 1768728013197
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "This blocks the opponent's potential win in column 5 next turn.",
+        "timestamp": 1768728013901
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal from (0,3) to (3,6).",
+        "timestamp": 1768728016274
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768728016842
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal from (0,3) to (3,6).",
+        "timestamp": 1768728019433
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768728020150
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning diagonal from (0,3) to (3,6).",
+        "timestamp": 1768728022562
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocks opponent's potential winning move in column 1.",
+        "timestamp": 1768728023305
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Playing column 1 creates a vertical four in a row to win immediately.",
+        "timestamp": 1768728025251
+      }
+    ],
+    "metrics": {
+      "totalMoves": 33,
+      "durationMs": 50489,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 3,
+        "retryCount": 3
+      }
+    },
+    "winLine": [
+      22,
+      23,
+      24,
+      25
+    ],
+    "finalBoard": [
+      null,
+      null,
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      null,
+      null,
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      null,
+      null,
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      null,
+      "R",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      null,
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "R",
+      null,
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y"
+    ]
+  },
+  {
+    "id": "c12cfb6d-3074-4445-b13e-ead1fbf5c013",
+    "createdAt": "2026-01-18T09:21:33.490Z",
+    "gameType": "c4",
+    "agentA": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "draw",
+    "winnerModel": null,
+    "moves": [
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Center column provides the most future winning opportunities.",
+        "timestamp": 1768728033082
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates an immediate winning line with four in a row vertically.",
+        "timestamp": 1768728033931
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 builds a vertical threat and controls the center.",
+        "timestamp": 1768728035764
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Dropping in column 4 creates a vertical threat of 4 in a row.",
+        "timestamp": 1768728037199
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Creates a diagonal threat while maintaining a safe position.",
+        "timestamp": 1768728039194
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "This move creates a vertical threat of 4 in column 4.",
+        "timestamp": 1768728040137
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Creates a diagonal threat while blocking opponent's potential vertical threat.",
+        "timestamp": 1768728041994
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768728042728
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Creates a winning threat by completing a diagonal of three red pieces.",
+        "timestamp": 1768728045118
+      },
+      {
+        "player": "B",
+        "move": 2,
+        "reason": "This move creates a vertical threat of 4 in column 2.",
+        "timestamp": 1768728045806
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Placing in column 4 creates a winning diagonal threat from (row 2, col 2) to (row 5, col 5) that the opponent cannot block.",
+        "timestamp": 1768728048810
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's winning move in column 1.",
+        "timestamp": 1768728049450
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Placing in column 2 creates a diagonal threat and blocks opponent's potential vertical threat.",
+        "timestamp": 1768728051766
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a horizontal line of four Y pieces.",
+        "timestamp": 1768728052415
+      },
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Creates a winning double threat by completing a diagonal and setting up a vertical win.",
+        "timestamp": 1768728054628
+      },
+      {
+        "player": "B",
+        "move": 4,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768728055270
+      },
+      {
+        "player": "A",
+        "move": 3,
+        "reason": "Placing in column 3 creates a winning vertical four-in-a-row.",
+        "timestamp": 1768728057598
+      },
+      {
+        "player": "B",
+        "move": 3,
+        "reason": "This move creates a winning line of 4 vertically.",
+        "timestamp": 1768728058258
+      },
+      {
+        "player": "A",
+        "move": 2,
+        "reason": "Placing in column 2 creates a winning diagonal threat from (2,1) to (5,4) that cannot be blocked.",
+        "timestamp": 1768728061009
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "This blocks the opponent's immediate winning move in column 5.",
+        "timestamp": 1768728061980
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning vertical threat in column 5 while also blocking opponent's potential diagonal threat.",
+        "timestamp": 1768728064228
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768728064837
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning vertical line of four red pieces.",
+        "timestamp": 1768728067145
+      },
+      {
+        "player": "B",
+        "move": 5,
+        "reason": "Block opponent's winning move in column 5.",
+        "timestamp": 1768728067788
+      },
+      {
+        "player": "A",
+        "move": 5,
+        "reason": "Placing in column 5 creates a winning vertical four in column 5.",
+        "timestamp": 1768728069819
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 1.",
+        "timestamp": 1768728070508
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Block opponent's immediate winning threat.",
+        "timestamp": 1768728072379
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Blocking opponent's potential win in column 1.",
+        "timestamp": 1768728073039
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Block opponent's immediate winning threat in column 1.",
+        "timestamp": 1768728075010
+      },
+      {
+        "player": "B",
+        "move": 1,
+        "reason": "Block opponent's immediate winning move.",
+        "timestamp": 1768728075519
+      },
+      {
+        "player": "A",
+        "move": 1,
+        "reason": "Placing in column 1 creates a vertical threat and blocks opponent's potential diagonal.",
+        "timestamp": 1768728077531
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "This blocks the opponent's potential winning move in column 6 next turn.",
+        "timestamp": 1768728078228
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Placing in column 0 creates a winning diagonal from (0,0) to (3,3).",
+        "timestamp": 1768728080774
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Dropping in column 0 wins with a vertical connect-4.",
+        "timestamp": 1768728081559
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Placing in column 0 creates a winning diagonal from (0,0) to (3,3).",
+        "timestamp": 1768728084134
+      },
+      {
+        "player": "B",
+        "move": 0,
+        "reason": "Dropping in column 0 creates a vertical win with 4 Y's.",
+        "timestamp": 1768728084929
+      },
+      {
+        "player": "A",
+        "move": 0,
+        "reason": "Placing in column 0 creates a winning diagonal from (0,0) to (3,3).",
+        "timestamp": 1768728087473
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "This move wins by creating a vertical line of 4 Yellow pieces.",
+        "timestamp": 1768728088153
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Dropping into column 6 creates a vertical four in a row to win.",
+        "timestamp": 1768728090119
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "This move creates a vertical win with four Yellow pieces.",
+        "timestamp": 1768728090804
+      },
+      {
+        "player": "A",
+        "move": 6,
+        "reason": "Placing in column 6 creates a winning vertical four in a row.",
+        "timestamp": 1768728092866
+      },
+      {
+        "player": "B",
+        "move": 6,
+        "reason": "This move creates a vertical winning line.",
+        "timestamp": 1768728093490
+      }
+    ],
+    "metrics": {
+      "totalMoves": 42,
+      "durationMs": 62502,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      "R",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "Y",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "Y",
+      "R",
+      "R",
+      "Y",
+      "Y",
+      "Y"
+    ]
+  },
+  {
+    "id": "b1dcea62-3703-40b4-9d48-b4be97e25250",
+    "createdAt": "2026-01-18T09:25:27.810Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gemini",
+      "modelVariant": "gemini-1.5-flash"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "B",
+    "winnerModel": "gpt",
+    "moves": [],
+    "metrics": {
+      "totalMoves": 0,
+      "durationMs": 940,
+      "agentA": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "868ceb4a-6da4-4559-a157-b29b226eccd6",
+    "createdAt": "2026-01-18T09:32:06.841Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gemini",
+      "modelVariant": "gemini-1.5-flash"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "B",
+    "winnerModel": "gpt",
+    "moves": [],
+    "metrics": {
+      "totalMoves": 0,
+      "durationMs": 574,
+      "agentA": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "2e23c31c-42a6-4d89-9e16-5854e34364f1",
+    "createdAt": "2026-01-18T09:32:18.574Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gemini",
+      "modelVariant": "gemini-1.5-flash"
+    },
+    "agentB": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "winner": "B",
+    "winnerModel": "gpt",
+    "moves": [],
+    "metrics": {
+      "totalMoves": 0,
+      "durationMs": 434,
+      "agentA": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "dad2669c-dda0-4ff4-8a2b-1f72f5b7c610",
+    "createdAt": "2026-01-18T09:32:26.796Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "gemini",
+      "modelVariant": "gemini-1.5-flash"
+    },
+    "winner": "A",
+    "winnerModel": "gpt",
+    "moves": [
+      {
+        "player": "A",
+        "move": 4,
+        "reason": "Center position is strategically valuable.",
+        "timestamp": 1768728746229
+      }
+    ],
+    "metrics": {
+      "totalMoves": 1,
+      "durationMs": 1483,
+      "agentA": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0
+      },
+      "agentB": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      "X",
+      null,
+      null,
+      null,
+      null
+    ]
   }
 ]

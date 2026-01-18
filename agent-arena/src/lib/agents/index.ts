@@ -1,6 +1,7 @@
-import { ModelType, AgentResponse, GameType, Player, TTTCell, C4Cell, GPTModel, DeepSeekModel } from '@/types';
+import { ModelType, AgentResponse, GameType, Player, TTTCell, C4Cell, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
 import { callGPT } from './gpt';
 import { callDeepSeek } from './deepseek';
+import { callGemini } from './gemini';
 import { buildPrompt, buildRetryPrompt } from './prompts';
 
 export interface AgentCallResult {
@@ -16,7 +17,7 @@ const MAX_RETRIES = 5; // Max total retries per turn
 
 export async function callAgent(
   model: ModelType,
-  modelVariant: GPTModel | DeepSeekModel,
+  modelVariant: GPTModel | DeepSeekModel | GeminiModel,
   gameType: GameType,
   board: (TTTCell | C4Cell)[],
   player: Player,
@@ -43,7 +44,9 @@ export async function callAgent(
 
     const { response, error } = model === 'gpt'
       ? await callGPT(prompt, modelVariant as GPTModel, retryPrompt)
-      : await callDeepSeek(prompt, modelVariant as DeepSeekModel, retryPrompt);
+      : model === 'deepseek'
+      ? await callDeepSeek(prompt, modelVariant as DeepSeekModel, retryPrompt)
+      : await callGemini(prompt, modelVariant as GeminiModel, retryPrompt);
 
     if (error || !response) {
       // Invalid JSON or API error

@@ -8,9 +8,19 @@ interface TicTacToeBoardProps {
   lastMove: number | null;
   currentPlayer: 'A' | 'B' | null;
   isThinking: boolean;
+  playerAClassName: string;
+  playerBClassName: string;
 }
 
-export function TicTacToeBoard({ board, winLine, lastMove, currentPlayer, isThinking }: TicTacToeBoardProps) {
+export function TicTacToeBoard({
+  board,
+  winLine,
+  lastMove,
+  currentPlayer,
+  isThinking,
+  playerAClassName,
+  playerBClassName,
+}: TicTacToeBoardProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="grid grid-cols-3 gap-2 bg-slate-700 p-3 rounded-lg">
@@ -32,7 +42,7 @@ export function TicTacToeBoard({ board, winLine, lastMove, currentPlayer, isThin
                 <span
                   className={`
                     animate-scale-in
-                    ${cell === 'X' ? 'text-blue-400' : 'text-red-400'}
+                    ${cell === 'X' ? playerAClassName : playerBClassName}
                   `}
                 >
                   {cell}

@@ -1,12 +1,13 @@
 // Game types
 export type GameType = 'ttt' | 'c4';
-export type ModelType = 'gpt' | 'deepseek';
+export type ModelType = 'gpt' | 'deepseek' | 'gemini';
 export type Player = 'A' | 'B';
 export type Winner = 'A' | 'B' | 'draw';
 
 // Model variants
 export type GPTModel = 'gpt-4o-mini' | 'gpt-4o' | 'gpt-4-turbo' | 'gpt-3.5-turbo';
 export type DeepSeekModel = 'deepseek-chat' | 'deepseek-reasoner';
+export type GeminiModel = 'gemini-1.5-flash' | 'gemini-1.5-pro';
 
 // Tic-Tac-Toe: 0-8 index, Connect-4: 0-6 column
 export type Move = number;
@@ -17,7 +18,7 @@ export type C4Cell = 'R' | 'Y' | null; // Red, Yellow
 
 export interface AgentConfig {
   model: ModelType;
-  modelVariant: GPTModel | DeepSeekModel;
+  modelVariant: GPTModel | DeepSeekModel | GeminiModel;
 }
 
 export interface GameState {
@@ -74,6 +75,7 @@ export interface GameStats {
   winsByModel: {
     gpt: number;
     deepseek: number;
+    gemini: number;
   };
 }
 

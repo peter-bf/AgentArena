@@ -50,6 +50,7 @@ export async function getGlobalStats(): Promise<GlobalStats> {
     const draws = gameMatches.filter(m => m.winner === 'draw').length;
     const gptWins = gameMatches.filter(m => m.winnerModel === 'gpt').length;
     const deepseekWins = gameMatches.filter(m => m.winnerModel === 'deepseek').length;
+    const geminiWins = gameMatches.filter(m => m.winnerModel === 'gemini').length;
 
     return {
       matchesPlayed: gameMatches.length,
@@ -57,6 +58,7 @@ export async function getGlobalStats(): Promise<GlobalStats> {
       winsByModel: {
         gpt: gptWins,
         deepseek: deepseekWins,
+        gemini: geminiWins,
       },
     };
   };

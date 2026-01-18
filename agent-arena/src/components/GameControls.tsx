@@ -1,6 +1,7 @@
 'use client';
 
-import { GameType, ModelType, GPTModel, DeepSeekModel } from '@/types';
+import { GameType, ModelType, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
+import { PROVIDER_LABELS, PROVIDER_STYLES } from '@/lib/ui/providerStyles';
 
 // Model variant options
 const GPT_MODELS: { value: GPTModel; label: string }[] = [
@@ -15,17 +16,22 @@ const DEEPSEEK_MODELS: { value: DeepSeekModel; label: string }[] = [
   { value: 'deepseek-reasoner', label: 'DeepSeek Reasoner' },
 ];
 
+const GEMINI_MODELS: { value: GeminiModel; label: string }[] = [
+  { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
+  { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro' },
+];
+
 interface GameControlsProps {
   gameType: GameType;
   agentAModel: ModelType;
-  agentAModelVariant: GPTModel | DeepSeekModel;
+  agentAModelVariant: GPTModel | DeepSeekModel | GeminiModel;
   agentBModel: ModelType;
-  agentBModelVariant: GPTModel | DeepSeekModel;
+  agentBModelVariant: GPTModel | DeepSeekModel | GeminiModel;
   onGameTypeChange: (type: GameType) => void;
   onAgentAModelChange: (model: ModelType) => void;
-  onAgentAModelVariantChange: (variant: GPTModel | DeepSeekModel) => void;
+  onAgentAModelVariantChange: (variant: GPTModel | DeepSeekModel | GeminiModel) => void;
   onAgentBModelChange: (model: ModelType) => void;
-  onAgentBModelVariantChange: (variant: GPTModel | DeepSeekModel) => void;
+  onAgentBModelVariantChange: (variant: GPTModel | DeepSeekModel | GeminiModel) => void;
   onRunMatch: () => void;
   isRunning: boolean;
 }
@@ -44,14 +50,20 @@ export function GameControls({
   onRunMatch,
   isRunning,
 }: GameControlsProps) {
-  const agentAModels = agentAModel === 'gpt' ? GPT_MODELS : DEEPSEEK_MODELS;
-  const agentBModels = agentBModel === 'gpt' ? GPT_MODELS : DEEPSEEK_MODELS;
-  const agentATitle = agentAModel === 'gpt' ? 'OpenAI' : 'DeepSeek';
-  const agentBTitle = agentBModel === 'gpt' ? 'OpenAI' : 'DeepSeek';
-  const agentABorder = agentAModel === 'deepseek' ? 'border-blue-500' : 'border-red-500';
-  const agentBBorder = agentBModel === 'deepseek' ? 'border-blue-500' : 'border-red-500';
-  const agentAText = agentAModel === 'deepseek' ? 'text-blue-400' : 'text-red-400';
-  const agentBText = agentBModel === 'deepseek' ? 'text-blue-400' : 'text-red-400';
+  const agentAModels = agentAModel === 'gpt'
+    ? GPT_MODELS
+    : agentAModel === 'deepseek'
+    ? DEEPSEEK_MODELS
+    : GEMINI_MODELS;
+  const agentBModels = agentBModel === 'gpt'
+    ? GPT_MODELS
+    : agentBModel === 'deepseek'
+    ? DEEPSEEK_MODELS
+    : GEMINI_MODELS;
+  const agentATitle = PROVIDER_LABELS[agentAModel];
+  const agentBTitle = PROVIDER_LABELS[agentBModel];
+  const agentAStyle = PROVIDER_STYLES[agentAModel];
+  const agentBStyle = PROVIDER_STYLES[agentBModel];
 
   return (
     <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
@@ -87,8 +99,8 @@ export function GameControls({
       {/* Agent Configuration */}
       <div className="grid md:grid-cols-2 gap-4 mb-6">
         {/* Agent A */}
-        <div className={`bg-slate-700/50 rounded-lg p-4 border-l-4 ${agentABorder}`}>
-          <h3 className={`font-medium mb-3 ${agentAText}`}>{agentATitle} (X / Red)</h3>
+        <div className={`bg-slate-700/50 rounded-lg p-4 border-l-4 ${agentAStyle.border}`}>
+          <h3 className={`font-medium mb-3 ${agentAStyle.text}`}>{agentATitle} (X / P1)</h3>
 
           <div className="mb-3">
             <label className="block text-xs text-slate-400 mb-1">Provider</label>
@@ -98,12 +110,19 @@ export function GameControls({
                 const newModel = e.target.value as ModelType;
                 onAgentAModelChange(newModel);
                 // Reset to first variant of the new provider
-                onAgentAModelVariantChange(newModel === 'gpt' ? 'gpt-4o-mini' : 'deepseek-chat');
+                onAgentAModelVariantChange(
+                  newModel === 'gpt'
+                    ? 'gpt-4o-mini'
+                    : newModel === 'deepseek'
+                    ? 'deepseek-chat'
+                    : 'gemini-1.5-flash'
+                );
               }}
               className="w-full bg-slate-600 rounded px-3 py-2 text-sm"
             >
               <option value="gpt">OpenAI</option>
               <option value="deepseek">DeepSeek</option>
+              <option value="gemini">Gemini</option>
             </select>
           </div>
 
@@ -111,7 +130,7 @@ export function GameControls({
             <label className="block text-xs text-slate-400 mb-1">Model</label>
             <select
               value={agentAModelVariant}
-              onChange={(e) => onAgentAModelVariantChange(e.target.value as GPTModel | DeepSeekModel)}
+              onChange={(e) => onAgentAModelVariantChange(e.target.value as GPTModel | DeepSeekModel | GeminiModel)}
               className="w-full bg-slate-600 rounded px-3 py-2 text-sm"
             >
               {agentAModels.map((m) => (
@@ -125,8 +144,8 @@ export function GameControls({
         </div>
 
         {/* Agent B */}
-        <div className={`bg-slate-700/50 rounded-lg p-4 border-l-4 ${agentBBorder}`}>
-          <h3 className={`font-medium mb-3 ${agentBText}`}>{agentBTitle} (O / Yellow)</h3>
+        <div className={`bg-slate-700/50 rounded-lg p-4 border-l-4 ${agentBStyle.border}`}>
+          <h3 className={`font-medium mb-3 ${agentBStyle.text}`}>{agentBTitle} (O / P2)</h3>
 
           <div className="mb-3">
             <label className="block text-xs text-slate-400 mb-1">Provider</label>
@@ -136,12 +155,19 @@ export function GameControls({
                 const newModel = e.target.value as ModelType;
                 onAgentBModelChange(newModel);
                 // Reset to first variant of the new provider
-                onAgentBModelVariantChange(newModel === 'gpt' ? 'gpt-4o-mini' : 'deepseek-chat');
+                onAgentBModelVariantChange(
+                  newModel === 'gpt'
+                    ? 'gpt-4o-mini'
+                    : newModel === 'deepseek'
+                    ? 'deepseek-chat'
+                    : 'gemini-1.5-flash'
+                );
               }}
               className="w-full bg-slate-600 rounded px-3 py-2 text-sm"
             >
               <option value="gpt">OpenAI</option>
               <option value="deepseek">DeepSeek</option>
+              <option value="gemini">Gemini</option>
             </select>
           </div>
 
@@ -149,7 +175,7 @@ export function GameControls({
             <label className="block text-xs text-slate-400 mb-1">Model</label>
             <select
               value={agentBModelVariant}
-              onChange={(e) => onAgentBModelVariantChange(e.target.value as GPTModel | DeepSeekModel)}
+              onChange={(e) => onAgentBModelVariantChange(e.target.value as GPTModel | DeepSeekModel | GeminiModel)}
               className="w-full bg-slate-600 rounded px-3 py-2 text-sm"
             >
               {agentBModels.map((m) => (

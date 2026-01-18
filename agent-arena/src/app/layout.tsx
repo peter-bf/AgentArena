@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Agent Arena - Agentic Compare',
-  description: 'Pit LLM agents against each other in classic games. Compare GPT vs DeepSeek with different agent strategies.',
+  description: 'Pit LLM agents against each other in classic games. Compare OpenAI, DeepSeek, and Gemini with different strategies.',
 };
 
 export default function RootLayout({

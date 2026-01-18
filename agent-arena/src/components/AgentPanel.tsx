@@ -1,15 +1,18 @@
 'use client';
 
-import { AgentConfig, MoveRecord, GPTModel, DeepSeekModel } from '@/types';
+import { AgentConfig, MoveRecord, GPTModel, DeepSeekModel, GeminiModel } from '@/types';
+import { PROVIDER_LABELS, PROVIDER_STYLES } from '@/lib/ui/providerStyles';
 
 // Human-readable model names
-const MODEL_LABELS: Record<GPTModel | DeepSeekModel, string> = {
+const MODEL_LABELS: Record<GPTModel | DeepSeekModel | GeminiModel, string> = {
   'gpt-4o-mini': 'GPT-4o Mini',
   'gpt-4o': 'GPT-4o',
   'gpt-4-turbo': 'GPT-4 Turbo',
   'gpt-3.5-turbo': 'GPT-3.5 Turbo',
   'deepseek-chat': 'DeepSeek Chat',
   'deepseek-reasoner': 'DeepSeek Reasoner',
+  'gemini-1.5-flash': 'Gemini 1.5 Flash',
+  'gemini-1.5-pro': 'Gemini 1.5 Pro',
 };
 
 interface AgentPanelProps {
@@ -25,24 +28,24 @@ interface AgentPanelProps {
 }
 
 export function AgentPanel({ label, config, lastMove, isActive, metrics }: AgentPanelProps) {
-  const providerDisplay = config.model === 'gpt' ? 'OpenAI' : 'DeepSeek';
+  const providerDisplay = PROVIDER_LABELS[config.model];
   const modelDisplay = MODEL_LABELS[config.modelVariant] || config.modelVariant;
-  const isDeepSeek = config.model === 'deepseek';
-  const colorClass = isDeepSeek ? 'border-blue-500' : 'border-red-500';
-  const bgClass = isActive ? (isDeepSeek ? 'bg-blue-500/10' : 'bg-red-500/10') : 'bg-slate-800';
-  const badgeClass = isDeepSeek ? 'bg-blue-500/20 text-blue-300' : 'bg-red-500/20 text-red-300';
+  const styles = PROVIDER_STYLES[config.model];
+  const colorClass = styles.border;
+  const bgClass = isActive ? styles.bg : 'bg-slate-800';
+  const badgeClass = styles.badge;
 
   return (
     <div className={`p-4 rounded-lg border-2 ${colorClass} ${bgClass} transition-all duration-300`}>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-bold">
+        <h3 className={`text-lg font-bold ${styles.text}`}>
           {providerDisplay}
           {isActive && (
             <span className="ml-2 inline-flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
           )}
         </h3>
         <span className={`px-2 py-1 rounded text-xs font-medium ${badgeClass}`}>
-          {label === 'A' ? 'X / Red' : 'O / Yellow'}
+          {label === 'A' ? 'X / P1' : 'O / P2'}
         </span>
       </div>
 

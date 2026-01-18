@@ -10,6 +10,7 @@ import {
   C4Cell,
   GPTModel,
   DeepSeekModel,
+  GeminiModel,
 } from '@/types';
 import { TicTacToeBoard } from '@/components/TicTacToeBoard';
 import { Connect4Board } from '@/components/Connect4Board';
@@ -19,6 +20,7 @@ import { GlobalStats } from '@/components/GlobalStats';
 import { GameControls } from '@/components/GameControls';
 import { ReplayControls } from '@/components/ReplayControls';
 import { LiveOutput, LiveMove } from '@/components/LiveOutput';
+import { PROVIDER_LABELS, PROVIDER_STYLES } from '@/lib/ui/providerStyles';
 
 const INITIAL_TTT_BOARD: TTTCell[] = Array(9).fill(null);
 const INITIAL_C4_BOARD: C4Cell[] = Array(42).fill(null);
@@ -26,11 +28,13 @@ const INITIAL_C4_BOARD: C4Cell[] = Array(42).fill(null);
 export default function Home() {
   const [gameType, setGameType] = useState<GameType>('ttt');
   const [agentAModel, setAgentAModel] = useState<ModelType>('gpt');
-  const [agentAModelVariant, setAgentAModelVariant] = useState<GPTModel | DeepSeekModel>('gpt-4o-mini');
+  const [agentAModelVariant, setAgentAModelVariant] = useState<GPTModel | DeepSeekModel | GeminiModel>('gpt-4o-mini');
   const [agentBModel, setAgentBModel] = useState<ModelType>('deepseek');
-  const [agentBModelVariant, setAgentBModelVariant] = useState<GPTModel | DeepSeekModel>('deepseek-chat');
-  const agentALabel = agentAModel === 'gpt' ? 'OpenAI' : 'DeepSeek';
-  const agentBLabel = agentBModel === 'gpt' ? 'OpenAI' : 'DeepSeek';
+  const [agentBModelVariant, setAgentBModelVariant] = useState<GPTModel | DeepSeekModel | GeminiModel>('deepseek-chat');
+  const agentALabel = PROVIDER_LABELS[agentAModel];
+  const agentBLabel = PROVIDER_LABELS[agentBModel];
+  const agentAStyle = PROVIDER_STYLES[agentAModel];
+  const agentBStyle = PROVIDER_STYLES[agentBModel];
   const getLabelForPlayer = (player: 'A' | 'B') => (player === 'A' ? agentALabel : agentBLabel);
 
   // Match state
@@ -52,8 +56,8 @@ export default function Home() {
 
   // Global stats
   const [globalStats, setGlobalStats] = useState<GlobalStatsType>({
-    ttt: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0 } },
-    c4: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0 } },
+    ttt: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0, gemini: 0 } },
+    c4: { matchesPlayed: 0, draws: 0, winsByModel: { gpt: 0, deepseek: 0, gemini: 0 } },
   });
 
   // Fetch stats on load
@@ -193,7 +197,7 @@ export default function Home() {
   const handleStreamEvent = (event: string, data: unknown) => {
     switch (event) {
       case 'thinking': {
-        const d = data as { player: 'A' | 'B'; modelVariant: GPTModel | DeepSeekModel };
+        const d = data as { player: 'A' | 'B'; modelVariant: GPTModel | DeepSeekModel | GeminiModel };
         setCurrentThinking(d.player);
         break;
       }
@@ -202,7 +206,7 @@ export default function Home() {
           player: 'A' | 'B';
           move: number;
           reason?: string;
-          modelVariant: GPTModel | DeepSeekModel;
+          modelVariant: GPTModel | DeepSeekModel | GeminiModel;
           board: (TTTCell | C4Cell)[];
           winLine: number[] | null;
         };
@@ -338,11 +342,11 @@ export default function Home() {
           </h1>
           <p className="text-slate-400 mt-2">Agentic Compare - uOttaHack 7</p>
           <div className="mt-2 flex items-center justify-center gap-2 text-sm font-semibold">
-            <span className={agentAModel === 'deepseek' ? 'text-blue-400' : 'text-red-400'}>
+            <span className={agentAStyle.text}>
               {agentALabel}
             </span>
             <span className="text-slate-500">vs</span>
-            <span className={agentBModel === 'deepseek' ? 'text-blue-400' : 'text-red-400'}>
+            <span className={agentBStyle.text}>
               {agentBLabel}
             </span>
           </div>
@@ -383,6 +387,8 @@ export default function Home() {
                   lastMove={getLastMoveIndex()}
                   currentPlayer={currentThinking}
                   isThinking={isRunning && currentThinking !== null}
+                  playerAClassName={agentAStyle.text}
+                  playerBClassName={agentBStyle.text}
                 />
               ) : (
                 <Connect4Board
@@ -391,6 +397,8 @@ export default function Home() {
                   lastMove={getLastMoveIndex()}
                   currentPlayer={currentThinking}
                   isThinking={isRunning && currentThinking !== null}
+                  playerAChipClassName={agentAStyle.chip}
+                  playerBChipClassName={agentBStyle.chip}
                 />
               )}
             </div>

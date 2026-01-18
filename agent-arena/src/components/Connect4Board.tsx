@@ -9,6 +9,8 @@ interface Connect4BoardProps {
   lastMove: number | null; // This is the board index, not column
   currentPlayer: 'A' | 'B' | null;
   isThinking: boolean;
+  playerAChipClassName: string;
+  playerBChipClassName: string;
 }
 
 const ROWS = 6;
@@ -18,7 +20,15 @@ function getIndex(row: number, col: number): number {
   return row * COLS + col;
 }
 
-export function Connect4Board({ board, winLine, lastMove, currentPlayer, isThinking }: Connect4BoardProps) {
+export function Connect4Board({
+  board,
+  winLine,
+  lastMove,
+  currentPlayer,
+  isThinking,
+  playerAChipClassName,
+  playerBChipClassName,
+}: Connect4BoardProps) {
   const [animatingCell, setAnimatingCell] = useState<number | null>(null);
 
   useEffect(() => {
@@ -63,7 +73,7 @@ export function Connect4Board({ board, winLine, lastMove, currentPlayer, isThink
                     <div
                       className={`
                         w-10 h-10 rounded-full
-                        ${cell === 'R' ? 'bg-red-500' : 'bg-yellow-400'}
+                        ${cell === 'R' ? playerAChipClassName : playerBChipClassName}
                         ${isAnimating ? 'animate-drop' : ''}
                         ${isWinCell ? 'shadow-lg' : ''}
                       `}
