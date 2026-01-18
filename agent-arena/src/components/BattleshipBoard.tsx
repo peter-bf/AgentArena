@@ -18,10 +18,17 @@ interface BattleshipBoardProps {
 
 const BOARD_SIZE = 10;
 const ROW_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const TOTAL_CELLS = 100;
 
 function getRowCol(index: number): { row: number; col: number } {
   return { row: Math.floor(index / BOARD_SIZE), col: index % BOARD_SIZE };
 }
+
+const MODEL_NAMES: Record<string, string> = {
+  gpt: 'OpenAI',
+  deepseek: 'DeepSeek',
+  gemini: 'Gemini',
+};
 
 export function BattleshipBoard({
   board,
@@ -47,134 +54,210 @@ export function BattleshipBoard({
   const agentAStyle = getPlayerStyles(agentAModel, false);
   const agentBStyle = getPlayerStyles(agentBModel, agentAModel === agentBModel);
 
-  // Check if a cell is part of a ship
-  const getShipAtCell = (index: number): { player: Player; ship: ShipPlacement } | null => {
-    for (const ship of placementsA) {
-      if (ship.cells.includes(index)) {
-        return { player: 'A', ship };
-      }
-    }
-    for (const ship of placementsB) {
-      if (ship.cells.includes(index)) {
-        return { player: 'B', ship };
-      }
-    }
-    return null;
+  // Get ship at cell for a specific player
+  const getShipAtCell = (index: number, player: Player): ShipPlacement | null => {
+    const placements = player === 'A' ? placementsA : placementsB;
+    return placements.find(ship => ship.cells.includes(index)) || null;
   };
 
-  const getCellDisplay = (cell: BSCell, index: number) => {
-    const shipInfo = getShipAtCell(index);
-    const moveOwner = moveOwnership[index];
+  // Check if a ship is fully sunk
+  const isShipSunk = (ship: ShipPlacement): boolean => {
+    return ship.cells.every(cellIndex => board[cellIndex] === 'sunk');
+  };
+
+  // Build separate board states for each player perspective
+  // Player A's perspective: A's ships + B's shots on A
+  // Player B's perspective: B's ships + A's shots on B
+  const getBoardForPerspective = (perspective: Player): BSCell[] => {
+    const perspectiveBoard: BSCell[] = Array(TOTAL_CELLS).fill('unknown');
+    const ownPlacements = perspective === 'A' ? placementsA : placementsB;
+    const opponentShotOwner = perspective === 'A' ? 'B' : 'A';
+
+    // For each cell
+    for (let i = 0; i < TOTAL_CELLS; i++) {
+      const cellOwner = moveOwnership[i];
+      
+      // If opponent shot here, show the result of that shot
+      if (cellOwner === opponentShotOwner) {
+        perspectiveBoard[i] = board[i]; // 'hit', 'miss', or 'sunk'
+      } else if (cellOwner === perspective) {
+        // If this player shot here (on opponent's board), don't show it on own board
+        perspectiveBoard[i] = 'unknown';
+      } else {
+        // Check if own ship is here
+        const ownShip = getShipAtCell(i, perspective);
+        if (ownShip) {
+          // Show ship location but as 'unknown' (hidden until shot by opponent)
+          perspectiveBoard[i] = 'unknown';
+        }
+      }
+    }
+
+    return perspectiveBoard;
+  };
+
+  const getCellDisplay = (
+    cell: BSCell,
+    index: number,
+    perspective: Player
+  ) => {
+    const ownShip = getShipAtCell(index, perspective);
+    const opponentShotOwner = perspective === 'A' ? 'B' : 'A';
+    const shotByOpponent = moveOwnership[index] === opponentShotOwner;
     
-    // Determine colors based on move owner
+    // Get cell from perspective board
+    const perspectiveBoard = getBoardForPerspective(perspective);
+    const perspectiveCell = perspectiveBoard[index];
+
     let moveColorClass = '';
-    if (moveOwner === 'A') {
+    if (moveOwnership[index] === 'A') {
       moveColorClass = agentAStyle.text;
-    } else if (moveOwner === 'B') {
+    } else if (moveOwnership[index] === 'B') {
       moveColorClass = agentBStyle.text;
     }
 
-    // Determine ship background color
-    let shipBgClass = '';
-    if (shipInfo) {
-      shipBgClass = shipInfo.player === 'A' 
-        ? agentAStyle.bg.replace('/15', '/20')
-        : agentBStyle.bg.replace('/15', '/20');
+    // If opponent shot here
+    if (shotByOpponent) {
+      switch (perspectiveCell) {
+        case 'miss':
+          return { 
+            symbol: '○', 
+            className: moveColorClass || 'text-blue-400',
+            bgClass: 'bg-card',
+          };
+        case 'hit':
+          return { 
+            symbol: '✕', 
+            className: 'text-white font-bold',
+            bgClass: 'bg-red-500/70',
+          };
+        case 'sunk':
+          return { 
+            symbol: '',
+            className: '',
+            bgClass: 'bg-red-600/90',
+          };
+        default:
+          return { symbol: '', className: '', bgClass: 'bg-card' };
+      }
     }
 
-    switch (cell) {
-      case 'miss':
-        return { 
-          symbol: '○', 
-          className: moveColorClass || 'text-blue-400',
-          bgClass: '',
-        };
-      case 'hit':
-        return { 
-          symbol: '✕', 
-          className: 'text-red-500 font-bold',
-          bgClass: shipBgClass,
-        };
-      case 'sunk':
-        return { 
-          symbol: '─',
-          className: 'text-red-600 font-bold text-xl',
-          bgClass: shipBgClass,
-        };
-      default:
-        // Only show background for unhit ships, no icon
-        return { 
-          symbol: '', 
-          className: '',
-          bgClass: shipInfo ? shipBgClass : '',
-        };
+    // If own ship is here (not shot by opponent) - make very light
+    if (ownShip) {
+      return { 
+        symbol: '', 
+        className: '',
+        bgClass: 'bg-gray-400/15',
+      };
     }
+
+    // Empty cell
+    return { 
+      symbol: '', 
+      className: '',
+      bgClass: 'bg-secondary/40',
+    };
+  };
+
+  const BoardView = ({ perspective, model, style }: { perspective: Player; model: ModelType; style: any }) => {
+    // Only show highlights on opponent's board where they just shot
+    const opponentPlayer = perspective === 'A' ? 'B' : 'A';
+    const isOpponentJustPlayed = currentPlayer === opponentPlayer || (currentPlayer === perspective && lastMove === null);
+    
+    // Highlight should only show on the RECEIVING end (the board being attacked)
+    const shouldShowHighlight = moveOwnership[lastMove ?? -1] === opponentPlayer && perspective !== moveOwnership[lastMove ?? -1];
+    
+    const perspectiveBoard = getBoardForPerspective(perspective);
+    
+    return (
+      <div className="flex flex-col items-center gap-3">
+        <div className={`text-sm font-semibold ${style.text} ${currentPlayer === perspective ? 'animate-pulse' : ''}`}>
+          {MODEL_NAMES[model]}'s Board
+        </div>
+
+        {/* Column headers */}
+        <div className="flex gap-1 mb-1">
+          <div className="w-6" /> {/* Spacer for row labels */}
+          {Array.from({ length: BOARD_SIZE }).map((_, col) => (
+            <div key={col} className="w-6 text-center text-xs text-muted-foreground font-mono">
+              {col + 1}
+            </div>
+          ))}
+        </div>
+
+        {/* Board */}
+        <div className="bg-secondary/50 p-2 rounded-lg border border-border/50">
+          {Array.from({ length: BOARD_SIZE }).map((_, row) => (
+            <div key={row} className="flex gap-1 mb-1">
+              {/* Row label */}
+              <div className="w-6 text-xs text-muted-foreground font-mono flex items-center justify-center">
+                {ROW_LABELS[row]}
+              </div>
+              {/* Cells */}
+              {Array.from({ length: BOARD_SIZE }).map((_, col) => {
+                const index = row * BOARD_SIZE + col;
+                const { symbol, className, bgClass } = getCellDisplay(board[index], index, perspective);
+                
+                // Only highlight this cell if:
+                // 1. It's the last move location
+                // 2. We're viewing the board that was attacked (not the attacker's own board)
+                // 3. The move that happened was an opponent's move (not current player's move)
+                const isLastMove = shouldShowHighlight && lastMove === index && lastMove !== null;
+                const isAnimating = isLastMove && animatingCell === index;
+
+                return (
+                  <div
+                    key={index}
+                    className={`
+                      w-6 h-6 rounded flex items-center justify-center
+                      text-sm font-bold transition-all duration-200
+                      ${bgClass}
+                      ${isLastMove ? 'ring-2 ring-yellow-400/80' : ''}
+                      ${isAnimating ? 'animate-pulse' : ''}
+                    `}
+                  >
+                    <span className={className}>{symbol}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Column headers */}
-      <div className="flex gap-1 mb-1">
-        <div className="w-6" /> {/* Spacer for row labels */}
-        {Array.from({ length: BOARD_SIZE }).map((_, col) => (
-          <div key={col} className="w-8 text-center text-xs text-muted-foreground font-mono">
-            {col + 1}
-          </div>
-        ))}
-      </div>
-
-      {/* Board */}
-      <div className="bg-secondary p-2 rounded-lg">
-        {Array.from({ length: BOARD_SIZE }).map((_, row) => (
-          <div key={row} className="flex gap-1 mb-1">
-            {/* Row label */}
-            <div className="w-6 text-xs text-muted-foreground font-mono flex items-center justify-center">
-              {ROW_LABELS[row]}
-            </div>
-            {/* Cells */}
-            {Array.from({ length: BOARD_SIZE }).map((_, col) => {
-              const index = row * BOARD_SIZE + col;
-              const cell = board[index];
-              const { symbol, className, bgClass } = getCellDisplay(cell, index);
-              const isLastMove = lastMove === index;
-              const isAnimating = animatingCell === index;
-
-              return (
-                <div
-                  key={index}
-                  className={`
-                    w-8 h-8 rounded flex items-center justify-center
-                    text-lg font-bold transition-all duration-200
-                    ${bgClass || 'bg-card'}
-                    ${isLastMove ? 'ring-2 ring-white/50' : ''}
-                    ${isAnimating ? 'animate-pulse' : ''}
-                  `}
-                >
-                  <span className={className}>{symbol}</span>
-                </div>
-              );
-            })}
-          </div>
-        ))}
+    <div className="flex flex-col items-center gap-6">
+      {/* Two boards side by side - each showing their own perspective */}
+      <div className="flex gap-12 justify-center flex-wrap">
+        <BoardView perspective="A" model={agentAModel} style={agentAStyle} />
+        <BoardView perspective="B" model={agentBModel} style={agentBStyle} />
       </div>
 
       {/* Legend */}
-      <div className="mt-4 flex gap-4 text-xs text-muted-foreground">
-        <div className="flex items-center gap-1">
-          <span className="text-muted-foreground/30">·</span>
-          <span>Unknown</span>
+      <div className="flex gap-6 text-xs text-muted-foreground mt-2 flex-wrap justify-center">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-secondary/40" />
+          <span>Empty</span>
         </div>
-        <div className="flex items-center gap-1">
-          <span className="text-blue-400">○</span>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-gray-400/15" />
+          <span>Your Ship</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-blue-400 font-bold">○</span>
           <span>Miss</span>
         </div>
-        <div className="flex items-center gap-1">
-          <span className="text-red-500 font-bold">✕</span>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-red-500/70 flex items-center justify-center">
+            <span className="text-white text-xs font-bold">✕</span>
+          </div>
           <span>Hit</span>
         </div>
-        <div className="flex items-center gap-1">
-          <span className="text-red-600 font-bold">─</span>
-          <span>Sunk</span>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-red-600/90" />
+          <span>Sunk Ship</span>
         </div>
       </div>
 
@@ -185,7 +268,9 @@ export function BattleshipBoard({
             <span className="w-2 h-2 bg-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
             <span className="w-2 h-2 bg-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
           </div>
-          <span className="text-sm">Thinking...</span>
+          <span className="text-sm">
+            {currentPlayer === 'A' ? MODEL_NAMES[agentAModel] : MODEL_NAMES[agentBModel]} is thinking...
+          </span>
         </div>
       )}
     </div>

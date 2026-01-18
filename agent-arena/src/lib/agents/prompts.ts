@@ -57,13 +57,27 @@ function getFormatInstructions(gameType: GameType): string {
     // Battleship
     moveExample = '42';
     decisionProtocol = `=== DECISION PROTOCOL (FOLLOW IN ORDER) ===
-1) Active target: If you have hits (X), ONLY try orthogonal neighbors (up/down/left/right). 
-   NEVER try diagonal cells. This finds the ship orientation.
-2) Perpendicular expansion: Once you know the orientation (horizontal/vertical), 
-   continue in that direction to find ship endpoints and sink it.
-3) Hunt mode: If NO hits exist, use parity/checkerboard pattern to systematically find ships.
-4) Efficiency: Always finish damaging a ship before hunting new ones.
-5) Avoid repeats: NEVER fire at cells already in your move history.`;
+1) PRIORITY TARGET: If you have any HITS (✕) on the board, you MUST focus on that ship.
+   - Find all your current hits
+   - Try orthogonal neighbors (up/down/left/right only, NO diagonals)
+   - If a ship is partially sunk, continue in the same direction
+   - NEVER abandon a hit to hunt elsewhere until the ship is COMPLETELY SUNK
+   
+2) SHIP ORIENTATION: Once you hit a ship:
+   - Try one orthogonal direction (e.g., up/down)
+   - If that hits again, continue that direction
+   - If that misses, try perpendicular (left/right)
+   - This finds the ship's orientation and sinks it efficiently
+
+3) HUNT MODE (only if NO hits exist):
+   - Use checkerboard/parity pattern to find ships systematically
+   - Example: Attack cells like (0,0), (0,2), (0,4), (1,1), (1,3), etc.
+   - This covers the board efficiently without wasting shots
+
+4) AVOID REPEATS: NEVER fire at a cell you've already targeted.
+
+5) PERSISTENCE: Keep attacking until all opponent ships are sunk. 
+   NEVER give up or declare stalemate.`;
   }
 
   return `${decisionProtocol}

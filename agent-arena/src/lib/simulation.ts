@@ -16,28 +16,21 @@ import { initC4State, applyC4Move, getC4LegalMoves } from './games/connect4';
 import { initBSState, applyBSMove, getBSLegalMoves } from './games/battleship';
 import { callAgent } from './agents';
 
-const MAX_MOVES = 100; // Safety limit
+const MAX_MOVES = 500; // Increased for battleship which can take many moves
 
 export async function runMatch(
   gameType: GameType,
   agentA: AgentConfig,
-  agentB: AgentConfig,
-  matchId?: string
+  agentB: AgentConfig
 ): Promise<MatchResult> {
   const startTime = Date.now();
 
   // Initialize game state
-  let state: GameState;
-  if (gameType === 'ttt') {
-    state = initTTTState();
-  } else if (gameType === 'c4') {
-    state = initC4State();
-  } else if (gameType === 'bs') {
-    state = initBSState(matchId || Date.now());
-  } else {
-    throw new Error(`Unknown game type: ${gameType}`);
-  }
-
+  let state = gameType === 'ttt' 
+    ? initTTTState() 
+    : gameType === 'c4' 
+    ? initC4State() 
+    : initBSState();
   const moves: MoveRecord[] = [];
 
   const metricsA: AgentMetrics = { invalidJsonCount: 0, illegalMoveCount: 0, retryCount: 0 };
@@ -51,21 +44,23 @@ export async function runMatch(
     const agent = currentPlayer === 'A' ? agentA : agentB;
     const metrics = currentPlayer === 'A' ? metricsA : metricsB;
 
-    // Get legal moves
+    // Get legal moves based on game type
+    // Get legal moves based on game type
     let legalMoves: number[];
     if (gameType === 'ttt') {
       legalMoves = getTTTLegalMoves(state.board as TTTCell[]);
     } else if (gameType === 'c4') {
       legalMoves = getC4LegalMoves(state.board as C4Cell[]);
-    } else if (gameType === 'bs') {
-      legalMoves = getBSLegalMoves(state, currentPlayer);
     } else {
-      throw new Error(`Unknown game type: ${gameType}`);
+      // Battleship
+      legalMoves = getBSLegalMoves(state, currentPlayer);
     }
 
     if (legalMoves.length === 0) {
-      // No legal moves - game should be terminal (draw)
-      break;
+      // No legal moves - for Battleship, shouldn't happen. For TTT/C4, it's a draw
+      if (gameType !== 'bs') {
+        break;
+      }
     }
 
     // Call agent
@@ -76,7 +71,7 @@ export async function runMatch(
       state.board,
       currentPlayer,
       legalMoves,
-      gameType === 'bs' ? state : undefined
+      gameType === 'bs' ? state : undefined // Pass full state for battleship
     );
 
     // Update metrics
@@ -90,16 +85,15 @@ export async function runMatch(
       break;
     }
 
-    // Apply move
-    let applyResult: { newState: GameState; valid: boolean; error?: string; outcome?: any };
+    // Apply move based on game type
+    let applyResult: any;
     if (gameType === 'ttt') {
       applyResult = applyTTTMove(state, result.response!.move, currentPlayer);
     } else if (gameType === 'c4') {
       applyResult = applyC4Move(state, result.response!.move, currentPlayer);
-    } else if (gameType === 'bs') {
-      applyResult = applyBSMove(state, result.response!.move, currentPlayer);
     } else {
-      throw new Error(`Unknown game type: ${gameType}`);
+      // Battleship
+      applyResult = applyBSMove(state, result.response!.move, currentPlayer);
     }
 
     if (!applyResult.valid) {
@@ -108,7 +102,7 @@ export async function runMatch(
       break;
     }
 
-    // Record move
+    // Record move with outcome info for battleship
     const moveRecord: MoveRecord = {
       player: currentPlayer,
       move: result.response!.move,
@@ -117,10 +111,12 @@ export async function runMatch(
       timestamp: Date.now(),
     };
 
-    // Add battleship-specific fields
-    if (gameType === 'bs' && applyResult.outcome) {
+    // Add battleship-specific outcome if present
+    if (applyResult.outcome) {
       moveRecord.outcome = applyResult.outcome.outcome;
-      moveRecord.sunkShipName = applyResult.outcome.sunkShipName;
+      if (applyResult.outcome.sunkShipName) {
+        moveRecord.sunkShipName = applyResult.outcome.sunkShipName;
+      }
     }
 
     moves.push(moveRecord);
@@ -136,18 +132,15 @@ export async function runMatch(
   if (forfeitedBy) {
     winner = forfeitedBy === 'A' ? 'B' : 'A';
   }
-  // Battleship should never draw - if no winner and game ended, it's an error state
-  if (!winner && gameType !== 'bs') {
-    winner = 'draw';
-  } else if (!winner && gameType === 'bs') {
-    // For battleship, if we reach here without a winner, something went wrong
-    // Check if all ships are sunk for either player
+  if (!winner) {
+    // Only declare draw for non-battleship games, or if we hit move limit in battleship
     if (gameType === 'bs') {
-      const totalHealthA = Object.values(state.shipHealthA || {}).reduce((sum, h) => sum + h, 0);
-      const totalHealthB = Object.values(state.shipHealthB || {}).reduce((sum, h) => sum + h, 0);
-      if (totalHealthA === 0) winner = 'B';
-      else if (totalHealthB === 0) winner = 'A';
-      else winner = 'draw'; // Fallback, but shouldn't happen
+      // Battleship shouldn't end in draw unless we hit MAX_MOVES
+      // In that case, the player with more sunk opponent ships wins
+      // But for now, just declare a draw (shouldn't happen in normal gameplay)
+      winner = 'draw';
+    } else {
+      winner = 'draw';
     }
   }
 
@@ -176,9 +169,11 @@ export async function runMatch(
     },
     winLine: state.winLine,
     finalBoard: state.board,
-    // Battleship-specific
-    placementsA: gameType === 'bs' ? state.placementsA : undefined,
-    placementsB: gameType === 'bs' ? state.placementsB : undefined,
-    moveOwnership: gameType === 'bs' ? state.moveOwnership : undefined,
+    // Include battleship placements if available
+    ...(gameType === 'bs' && {
+      placementsA: state.placementsA,
+      placementsB: state.placementsB,
+      moveOwnership: state.moveOwnership,
+    }),
   };
 }
