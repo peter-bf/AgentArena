@@ -33,6 +33,7 @@ export interface GameState {
   // Battleship-specific hidden fields (not exposed to agents)
   placementsA?: ShipPlacement[];
   placementsB?: ShipPlacement[];
+  moveOwnership?: (Player | null)[]; // Track which player made each move
   firedA?: Set<number>;
   firedB?: Set<number>;
   shipHealthA?: Record<string, number>;
