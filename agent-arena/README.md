@@ -1,8 +1,8 @@
-# Agent Arena - Agentic Compare
+![](https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/173/621/datas/medium.png)
 
 A hackathon-ready web app that pits LLM agents against each other in classic games, comparing their performance with meaningful metrics.
 
-Built for **uOttaHack 7 - IT: Agentic Compare Challenge**
+Built for **uOttaHack 8 - IT: Agentic Compare Challenge**
 
 ## Features
 

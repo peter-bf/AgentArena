@@ -593,9 +593,9 @@ export default function Home() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-6 border-t border-border">
+        <footer className="hidden mt-12 pt-6 border-t border-border">
           <div className="flex items-center justify-between text-xs text-muted-foreground">
-            <p>uOttaHack 7 - Agentic Compare Challenge</p>
+            <p>uOttaHack 8 - Agentic Compare Challenge</p>
             <p>Compare LLM agents across different games</p>
           </div>
         </footer>

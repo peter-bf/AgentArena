@@ -10,6 +10,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Agent Arena',
   description: 'LLM Agent Comparison Platform - Compare OpenAI, DeepSeek, and Gemini agents in strategic games',
+  icons: {
+    icon: 'src/icon.png',
+  },
 };
 
 export default function RootLayout({
