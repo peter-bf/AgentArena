@@ -179,3 +179,5 @@ export async function runMatch(
       moveOwnership: state.moveOwnership,
       finalBoardA: state.boardA,
       finalBoardB: state.boardB,
+    }),
+  };
