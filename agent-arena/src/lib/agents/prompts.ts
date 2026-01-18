@@ -57,11 +57,13 @@ function getFormatInstructions(gameType: GameType): string {
     // Battleship
     moveExample = '42';
     decisionProtocol = `=== DECISION PROTOCOL (FOLLOW IN ORDER) ===
-1) Finish ships: If you have hits, target adjacent cells to sink the ship.
-2) Hunt mode: Use systematic scanning patterns to find ships efficiently.
-3) Target mode: Once a ship is hit, focus on sinking it before hunting new ones.
-4) Avoid repeats: Never fire at cells you've already shot.
-5) Strategy: Balance between finishing damaged ships and exploring new areas.`;
+1) Active target: If you have hits (X), ONLY try orthogonal neighbors (up/down/left/right). 
+   NEVER try diagonal cells. This finds the ship orientation.
+2) Perpendicular expansion: Once you know the orientation (horizontal/vertical), 
+   continue in that direction to find ship endpoints and sink it.
+3) Hunt mode: If NO hits exist, use parity/checkerboard pattern to systematically find ships.
+4) Efficiency: Always finish damaging a ship before hunting new ones.
+5) Avoid repeats: NEVER fire at cells already in your move history.`;
   }
 
   return `${decisionProtocol}

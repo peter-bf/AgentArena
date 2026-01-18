@@ -77,7 +77,28 @@ function canPlaceShip(
   occupied: Set<number>
 ): boolean {
   if (cells.length === 0) return false;
-  return cells.every(cell => !occupied.has(cell));
+  // Check that no ship cells overlap with occupied cells
+  if (!cells.every(cell => !occupied.has(cell))) return false;
+  
+  // Check minimum spacing (no adjacent cells, including diagonals)
+  for (const cell of cells) {
+    const { row, col } = getRowCol(cell);
+    // Check all 8 adjacent cells
+    for (let dr = -1; dr <= 1; dr++) {
+      for (let dc = -1; dc <= 1; dc++) {
+        if (dr === 0 && dc === 0) continue;
+        const adjRow = row + dr;
+        const adjCol = col + dc;
+        if (isValidPosition(adjRow, adjCol)) {
+          const adjCell = getIndex(adjRow, adjCol);
+          if (occupied.has(adjCell)) {
+            return false; // Adjacent cell is occupied, too close
+          }
+        }
+      }
+    }
+  }
+  return true;
 }
 
 function generatePlacements(seed: string | number): ShipPlacement[] {
@@ -332,6 +353,58 @@ export function getBSBoardForPrompt(
 - Col 0-9 = 1-10
 - Example: A1 = 0, A10 = 9, B1 = 10, J10 = 99`;
 
+  // Find hit cells and recommend perpendicular moves
+  const hitCells: number[] = [];
+  const missedCells: number[] = [];
+  
+  for (let i = 0; i < TOTAL_CELLS; i++) {
+    if (board[i] === 'hit') hitCells.push(i);
+    if (board[i] === 'miss') missedCells.push(i);
+  }
+
+  let strategyAdvice = '';
+  
+  // If there are hits, provide perpendicular targeting advice
+  if (hitCells.length > 0) {
+    const perpendicularMoves = new Set<number>();
+    
+    for (const hitCell of hitCells) {
+      const { row, col } = getRowCol(hitCell);
+      
+      // Add orthogonally adjacent cells (up, down, left, right)
+      const adjacentCells = [
+        getIndex(row - 1, col), // up
+        getIndex(row + 1, col), // down
+        getIndex(row, col - 1), // left
+        getIndex(row, col + 1), // right
+      ];
+      
+      for (const adj of adjacentCells) {
+        if (isValidPosition(getRowCol(adj).row, getRowCol(adj).col) && legalMoves.includes(adj)) {
+          perpendicularMoves.add(adj);
+        }
+      }
+    }
+    
+    if (perpendicularMoves.size > 0) {
+      const perpMoveList = Array.from(perpendicularMoves)
+        .sort((a, b) => a - b)
+        .slice(0, 5) // Show up to 5 recommendations
+        .map(idx => {
+          const { row, col } = getRowCol(idx);
+          return `${idx} (${String.fromCharCode(65 + row)}${col + 1})`;
+        });
+      strategyAdvice = `\n⚡ ACTIVE TARGET: You have ${hitCells.length} hit(s). 
+   RECOMMENDED PERPENDICULAR MOVES: ${perpMoveList.join(', ')}
+   Fire adjacent to your hits to sink the ship efficiently.`;
+    }
+  } else {
+    // In hunt mode, recommend parity pattern
+    strategyAdvice = `\n🔍 HUNT MODE: No ships hit yet. 
+   Use checkerboard pattern (e.g., fire at cells where (row + col) is even).
+   This efficiently covers the board to find ships.`;
+  }
+
   // Build status info
   let statusInfo = '';
   if (sunkShips.length > 0) {
@@ -360,14 +433,16 @@ ${moveMapping}
 Current board (your knowledge of opponent's grid):
 ${gridDisplay}
 
-Available moves: [${legalMoves.join(', ')}]${statusInfo}
+Available moves: [${legalMoves.join(', ')}] (${legalMoves.length} cells remain)${statusInfo}
 
-STRATEGY PRIORITY:
-1. FINISH SHIPS: If you have hits, target adjacent cells to sink the ship
-2. HUNT MODE: Use systematic scanning (parity patterns) to find ships efficiently
-3. TARGET MODE: Once a ship is hit, focus on sinking it before hunting new ones
-4. AVOID REPEATS: Never fire at cells you've already shot
+${strategyAdvice}
 
-Think carefully and choose the BEST move to win.`;
+=== TARGETING STRATEGY ===
+1. FINISH SHIPS: If hits exist, ONLY fire at orthogonal neighbors (up/down/left/right), NEVER diagonal.
+2. HUNT PATTERN: When no active hits, use systematic scanning (checkerboard/parity pattern).
+3. PRIORITY: Sinking a ship is better than exploring new areas.
+4. NO REPEATS: Never fire at cells already shot.
+
+Think carefully about which move gives the best chance to sink a ship.`;
 }
 

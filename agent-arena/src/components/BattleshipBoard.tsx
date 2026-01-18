@@ -87,27 +87,26 @@ export function BattleshipBoard({
         return { 
           symbol: '○', 
           className: moveColorClass || 'text-blue-400',
-          bgClass: shipBgClass,
+          bgClass: '',
         };
       case 'hit':
         return { 
           symbol: '✕', 
-          className: moveColorClass || 'text-red-500',
+          className: 'text-red-500 font-bold',
           bgClass: shipBgClass,
         };
       case 'sunk':
         return { 
-          symbol: '■', 
-          className: moveColorClass || 'text-red-700',
+          symbol: '─',
+          className: 'text-red-600 font-bold text-xl',
           bgClass: shipBgClass,
         };
       default:
+        // Only show background for unhit ships, no icon
         return { 
-          symbol: shipInfo ? '▢' : '·', 
-          className: shipInfo 
-            ? (shipInfo.player === 'A' ? agentAStyle.text : agentBStyle.text)
-            : 'text-muted-foreground/30',
-          bgClass: shipBgClass,
+          symbol: '', 
+          className: '',
+          bgClass: shipInfo ? shipBgClass : '',
         };
     }
   };
@@ -170,11 +169,11 @@ export function BattleshipBoard({
           <span>Miss</span>
         </div>
         <div className="flex items-center gap-1">
-          <span className="text-red-500">✕</span>
+          <span className="text-red-500 font-bold">✕</span>
           <span>Hit</span>
         </div>
         <div className="flex items-center gap-1">
-          <span className="text-red-700">■</span>
+          <span className="text-red-600 font-bold">─</span>
           <span>Sunk</span>
         </div>
       </div>
