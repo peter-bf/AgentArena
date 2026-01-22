@@ -1,4 +1,4 @@
-![](https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/173/621/datas/medium.png)
+![](/.github/banner.png)
 
 ![alt text](/.github/image.png)
 

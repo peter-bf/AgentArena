@@ -1,29 +1,39 @@
 import OpenAI from 'openai';
 import { AgentResponse, DeepSeekModel } from '@/types';
 
-// Lazy initialization to avoid errors if API key is missing
-let client: OpenAI | null = null;
+// Cached client for env-based API key
+let envClient: OpenAI | null = null;
 
-function getClient(): OpenAI {
-  if (!client) {
-    if (!process.env.DEEPSEEK_API_KEY) {
-      throw new Error('DEEPSEEK_API_KEY environment variable is not set');
-    }
-    client = new OpenAI({
-      apiKey: process.env.DEEPSEEK_API_KEY,
-      baseURL: process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1',
+function getClient(apiKey?: string): OpenAI {
+  // If a custom API key is provided, create a new client for it
+  if (apiKey) {
+    return new OpenAI({
+      apiKey,
+      baseURL: 'https://api.deepseek.com/v1',
     });
   }
-  return client;
+
+  // Use cached client for env-based key
+  if (!envClient) {
+    if (!process.env.DEEPSEEK_API_KEY) {
+      throw new Error('DEEPSEEK_API_KEY is not set. Please add it to your environment variables or enter it in LLM Settings.');
+    }
+    envClient = new OpenAI({
+      apiKey: process.env.DEEPSEEK_API_KEY,
+      baseURL: 'https://api.deepseek.com/v1',
+    });
+  }
+  return envClient;
 }
 
 export async function callDeepSeek(
   prompt: string,
   modelVariant: DeepSeekModel = 'deepseek-chat',
-  retryPrompt?: string
-): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string; inputTokens?: number; outputTokens?: number }> {
+  retryPrompt?: string,
+  apiKey?: string
+): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string; isApiError?: boolean; inputTokens?: number; outputTokens?: number }> {
   try {
-    const openai = getClient();
+    const openai = getClient(apiKey);
 
     const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
       { role: 'system', content: 'You are an expert game-playing AI that plays to WIN. Always take winning moves when available. Always block opponent winning moves. Think strategically. Respond only with valid JSON as instructed - no markdown, no extra text.' },
@@ -56,7 +66,7 @@ export async function callDeepSeek(
     return { response: parsed.response, rawResponse, inputTokens, outputTokens };
   } catch (err) {
     const error = err instanceof Error ? err.message : 'Unknown error';
-    return { response: null, rawResponse: '', error: `API Error: ${error}` };
+    return { response: null, rawResponse: '', error: `API Error: ${error}`, isApiError: true };
   }
 }
 

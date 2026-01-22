@@ -21,6 +21,13 @@ import { initBSState, applyBSMove, getBSLegalMoves } from '@/lib/games/battleshi
 import { callAgent } from '@/lib/agents';
 import { saveMatch } from '@/lib/db';
 
+// API keys interface
+interface ApiKeys {
+  gpt?: string;
+  deepseek?: string;
+  gemini?: string;
+}
+
 const VALID_GPT_MODELS: GPTModel[] = ['gpt-4o-mini', 'gpt-4o', 'gpt-4-turbo', 'gpt-3.5-turbo'];
 const VALID_DEEPSEEK_MODELS: DeepSeekModel[] = ['deepseek-chat', 'deepseek-reasoner'];
 const VALID_GEMINI_MODELS: GeminiModel[] = ['gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash', 'gemini-1.5-pro'];
@@ -81,6 +88,13 @@ export async function POST(request: NextRequest) {
     modelVariant: body.agentB.modelVariant,
   };
 
+  // Extract API keys from request (user-provided keys override env vars)
+  const apiKeys: ApiKeys = {
+    gpt: body.apiKeys?.gpt || undefined,
+    deepseek: body.apiKeys?.deepseek || undefined,
+    gemini: body.apiKeys?.gemini || undefined,
+  };
+
   // Create a streaming response
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -92,29 +106,30 @@ export async function POST(request: NextRequest) {
       try {
         const startTime = Date.now();
         const MAX_MOVES = getMaxMoves(gameType);
-        let state = gameType === 'ttt' 
-          ? initTTTState() 
-          : gameType === 'c4' 
-          ? initC4State() 
+        let state = gameType === 'ttt'
+          ? initTTTState()
+          : gameType === 'c4'
+          ? initC4State()
           : initBSState(Date.now());
         const moves: MoveRecord[] = [];
-        const metricsA: AgentMetrics = { 
-          invalidJsonCount: 0, 
-          illegalMoveCount: 0, 
+        const metricsA: AgentMetrics = {
+          invalidJsonCount: 0,
+          illegalMoveCount: 0,
           retryCount: 0,
           totalInputTokens: 0,
           totalOutputTokens: 0,
           totalThinkingTimeMs: 0,
         };
-        const metricsB: AgentMetrics = { 
-          invalidJsonCount: 0, 
-          illegalMoveCount: 0, 
+        const metricsB: AgentMetrics = {
+          invalidJsonCount: 0,
+          illegalMoveCount: 0,
           retryCount: 0,
           totalInputTokens: 0,
           totalOutputTokens: 0,
           totalThinkingTimeMs: 0,
         };
         let forfeitedBy: Player | null = null;
+        let isApiError = false;
 
         send('start', { gameType, agentA, agentB });
 
@@ -156,6 +171,7 @@ export async function POST(request: NextRequest) {
 
           // Call agent and track duration
           const moveStartTime = Date.now();
+          const agentApiKey = apiKeys[agent.model as keyof ApiKeys];
           const result = await callAgent(
             agent.model,
             agent.modelVariant,
@@ -163,7 +179,8 @@ export async function POST(request: NextRequest) {
             state.board,
             currentPlayer,
             legalMoves,
-            gameType === 'bs' ? state : undefined
+            gameType === 'bs' ? state : undefined,
+            agentApiKey
           );
           const moveDurationMs = Date.now() - moveStartTime;
 
@@ -171,7 +188,7 @@ export async function POST(request: NextRequest) {
           metrics.illegalMoveCount += result.illegalMoveCount;
           metrics.retryCount += result.retryCount;
           metrics.totalThinkingTimeMs = (metrics.totalThinkingTimeMs || 0) + moveDurationMs;
-          
+
           if (result.inputTokens !== undefined) {
             metrics.totalInputTokens = (metrics.totalInputTokens || 0) + result.inputTokens;
           }
@@ -184,20 +201,19 @@ export async function POST(request: NextRequest) {
 
           if (result.forfeit) {
             forfeitedBy = currentPlayer;
-            send('forfeit', { player: currentPlayer, reason: result.forfeitReason });
+            isApiError = result.isApiError;
+            send('forfeit', { player: currentPlayer, reason: result.forfeitReason, isApiError: result.isApiError });
             break;
           }
 
           // Apply move
-          let applyResult: { newState: any; valid: boolean; error?: string; outcome?: any };
+          let applyResult: { newState: typeof state; valid: boolean; error?: string; outcome?: { outcome: string; sunkShipName?: string } };
           if (gameType === 'ttt') {
             applyResult = applyTTTMove(state, result.response!.move, currentPlayer);
           } else if (gameType === 'c4') {
             applyResult = applyC4Move(state, result.response!.move, currentPlayer);
-          } else if (gameType === 'bs') {
-            applyResult = applyBSMove(state, result.response!.move, currentPlayer);
           } else {
-            throw new Error(`Unknown game type: ${gameType}`);
+            applyResult = applyBSMove(state, result.response!.move, currentPlayer);
           }
 
           if (!applyResult.valid) {
@@ -218,7 +234,7 @@ export async function POST(request: NextRequest) {
 
           // Add battleship-specific fields
           if (gameType === 'bs' && applyResult.outcome) {
-            moveRecord.outcome = applyResult.outcome.outcome;
+            moveRecord.outcome = applyResult.outcome.outcome as 'miss' | 'hit' | 'sunk';
             moveRecord.sunkShipName = applyResult.outcome.sunkShipName;
           }
 
@@ -255,9 +271,14 @@ export async function POST(request: NextRequest) {
         const endTime = Date.now();
 
         // Determine winner
-        let winner: 'A' | 'B' | 'draw' = state.winner || 'draw';
+        let winner: 'A' | 'B' | 'draw' | 'error' = state.winner || 'draw';
         if (forfeitedBy) {
-          winner = forfeitedBy === 'A' ? 'B' : 'A';
+          // If the forfeit was due to API error (auth, rate limit, etc), mark as 'error' instead of giving opponent the win
+          if (isApiError) {
+            winner = 'error';
+          } else {
+            winner = forfeitedBy === 'A' ? 'B' : 'A';
+          }
         } else if (!state.winner) {
           // Battleship should never draw - if no winner and game ended, check ship health
           if (gameType === 'bs') {
@@ -278,6 +299,7 @@ export async function POST(request: NextRequest) {
         } else if (winner === 'B') {
           winnerModel = agentB.model;
         }
+        // Note: winner === 'error' or 'draw' means no winnerModel
 
         const matchResult: MatchResult = {
           id: uuidv4(),
@@ -304,8 +326,10 @@ export async function POST(request: NextRequest) {
           finalBoardB: gameType === 'bs' ? state.boardB : undefined,
         };
 
-        // Save match
-        await saveMatch(matchResult);
+        // Save match (but not if it was an API error - those shouldn't count)
+        if (winner !== 'error') {
+          await saveMatch(matchResult);
+        }
 
         // Send complete event
         send('complete', matchResult);

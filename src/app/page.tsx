@@ -13,7 +13,6 @@ import {
   DeepSeekModel,
   GeminiModel,
   ShipPlacement,
-  Player,
 } from '@/types';
 import { TicTacToeBoard } from '@/components/TicTacToeBoard';
 import { Connect4Board } from '@/components/Connect4Board';
@@ -229,6 +228,22 @@ export default function Home() {
       });
 
     try {
+      // Get API keys from sessionStorage (user-provided keys)
+      let apiKeys: { gpt?: string; deepseek?: string; gemini?: string } = {};
+      try {
+        const savedSettings = sessionStorage.getItem('llmSettings');
+        if (savedSettings) {
+          const parsed = JSON.parse(savedSettings);
+          apiKeys = {
+            gpt: parsed.gpt?.key || undefined,
+            deepseek: parsed.deepseek?.key || undefined,
+            gemini: parsed.gemini?.key || undefined,
+          };
+        }
+      } catch {
+        // Ignore sessionStorage errors
+      }
+
       const res = await fetch('/api/play-stream', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -236,6 +251,7 @@ export default function Home() {
           gameType,
           agentA: { model: currentSession.agentAModel, modelVariant: currentSession.agentAModelVariant },
           agentB: { model: currentSession.agentBModel, modelVariant: currentSession.agentBModelVariant },
+          apiKeys,
         }),
         signal: abortControllers.current[gameType]!.signal,
       });
@@ -370,11 +386,15 @@ export default function Home() {
         break;
       }
       case 'forfeit': {
-        const d = data as { player: 'A' | 'B'; reason: string };
+        const d = data as { player: 'A' | 'B'; reason: string; isApiError?: boolean };
         const playerLabel = PROVIDER_LABELS[
           d.player === 'A' ? sessions[gameType].agentAModel : sessions[gameType].agentBModel
         ];
-        updateSession(gameType, { error: `${playerLabel} forfeited: ${d.reason}` });
+        if (d.isApiError) {
+          updateSession(gameType, { error: `API Error (${playerLabel}): ${d.reason}` });
+        } else {
+          updateSession(gameType, { error: `${playerLabel} forfeited: ${d.reason}` });
+        }
         break;
       }
     }

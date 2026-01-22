@@ -11,6 +11,7 @@ export interface AgentCallResult {
   retryCount: number;
   forfeit: boolean;
   forfeitReason?: string;
+  isApiError: boolean; // True if failure was due to API error (auth, rate limit, etc) vs gameplay error
   inputTokens?: number;
   outputTokens?: number;
 }
@@ -24,7 +25,8 @@ export async function callAgent(
   board: (TTTCell | C4Cell | BSCell)[],
   player: Player,
   legalMoves: number[],
-  state?: GameState
+  state?: GameState,
+  apiKey?: string
 ): Promise<AgentCallResult> {
   const result: AgentCallResult = {
     response: null,
@@ -32,11 +34,13 @@ export async function callAgent(
     illegalMoveCount: 0,
     retryCount: 0,
     forfeit: false,
+    isApiError: false,
   };
 
   const prompt = buildPrompt(gameType, board, player, state, legalMoves);
 
   let lastError = '';
+  let apiErrorCount = 0;
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     const retryPrompt = attempt > 0 ? buildRetryPrompt(lastError) : undefined;
@@ -46,12 +50,12 @@ export async function callAgent(
     }
 
     const agentResponse = model === 'gpt'
-      ? await callGPT(prompt, modelVariant as GPTModel, retryPrompt)
+      ? await callGPT(prompt, modelVariant as GPTModel, retryPrompt, apiKey)
       : model === 'deepseek'
-      ? await callDeepSeek(prompt, modelVariant as DeepSeekModel, retryPrompt)
-      : await callGemini(prompt, modelVariant as GeminiModel, retryPrompt);
+      ? await callDeepSeek(prompt, modelVariant as DeepSeekModel, retryPrompt, apiKey)
+      : await callGemini(prompt, modelVariant as GeminiModel, retryPrompt, apiKey);
 
-    const { response, error, inputTokens, outputTokens } = agentResponse;
+    const { response, error, isApiError, inputTokens, outputTokens } = agentResponse;
 
     // Track tokens (accumulate across retries)
     if (inputTokens !== undefined) {
@@ -62,6 +66,10 @@ export async function callAgent(
     }
 
     if (error || !response) {
+      // Track if this was an API error
+      if (isApiError) {
+        apiErrorCount++;
+      }
       // Invalid JSON or API error
       result.invalidJsonCount++;
       lastError = error || 'Failed to parse response';
@@ -83,5 +91,7 @@ export async function callAgent(
   // All retries exhausted
   result.forfeit = true;
   result.forfeitReason = `Agent failed after ${MAX_RETRIES + 1} attempts. Last error: ${lastError}`;
+  // If all failures were API errors, mark this as an API error (shouldn't count as a win for opponent)
+  result.isApiError = apiErrorCount === MAX_RETRIES + 1;
   return result;
 }

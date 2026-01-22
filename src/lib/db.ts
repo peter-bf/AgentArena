@@ -2,10 +2,17 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { MatchResult, GlobalStats, GameStats, GameType } from '@/types';
 
+// Check if running on Vercel (read-only filesystem)
+const isVercel = process.env.VERCEL === '1';
+
 const DATA_DIR = path.join(process.cwd(), 'data');
 const MATCHES_FILE = path.join(DATA_DIR, 'matches.json');
 
+// In-memory storage for Vercel deployments
+let inMemoryMatches: MatchResult[] = [];
+
 async function ensureDataDir() {
+  if (isVercel) return; // Skip on Vercel
   try {
     await fs.access(DATA_DIR);
   } catch {
@@ -14,6 +21,10 @@ async function ensureDataDir() {
 }
 
 async function readMatches(): Promise<MatchResult[]> {
+  if (isVercel) {
+    return inMemoryMatches;
+  }
+
   await ensureDataDir();
   try {
     const data = await fs.readFile(MATCHES_FILE, 'utf-8');
@@ -24,6 +35,11 @@ async function readMatches(): Promise<MatchResult[]> {
 }
 
 async function writeMatches(matches: MatchResult[]): Promise<void> {
+  if (isVercel) {
+    inMemoryMatches = matches;
+    return;
+  }
+
   await ensureDataDir();
   await fs.writeFile(MATCHES_FILE, JSON.stringify(matches, null, 2));
 }

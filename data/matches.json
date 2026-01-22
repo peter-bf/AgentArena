@@ -36547,5 +36547,101 @@
       "unknown",
       "unknown"
     ]
+  },
+  {
+    "id": "bbf61360-d3b0-4dc2-b00c-c50e2f572bdb",
+    "createdAt": "2026-01-21T23:59:10.962Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "B",
+    "winnerModel": "deepseek",
+    "moves": [],
+    "metrics": {
+      "totalMoves": 0,
+      "durationMs": 958,
+      "agentA": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5,
+        "totalInputTokens": 0,
+        "totalOutputTokens": 0,
+        "totalThinkingTimeMs": 958
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 0,
+        "totalOutputTokens": 0,
+        "totalThinkingTimeMs": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "4e8a18b2-2724-4cf9-b2ca-932ee9c0360b",
+    "createdAt": "2026-01-22T00:32:59.992Z",
+    "gameType": "ttt",
+    "agentA": {
+      "model": "gpt",
+      "modelVariant": "gpt-4o-mini"
+    },
+    "agentB": {
+      "model": "deepseek",
+      "modelVariant": "deepseek-chat"
+    },
+    "winner": "error",
+    "winnerModel": null,
+    "moves": [],
+    "metrics": {
+      "totalMoves": 0,
+      "durationMs": 881,
+      "agentA": {
+        "invalidJsonCount": 6,
+        "illegalMoveCount": 0,
+        "retryCount": 5,
+        "totalInputTokens": 0,
+        "totalOutputTokens": 0,
+        "totalThinkingTimeMs": 880
+      },
+      "agentB": {
+        "invalidJsonCount": 0,
+        "illegalMoveCount": 0,
+        "retryCount": 0,
+        "totalInputTokens": 0,
+        "totalOutputTokens": 0,
+        "totalThinkingTimeMs": 0
+      }
+    },
+    "winLine": null,
+    "finalBoard": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   }
 ]

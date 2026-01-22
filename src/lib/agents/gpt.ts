@@ -1,28 +1,35 @@
 import OpenAI from 'openai';
 import { AgentResponse, GPTModel } from '@/types';
 
-// Lazy initialization to avoid errors if API key is missing
-let client: OpenAI | null = null;
+// Cached client for env-based API key
+let envClient: OpenAI | null = null;
 
-function getClient(): OpenAI {
-  if (!client) {
+function getClient(apiKey?: string): OpenAI {
+  // If a custom API key is provided, create a new client for it
+  if (apiKey) {
+    return new OpenAI({ apiKey });
+  }
+
+  // Use cached client for env-based key
+  if (!envClient) {
     if (!process.env.OPENAI_API_KEY) {
-      throw new Error('OPENAI_API_KEY environment variable is not set');
+      throw new Error('OPENAI_API_KEY is not set. Please add it to your environment variables or enter it in LLM Settings.');
     }
-    client = new OpenAI({
+    envClient = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
   }
-  return client;
+  return envClient;
 }
 
 export async function callGPT(
   prompt: string,
   modelVariant: GPTModel = 'gpt-4o-mini',
-  retryPrompt?: string
-): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string; inputTokens?: number; outputTokens?: number }> {
+  retryPrompt?: string,
+  apiKey?: string
+): Promise<{ response: AgentResponse | null; rawResponse: string; error?: string; isApiError?: boolean; inputTokens?: number; outputTokens?: number }> {
   try {
-    const openai = getClient();
+    const openai = getClient(apiKey);
 
     const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
       { role: 'system', content: 'You are an expert game-playing AI that plays to WIN. Always take winning moves when available. Always block opponent winning moves. Think strategically. Respond only with valid JSON as instructed - no markdown, no extra text.' },
@@ -55,7 +62,7 @@ export async function callGPT(
     return { response: parsed.response, rawResponse, inputTokens, outputTokens };
   } catch (err) {
     const error = err instanceof Error ? err.message : 'Unknown error';
-    return { response: null, rawResponse: '', error: `API Error: ${error}` };
+    return { response: null, rawResponse: '', error: `API Error: ${error}`, isApiError: true };
   }
 }
 

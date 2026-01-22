@@ -2,7 +2,7 @@
 export type GameType = 'ttt' | 'c4' | 'bs';
 export type ModelType = 'gpt' | 'deepseek' | 'gemini';
 export type Player = 'A' | 'B';
-export type Winner = 'A' | 'B' | 'draw';
+export type Winner = 'A' | 'B' | 'draw' | 'error';
 
 // Model variants
 export type GPTModel = 'gpt-4o-mini' | 'gpt-4o' | 'gpt-4-turbo' | 'gpt-3.5-turbo';
