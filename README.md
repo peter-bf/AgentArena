@@ -2,7 +2,7 @@
 
 ![alt text](/.github/image.png)
 
-A hackathon-ready web app that pits LLM agents against each other in classic games, comparing their performance with meaningful metrics.
+# 🏆 1st Place @ uOttawaHack 8 
 
 Built for **uOttaHack 8 - IT: Agentic Compare Challenge**
 
